@@ -26,6 +26,7 @@ const DefaultPalette = (mode, themeColor) => {
       primaryGradient: primaryGradient(),
       tableHeaderBg: mode === 'light' ? '#F9FAFC' : '#3D3759'
     },
+
     common: {
       black: '#000',
       white: '#FFF'
@@ -41,7 +42,14 @@ const DefaultPalette = (mode, themeColor) => {
       light: '#9C9FA4',
       main: '#8A8D93',
       dark: '#777B82',
-      contrastText: '#FFF'
+      contrastText: '#FFF',
+      A: '#eceff1',
+      B: '#cfd8dc',
+      C: '#b0bec5',
+      D: '#90a4ae',
+      E: '#78909c',
+      F: '#607d8b',
+      G: '#546e7a'
     },
     success: {
       light: '#6AD01F',

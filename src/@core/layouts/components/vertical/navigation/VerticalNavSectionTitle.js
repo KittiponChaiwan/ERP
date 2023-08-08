@@ -21,7 +21,7 @@ const TypographyHeaderText = styled(Typography)(({ theme }) => ({
   letterSpacing: '0.21px',
   textTransform: 'uppercase',
   color: theme.palette.text.disabled,
-  fontWeight: theme.typography.fontWeightMedium
+  fontWeight: 'theme.typography.fontWeightMedium'
 }))
 
 const VerticalNavSectionTitle = props => {

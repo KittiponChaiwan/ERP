@@ -30,7 +30,7 @@ const MainContentWrapper = styled(Box)({
   flexGrow: 1,
   minWidth: 0,
   display: 'flex',
-  minHeight: '100vh',
+  minHeight: '200vh',
   flexDirection: 'column'
 })
 
@@ -63,8 +63,8 @@ const VerticalLayout = props => {
     <>
       <VerticalLayoutWrapper className='layout-wrapper'>
         <Navigation
-          // navWidth={navWidth}
           navWidth={200}
+          // navWidth={navWidth}
           navVisible={navVisible}
           setNavVisible={setNavVisible}
           toggleNavVisibility={toggleNavVisibility}
