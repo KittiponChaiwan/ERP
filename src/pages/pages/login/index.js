@@ -5,6 +5,13 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+// ** redux
+import { useDispatch } from 'react-redux'
+import { setAuthUser } from '../../../@core/redux/authSlice'
+
+// ** axios
+import axios from 'axios'
+
 // ** MUI Components
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -38,6 +45,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
+import { generateToken } from 'src/@core/utils/generateToken'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -60,6 +68,7 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 const LoginPage = () => {
   // ** State
   const [values, setValues] = useState({
+    username: '',
     password: '',
     showPassword: false
   })
@@ -67,6 +76,7 @@ const LoginPage = () => {
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -78,6 +88,54 @@ const LoginPage = () => {
 
   const handleMouseDownPassword = event => {
     event.preventDefault()
+  }
+
+  const handleLogin = async () => {
+    console.log('usr: ', values.username, 'pwd: ', values.password)
+
+    try {
+      // Send login credentials to the backend API
+      const response = await axios.post(
+        'http://111.223.38.20/api/method/login',
+        {
+          usr: values.username,
+          pwd: values.password
+        },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*'
+          }
+        }
+      )
+
+      if (response.status === 200) {
+        console.log('response: ', response)
+
+        // Login successful
+        console.log('API response:', response.data)
+
+        const tokenFormGen = generateToken(values)
+
+        const loginData = {
+          name: response.data.full_name,
+          status: response.data.message,
+          token: tokenFormGen,
+          authState: true
+        }
+
+        console.log('loginData: ', loginData)
+        dispatch(setAuthUser(loginData))
+        router.replace('/')
+      } else {
+        // Login failed
+        console.error('Login failed')
+      }
+    } catch (error) {
+      // Handle any errors that occurred during the API call
+      console.error('Error during login:', error.message)
+    }
   }
 
   return (
@@ -164,7 +222,15 @@ const LoginPage = () => {
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField
+              autoFocus
+              fullWidth
+              id='username'
+              label='Username'
+              value={values.username}
+              onChange={handleChange('username')}
+              sx={{ marginBottom: 4 }}
+            />
             <FormControl fullWidth>
               <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
@@ -195,13 +261,7 @@ const LoginPage = () => {
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>
             </Box>
-            <Button
-              fullWidth
-              size='large'
-              variant='contained'
-              sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
-            >
+            <Button fullWidth size='large' variant='contained' sx={{ marginBottom: 7 }} onClick={handleLogin}>
               Login
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
