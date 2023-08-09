@@ -1,6 +1,14 @@
+// ** React Imports
+import { useEffect } from 'react'
+
 // ** Next Imports
 import Head from 'next/head'
-import { Router } from 'next/router'
+import { Router, useRouter } from 'next/router'
+
+// ** Redux Imports
+import { wrapper } from '../@core/redux/store'
+import { useSelector } from 'react-redux'
+import { selectAuthUser } from '../@core/redux/authSlice'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -43,11 +51,20 @@ if (themeConfig.routingLoader) {
 }
 
 // ** Configure JSS & ClassName
-const App = props => {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) => {
+  // ** Router
+  const Router = useRouter()
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
+  const authUser = useSelector(selectAuthUser)
+
+  useEffect(() => {
+    if (!authUser.authState) {
+      // เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบ หรือเส้นทางที่คุณต้องการ
+      Router.push('/pages/login')
+    }
+  }, [])
 
   return (
     <CacheProvider value={emotionCache}>
@@ -72,4 +89,4 @@ const App = props => {
   )
 }
 
-export default App
+export default wrapper.withRedux(App)
