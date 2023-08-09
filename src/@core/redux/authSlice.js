@@ -1,4 +1,3 @@
-import { AppState } from './store'
 import { createSlice } from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper'
 
@@ -9,7 +8,7 @@ const initialState = {
   authState: false // เพิ่ม property สำหรับสถานะการอนุญาต
 }
 
-const authSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
