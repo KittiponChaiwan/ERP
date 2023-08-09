@@ -23,6 +23,13 @@ import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 
+// ** redux
+import { useDispatch } from 'react-redux'
+import { logoutUser } from 'src/@core/redux/authSlice'
+
+// ** Cookies Import
+import Cookies from 'js-cookie'
+
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
   width: 8,
@@ -38,6 +45,7 @@ const UserDropdown = () => {
 
   // ** Hooks
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const handleDropdownOpen = event => {
     setAnchorEl(event.currentTarget)
@@ -48,6 +56,12 @@ const UserDropdown = () => {
       router.push(url)
     }
     setAnchorEl(null)
+  }
+
+  const handleLogout = () => {
+    dispatch(logoutUser)
+    Cookies.remove('jwtToken')
+    router.push('/pages/login')
   }
 
   const styles = {
@@ -144,7 +158,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={() => handleDropdownClose('/pages/login')}>
+        <MenuItem sx={{ py: 2 }} onClick={handleLogout}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
         </MenuItem>
