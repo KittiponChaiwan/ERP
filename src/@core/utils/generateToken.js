@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 const jwt = require('jsonwebtoken')
 
 export const generateToken = payload => {
@@ -19,5 +21,5 @@ IogSYY9duUasaUHrWPw/IpXeN7Y/ohg3939qMaH88zk=`
   // สร้าง JWT โดยใช้คีย์ส่วนตัว
   const token = jwt.sign({ data: payload }, privateKey, { expiresIn: '3h' })
 
-  return token
+  Cookies.set('jwtToken', token, { expiresIn: '3h' })
 }

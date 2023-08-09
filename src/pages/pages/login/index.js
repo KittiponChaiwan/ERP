@@ -45,7 +45,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
-import { generateToken } from 'src/@core/utils/generateToken'
+import { generateToken } from '../../../@core/utils/generateToken'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -116,12 +116,11 @@ const LoginPage = () => {
         // Login successful
         console.log('API response:', response.data)
 
-        const tokenFormGen = generateToken(values)
+        generateToken({ name: response.data.full_name, status: response.data.message })
 
         const loginData = {
           name: response.data.full_name,
           status: response.data.message,
-          token: tokenFormGen,
           authState: true
         }
 

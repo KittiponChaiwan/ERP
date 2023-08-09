@@ -27,6 +27,9 @@ import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from 'src/@core/redux/authSlice'
 
+// ** Cookies Import
+import Cookies from 'js-cookie'
+
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
   width: 8,
@@ -57,6 +60,7 @@ const UserDropdown = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser)
+    Cookies.remove('jwtToken')
     router.push('/pages/login')
   }
 

@@ -7,8 +7,9 @@ import { Router, useRouter } from 'next/router'
 
 // ** Redux Imports
 import { wrapper } from '../@core/redux/store'
-import { useSelector } from 'react-redux'
-import { selectAuthUser } from '../@core/redux/authSlice'
+
+// ** Cookies Import
+import Cookies from 'js-cookie'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -35,6 +36,9 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 // ** Global css styles
 import '../../styles/globals.css'
 
+// ** Check Login
+import { checkCookieToken } from 'src/@core/utils/checkCookieToken'
+
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
@@ -57,10 +61,10 @@ const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) =>
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
-  const authUser = useSelector(selectAuthUser)
+  const UserStatus = checkCookieToken(Cookies.get('jwtToken'))
 
   useEffect(() => {
-    if (!authUser.authState) {
+    if (!UserStatus) {
       // เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบ หรือเส้นทางที่คุณต้องการ
       Router.push('/pages/login')
     }
