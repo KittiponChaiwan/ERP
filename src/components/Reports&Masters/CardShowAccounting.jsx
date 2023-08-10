@@ -28,7 +28,7 @@ function CardShowAccounting({
     <Box>
       <Grid container>
         <Grid item>
-          <Typography variant='body1' fontWeight={'bold'} sx={{ mt: 15, mb: 2 }}>
+          <Typography variant='h6' fontWeight={'bold'} sx={{ mt: 15, mb: 2, color: '#FFF' }}>
             {Title}
           </Typography>
         </Grid>

@@ -24,7 +24,7 @@ function CardMenu({ handleButtonClick, MenuName, MenuIcon }) {
         <Box>
           <Icon path={MenuIcon} size={2} />
         </Box>
-        <Typography sx={{ fontSize: 11 }} variant='body1' fontWeight={'bold'}>
+        <Typography sx={{ fontSize: 11 }} fontSize={25} fontWeight={'bold'}>
           {MenuName}
         </Typography>
       </CardContent>

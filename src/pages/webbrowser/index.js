@@ -56,16 +56,15 @@ const CardSupport = () => {
                 <Btn
                   numminwid={280}
                   detailbutton='Item'
-                  bgcolorbutton='secondary.E'
+                  bgcolorbutton='secondary.D'
                   handleButtonClick={() =>
                     handleButtonClick(homecontent[0].head, homecontent[0].body, homecontent[0].footer)
                   }
                 />
-
                 <Btn
                   numminwid={280}
                   detailbutton=' Create a Customer'
-                  bgcolorbutton='secondary.F'
+                  bgcolorbutton='secondary.C'
                   handleButtonClick={() =>
                     handleButtonClick(
                       homecontent[1].head,
@@ -80,7 +79,7 @@ const CardSupport = () => {
                 <Btn
                   numminwid={280}
                   detailbutton='Create Your First Sales Invoice'
-                  bgcolorbutton='secondary.G'
+                  bgcolorbutton='secondary.D'
                   handleButtonClick={() => handleButtonClick(homecontent[2].head, homecontent[2].body)}
                 />
               </React.Fragment>

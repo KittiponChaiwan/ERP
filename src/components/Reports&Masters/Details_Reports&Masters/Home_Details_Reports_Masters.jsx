@@ -30,7 +30,7 @@ function CardReports_Masters({ Reports_MastersName_1 }) {
         </Typography>
       </Box>
 
-      <Card style={{ background: theme.palette.primary.light }} sx={{ width: '100%', height: 'auto' }}>
+      <Card style={{ background: theme.palette.secondary.E }} sx={{ width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
             display: 'flex',

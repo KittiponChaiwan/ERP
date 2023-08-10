@@ -7,7 +7,7 @@ import CardDetails from 'src/components/Details/CardDetails'
 import Btn from 'src/components/Button/Button'
 
 import { homecontent } from 'src/dummy/Homecontent'
-import CardShortcuts from 'src/components/Shortcuts/Accounting_Detail_Shortcut'
+import CardShortcuts from 'src/components/Shortcuts/Home_Detail_Shortcut'
 import CardReports_Masters_1 from 'src/components/Reports&Masters/Details_Reports&Masters/Home_Details_Reports_Masters'
 
 const CardSupport = () => {
@@ -35,10 +35,12 @@ const CardSupport = () => {
     setShowCard(true)
   }
 
+  // object.values(objectData).map(x => console.log(x))
+
   return (
     <Box m={12} mb={20}>
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid item sm={12} md={12} lg={12} sx={{ minWidth: 300 }}>
+        <Grid item sm={12} md={12} lg={12}>
           <CardDetails
             head={showcardhead}
             body={showcardbody}
@@ -51,78 +53,39 @@ const CardSupport = () => {
             Details={'Item, Customer, Supplier and Quotation'}
             Content={
               <React.Fragment>
-                {/* ////////////////////// 1 ///////////////////////////// */}
-
                 <Btn
                   numminwid={280}
-                  detailbutton=' Review Chart of Accounts'
-                  bgcolorbutton='secondary.G'
-                  handleButtonClick={() => handleButtonClick(homecontent[3].head, homecontent[3].body)}
-                />
-                {/* ////////////////////// 2 ///////////////////////////// */}
-
-                <Btn
-                  numminwid={280}
-                  detailbutton=' Setting up Taxes'
-                  bgcolorbutton='secondary.E'
-                  handleButtonClick={() => handleButtonClick(homecontent[4].head, homecontent[4].body)}
+                  detailbutton='Item'
+                  bgcolorbutton='secondary.D'
+                  handleButtonClick={() =>
+                    handleButtonClick(homecontent[0].head, homecontent[0].body, homecontent[0].footer)
+                  }
                 />
 
-                {/* ////////////////////// 3 ///////////////////////////// */}
-
                 <Btn
                   numminwid={280}
-                  detailbutton='Accounts Settings'
-                  bgcolorbutton='secondary.G'
+                  detailbutton=' Create a Customer'
+                  bgcolorbutton='secondary.C'
                   handleButtonClick={() =>
                     handleButtonClick(
-                      homecontent[5].head,
-                      homecontent[5].body,
-                      homecontent[5].footer,
-                      homecontent[5].footer_1,
-                      homecontent[5].footer_2,
-                      homecontent[5].footer_3
+                      homecontent[1].head,
+                      homecontent[1].body,
+                      homecontent[1].footer,
+                      homecontent[1].footer_1,
+                      homecontent[1].footer_2,
+                      homecontent[1].footer_3
                     )
                   }
                 />
-
-                {/* ////////////////////// 4 ///////////////////////////// */}
                 <Btn
                   numminwid={280}
-                  detailbutton='Cost Centers for Budgeting and Analysis'
-                  bgcolorbutton='secondary.E'
-                  handleButtonClick={() =>
-                    handleButtonClick(homecontent[6].head, homecontent[6].body, homecontent[6].footer)
-                  }
-                />
-
-                {/* ////////////////////// 5 ///////////////////////////// */}
-                <Btn
-                  numminwid={280}
-                  detailbutton='Create Your First Purchase Invoice'
-                  bgcolorbutton='secondary.G'
-                  handleButtonClick={() =>
-                    handleButtonClick(homecontent[7].head, homecontent[7].body, homecontent[7].footer)
-                  }
-                />
-                {/* ////////////////////// 6 ///////////////////////////// */}
-                <Btn
-                  numminwid={280}
-                  detailbutton='Updating Opening Balances'
-                  bgcolorbutton='secondary.E'
-                  handleButtonClick={() => handleButtonClick(homecontent[8].head, homecontent[8].body)}
-                />
-                {/* ////////////////////// 7 ///////////////////////////// */}
-                <Btn
-                  numminwid={280}
-                  detailbutton='Financial Statements'
-                  bgcolorbutton='secondary.G'
-                  handleButtonClick={() => handleButtonClick(homecontent[9].head, homecontent[9].body)}
+                  detailbutton='Create Your First Sales Invoice'
+                  bgcolorbutton='secondary.D'
+                  handleButtonClick={() => handleButtonClick(homecontent[2].head, homecontent[2].body)}
                 />
               </React.Fragment>
             }
           />
-
           <Grid item sm={12} md={12} lg={12}>
             <CardShortcuts
               CardShortcutsName={`Your Shortcuts`}
@@ -134,7 +97,9 @@ const CardSupport = () => {
             />
           </Grid>
           <Grid item sm={12} md={12} lg={12}>
-            <CardReports_Masters_1 Reports_MastersName_1={'Reports & Masters'} />
+            <React.Fragment>
+              <CardReports_Masters_1 Reports_MastersName_1={'Reports & Masters'} />\
+            </React.Fragment>
           </Grid>
         </Grid>
       </Grid>

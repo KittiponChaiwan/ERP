@@ -32,7 +32,7 @@ function CardShortcuts({ CardShortcutsName }) {
         </Typography>
       </Box>
 
-      <Card style={{ background: theme.palette.primary.light }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
+      <Card style={{ background: theme.palette.secondary.E }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
             mx: 2,

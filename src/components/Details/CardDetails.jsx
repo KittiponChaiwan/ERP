@@ -25,12 +25,14 @@ function CardDetails({ DetailsName, Details, Content, showCard, head, body, foot
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <Typography variant='h6' fontWeight={'bold'}>
+        <Typography variant='h6' fontWeight={'bold'} color={'secondary.F'}>
           {DetailsName}
         </Typography>
-        <Typography variant='body1'>{Details}</Typography>
+        <Typography variant='body1' color={'secondary.F'}>
+          {Details}
+        </Typography>
       </Box>
-      <Card style={{ background: theme.palette.primary.light }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
+      <Card style={{ background: theme.palette.secondary.E }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
             mx: 2,
@@ -68,67 +70,68 @@ function CardDetails({ DetailsName, Details, Content, showCard, head, body, foot
                       display: 'flex',
                       textAlign: 'left',
                       flexDirection: 'column',
-                      padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`
+                      padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`,
+                      background: theme.palette.grey[200]
                     }}
                   >
                     {head && (
-                      <Card sx={{ mb: 5 }}>
-                        <Typography variant='body1' sx={{ color: theme.palette.grey[300] }}>
+                      <Grid sx={{ mb: 5, mt: -6 }}>
+                        <Typography variant='body1' sx={{ color: theme.palette.secondary.F }}>
                           {head}
                         </Typography>
-                      </Card>
+                      </Grid>
                     )}
 
                     {body && (
-                      <Card sx={{ mb: 5 }}>
-                        <Typography variant='body2' sx={{ fornSize: 19, color: theme.palette.grey[300] }}>
+                      <Grid sx={{ mb: 5 }}>
+                        <Typography variant='body2' sx={{ fornSize: 19, color: theme.palette.secondary.F }}>
                           {body}
                         </Typography>
-                      </Card>
+                      </Grid>
                     )}
 
                     {footer && (
-                      <Card>
-                        <Typography style={{ fontSize: '13px', color: theme.palette.grey[300] }} variant='body2'>
+                      <Grid>
+                        <Typography style={{ fontSize: '13px', color: theme.palette.secondary.F }} variant='body2'>
                           {footer}
                         </Typography>
-                      </Card>
+                      </Grid>
                     )}
 
                     {footer_1 && (
-                      <Card>
+                      <Grid>
                         <Typography
                           style={{ fontSize: '13px' }}
                           variant='body2'
-                          sx={{ ml: 11.5, color: theme.palette.grey[300] }}
+                          sx={{ ml: 11.5, color: theme.palette.secondary.F }}
                         >
                           {footer_1}
                         </Typography>
-                      </Card>
+                      </Grid>
                     )}
 
                     {footer_2 && (
-                      <Card>
+                      <Grid>
                         <Typography
                           style={{ fontSize: '13px' }}
                           variant='body2'
-                          sx={{ ml: 11.5, color: theme.palette.grey[300] }}
+                          sx={{ ml: 11.5, color: theme.palette.secondary.F }}
                         >
                           {footer_2}
                         </Typography>
-                      </Card>
+                      </Grid>
                     )}
 
                     {footer_3 && (
-                      <Card>
+                      <Grid>
                         <Typography
                           style={{ fontSize: '13px' }}
                           variant='body2'
-                          sx={{ ml: 11.5, color: theme.palette.grey[300] }}
+                          sx={{ ml: 11.5, color: theme.palette.secondary.F }}
                         >
                           {footer_3}
                         </Typography>
-                      </Card>
+                      </Grid>
                     )}
                   </Card>
                 )}

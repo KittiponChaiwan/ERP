@@ -32,7 +32,7 @@ function CardShortcuts({ CardShortcutsName }) {
         </Typography>
       </Box>
 
-      <Card style={{ background: theme.palette.primary.light }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
+      <Card style={{ background: theme.palette.secondary.E }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
             mx: 2,
@@ -51,7 +51,7 @@ function CardShortcuts({ CardShortcutsName }) {
                   detailbutton={x.detailbutton}
                   bgcolorbutton={x.bgcolorbutton}
                   numminwid={x.numminwid}
-                  handleButtonClick={() => router.push('/webbrowser/item_shortcuts')}
+                  handleButtonClick={() => router.push(x.part)}
                 />
               </React.Fragment>
             ))}

@@ -116,27 +116,32 @@ export const Home_Detail_Shortcut = [
   {
     detailbutton: 'Item',
     numminwid: 280,
-    bgcolorbutton: 'secondary.C'
+    bgcolorbutton: 'secondary.C',
+    part: '/webbrowser/item_shortcuts'
   },
   {
-    detailbutton: ' detailbutton',
+    detailbutton: ' Customer',
     numminwid: 280,
-    bgcolorbutton: 'secondary.D'
+    bgcolorbutton: 'secondary.D',
+    part: '/webbrowser/customer_shortcuts'
   },
   {
     detailbutton: ' Supplier',
     numminwid: 280,
-    bgcolorbutton: 'secondary.E'
+    bgcolorbutton: 'secondary.C',
+    part: '/webbrowser/supplier_shortcuts'
   },
   {
     detailbutton: ' Sales Invoice',
     numminwid: 280,
-    bgcolorbutton: 'secondary.F'
+    bgcolorbutton: 'secondary.D',
+    part: '/webbrowser/sales_invoice_shortcuts'
   },
   {
     detailbutton: ' Leaderbord',
     numminwid: 280,
-    bgcolorbutton: 'secondary.G'
+    bgcolorbutton: 'secondary.C',
+    part: '/webbrowser/leaderboard_shortcuts'
   }
 ]
 
@@ -144,27 +149,27 @@ export const Accounting_Detail_Shortcut = [
   {
     detailbutton: 'Chart of Accounts',
     numminwid: 280,
-    bgcolorbutton: 'secondary.C'
+    bgcolorbutton: 'secondary.D'
   },
   {
     detailbutton: ' Sales Invice',
     numminwid: 280,
-    bgcolorbutton: 'secondary.D'
+    bgcolorbutton: 'secondary.C'
   },
   {
     detailbutton: ' Purchase Invoice',
     numminwid: 280,
-    bgcolorbutton: 'secondary.E'
+    bgcolorbutton: 'secondary.D'
   },
   {
     detailbutton: ' Journal Entry',
     numminwid: 280,
-    bgcolorbutton: 'secondary.F'
+    bgcolorbutton: 'secondary.C'
   },
   {
     detailbutton: ' Payment Entry',
     numminwid: 280,
-    bgcolorbutton: 'secondary.G'
+    bgcolorbutton: 'secondary.D'
   },
   {
     detailbutton: ' Accounts Receivable',
@@ -179,44 +184,39 @@ export const Accounting_Detail_Shortcut = [
   {
     detailbutton: ' Trial Balance',
     numminwid: 280,
-    bgcolorbutton: 'secondary.E'
+    bgcolorbutton: 'secondary.C'
   },
   {
     detailbutton: ' Dashboard',
     numminwid: 280,
-    bgcolorbutton: 'secondary.F'
+    bgcolorbutton: 'secondary.D'
   },
   {
     detailbutton: ' Learn Accounting',
     numminwid: 280,
-    bgcolorbutton: 'secondary.F'
+    bgcolorbutton: 'secondary.C'
   }
 ]
 
 export const Buying_Detail_Shortcut = [
   {
-    detailbutton: 'asd',
-    numminwid: 280,
-    bgcolorbutton: 'secondary.C'
-  },
-  {
-    detailbutton: ' detailbutton',
+    detailbutton: 'Cost Centers for Budgeting and Analysis',
     numminwid: 280,
     bgcolorbutton: 'secondary.D'
   },
   {
-    detailbutton: ' Supplier',
+    detailbutton: ' Create Your First Purchase Invoice',
     numminwid: 280,
-    bgcolorbutton: 'secondary.E'
+    bgcolorbutton: 'secondary.C'
   },
   {
-    detailbutton: ' Sales Invoice',
+    detailbutton: ' Updating Opening Balances',
     numminwid: 280,
-    bgcolorbutton: 'secondary.F'
+    bgcolorbutton: 'secondary.D'
   },
   {
-    detailbutton: ' Leaderbord',
+    detailbutton: ' Financial Statements',
     numminwid: 280,
-    bgcolorbutton: 'secondary.G'
+    bgcolorbutton: 'secondary.C'
   }
 ]
