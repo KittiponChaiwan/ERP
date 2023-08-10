@@ -13,6 +13,8 @@ import axios from 'axios'
 import TextField from '@mui/material/TextField'
 import Icon from '@mdi/react'
 import { InputLabel, FormControl, Select, MenuItem } from '@mui/material'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 // ** Import Table
 import { DataGrid } from '@mui/x-data-grid'
@@ -23,10 +25,14 @@ import { mdiAccountBoxOutline } from '@mdi/js'
 import { mdiMagnify } from '@mdi/js'
 
 // ** Components
+
 import { useTheme } from '@mui/material/styles'
 import Iconbtn from 'src/components/Button/IconButton/iconbutton'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import Accounting_item from './accounting_item'
+import Details_item from './details_item'
+import Inventory_item from './inventory_item'
+import Dashboard_item from './dashboard_item'
+import Purchasing_item from './purchasing_item'
 
 const Carditem_shortcuts = props => {
   // ** Props
@@ -54,19 +60,37 @@ const Carditem_shortcuts = props => {
         params //ทั้งหมดมี button edit
       ) => (
         <Button
-          sx={{ backgroundColor: 'red' }}
+          variant='text'
+          onClick={() => {
+            // setGetRow(params.row)
+            console.log(params.row)
+          }}
+        >
+          Status
+        </Button>
+      )
+    },
+    { field: 'item_group', headerName: 'Item Group', width: 150 },
+    { field: 'description', headerName: 'ID', width: 250 },
+    {
+      field: 'Data',
+      headerName: 'Data',
+      width: 150,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => (
+        <Button
+          sx={{ backgroundColor: '#ffff8d' }}
           variant='text'
           onClick={() => {
             setGetRow(params.row)
             console.log(params.row)
           }}
         >
-          Enabled
+          OPEN
         </Button>
       )
-    },
-    { field: 'item_group', headerName: 'Item Group', width: 150 },
-    { field: 'description', headerName: 'ID', width: 250 }
+    }
   ]
 
   useEffect(() => {
@@ -85,8 +109,18 @@ const Carditem_shortcuts = props => {
       })
   }, [])
 
-  const HandleFilterData = value => {
+  const HandleFilterName = value => {
     const res = filterData.filter(f => f.item_name.includes(value))
+    setDataItem(res)
+  }
+
+  const HandleFilterGroup = value => {
+    const res = filterData.filter(f => f.item_group.includes(value))
+    setDataItem(res)
+  }
+
+  const HandleFilterID = value => {
+    const res = filterData.filter(f => f.description.includes(value))
     setDataItem(res)
   }
 
@@ -129,15 +163,31 @@ const Carditem_shortcuts = props => {
                 bgcolor: 'beige',
                 width: '100%',
                 display: 'flex',
-                justifyContent: 'flex-end'
+                justifyContent: 'flex'
               }}
             >
               <Box>
                 <TextField
-                  id='standard-basic'
-                  label='Standard'
+                  // id='standard-basic'
+                  label='Search Name'
                   variant='standard'
-                  onChange={e => HandleFilterData(e.target.value)}
+                  onChange={e => HandleFilterName(e.target.value)}
+                />
+              </Box>
+              <Box sx={{ ml: 20 }}>
+                <TextField
+                  // id='standard-basic'
+                  label='Search Group'
+                  variant='standard'
+                  onChange={e => HandleFilterGroup(e.target.value)}
+                />
+              </Box>
+              <Box sx={{ ml: 20 }}>
+                <TextField
+                  // id='standard-basic'
+                  label='Search ID'
+                  variant='standard'
+                  onChange={e => HandleFilterID(e.target.value)}
                 />
               </Box>
               <Box sx={{ m: 4 }}>
@@ -157,122 +207,32 @@ const Carditem_shortcuts = props => {
               <TabContext value={value}>
                 <TabList onChange={handleChange} aria-label='card navigation example'>
                   <Tab value='1' label='Details' />
-                  <Tab value='2' label='Inventory' />
-                  <Tab value='3' label='Item Three' />
+                  <Tab value='2' label='Dashboard' />
+                  <Tab value='3' label='Inventory' />
+                  <Tab value='4' label='Accounting' />
+                  <Tab value='5' label='Purchasing' />
+                  <Tab value='6' label='Sales' />
+                  <Tab value='7' label='Tax' />
+                  <Tab value='8' label='Quality' />
+                  <Tab value='9' label='Manufacturing' />
                 </TabList>
                 <CardContent>
                   <TabPanel value='1' sx={{ p: 0 }}>
-                    <Box sx={{ display: 'flex' }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}>Item Name :</Typography>
-                        <TextField variant='filled' value={getRow.item_name} />
-                      </Box>
-                      <Box sx={{ ml: 20 }}>
-                        <Typography sx={{ marginBottom: 2 }}>Valuation Rate :</Typography>
-                        <TextField variant='filled' label='' value={getRow.valuation_rate} />
-                      </Box>
-                    </Box>
-                    <Box sx={{ display: 'flex', mt: 6 }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}>Item Group :</Typography>
-                        <TextField variant='filled' label='' value={getRow.item_group} />
-                      </Box>
-                      <Box sx={{ ml: 20 }}>
-                        <Typography sx={{ marginBottom: 2 }}>Over Delivery/Receipt Allowance (%) :</Typography>
-                        <TextField variant='filled' label='' value={getRow.over_delivery_receipt_allowance} />
-                      </Box>
-                    </Box>
-                    <Box sx={{ display: 'flex', mt: 6 }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}>Default Unit of Measure :</Typography>
-                        <TextField variant='filled' label='' value={getRow.stock_uom} />
-                      </Box>
-                      <Box sx={{ ml: 20 }}>
-                        <Typography sx={{ marginBottom: 2 }}>Over Billing Allowance (%) :</Typography>
-                        <TextField variant='filled' label='' value={getRow.over_billing_allowance} />
-                      </Box>
-                    </Box>
-                    <Box sx={{ mt: 30 }}>
-                      <Typography variant='h5'>Descripstion:</Typography>
-                      <TextField variant='filled' label='' multiline rows={8} fullWidth value={getRow.description} />
-                    </Box>
+                    <Details_item getRow={getRow} />
                   </TabPanel>
-                  {/* End Panel 1  */}
                   <TabPanel value='2' sx={{ p: 0 }}>
-                    <Box sx={{ display: 'flex' }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}> Shelf Life In Days :</Typography>
-                        <TextField variant='filled' label='' value={getRow.shelf_life_in_days} />
-                      </Box>
-                      <Box sx={{ ml: 20 }}>
-                        <Typography sx={{ marginBottom: 2 }}>Warranty Period (in days) :</Typography>
-                        <TextField variant='filled' label='' value={getRow.warranty_period} />
-                      </Box>
-                    </Box>
-                    <Box sx={{ mt: 6, display: 'flex' }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}>End of Life:</Typography>
-                        <TextField variant='filled' label='' value={getRow.end_of_life} />
-                      </Box>
-                      <Box sx={{ ml: 20 }}>
-                        <Typography sx={{ marginBottom: 2 }}>Weight Per Unit:</Typography>
-                        <TextField variant='filled' label='' value={getRow.weight_per_unit} />
-                      </Box>
-                    </Box>
-                    <Box sx={{ mt: 6, display: 'flex' }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}>default material request type-label:</Typography>
-                        <FormControl variant='outlined' fullWidth sx={{ mb: 2 }}>
-                          <InputLabel id='default material request type-label'>
-                            default material request type:
-                          </InputLabel>
-                          <Select
-                            required
-                            labelId='default material request type-label'
-                            id='default material request type'
-                            name='default material request type'
-                            label='default material request type'
-                          >
-                            {dataItem.map(row => (
-                              <MenuItem
-                                key={row.default_material_request_type}
-                                value={row.default_material_request_type}
-                              >
-                                {row.default_material_request_type}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </Box>
-                      <Box sx={{ ml: 14 }}>
-                        <Typography sx={{ marginBottom: 2 }}>Weight UOM:</Typography>
-                        <TextField variant='filled' label='' value={getRow.weight_uom} />
-                      </Box>
-                    </Box>
-                    <Box sx={{ mt: 6, display: 'flex' }}>
-                      <Box>
-                        <Typography sx={{ marginBottom: 2 }}>Valuation method:</Typography>
-                        <FormControl variant='outlined' fullWidth sx={{ mb: 2 }}>
-                          <InputLabel id='valuation_method-label'>Valuation method:</InputLabel>
-                          <Select
-                            required
-                            labelId='valuation_method-label'
-                            id='valuation_method'
-                            name='valuation_method'
-                            label='valuation_method'
-                            sx={{ width: 270 }}
-                          >
-                            {dataItem.map(row => (
-                              <MenuItem key={row.valuation_method} value={row.valuation_method}>
-                                {row.valuation_method}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </Box>
-                    </Box>
+                    <Dashboard_item />
                   </TabPanel>
                   <TabPanel value='3' sx={{ p: 0 }}>
+                    <Inventory_item getRow={getRow} dataItem={dataItem} />
+                  </TabPanel>
+                  <TabPanel value='4' sx={{ p: 0 }}>
+                    <Accounting_item />
+                  </TabPanel>
+                  <TabPanel value='5' sx={{ p: 0 }}>
+                    <Purchasing_item />
+                  </TabPanel>
+                  <TabPanel value='6' sx={{ p: 0 }}>
                     <Typography variant='h6' sx={{ marginBottom: 2 }}>
                       Header Three
                     </Typography>
