@@ -33,6 +33,10 @@ import Details_item from './details_item'
 import Inventory_item from './inventory_item'
 import Dashboard_item from './dashboard_item'
 import Purchasing_item from './purchasing_item'
+import Sales_item from './sales_item'
+import Tex_item from './tex_item'
+import Quality_item from './quality_item'
+import Manufacturing_item from './manufacturing_item'
 
 const Carditem_shortcuts = props => {
   // ** Props
@@ -233,14 +237,16 @@ const Carditem_shortcuts = props => {
                     <Purchasing_item />
                   </TabPanel>
                   <TabPanel value='6' sx={{ p: 0 }}>
-                    <Typography variant='h6' sx={{ marginBottom: 2 }}>
-                      Header Three
-                    </Typography>
-                    <Typography variant='body2' sx={{ marginBottom: 4 }}>
-                      Icing cake macaroon macaroon jelly chocolate bar. Chupa chups dessert dessert soufflé chocolate
-                      bar jujubes gummi bears lollipop.
-                    </Typography>
-                    <Button variant='contained'>Button Three</Button>
+                    <Sales_item />
+                  </TabPanel>
+                  <TabPanel value='7' sx={{ p: 0 }}>
+                    <Tex_item />
+                  </TabPanel>
+                  <TabPanel value='8' sx={{ p: 0 }}>
+                    <Quality_item />
+                  </TabPanel>
+                  <TabPanel value='9' sx={{ p: 0 }}>
+                    <Manufacturing_item />
                   </TabPanel>
                 </CardContent>
               </TabContext>
