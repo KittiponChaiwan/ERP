@@ -1,14 +1,19 @@
+// ** React Imports
+import React, { useState } from 'react'
+
 // ** MUI Imports
 import { Grid, Box, Button } from '@mui/material'
-import React, { useState } from 'react'
 
 // ** Components Imports
 import CardDetails from 'src/components/Details/CardDetails'
 import Btn from 'src/components/Button/Button'
-
-import { homecontent } from 'src/dummy/Homecontent'
 import CardShortcuts from 'src/components/Shortcuts/Home_Detail_Shortcut'
-import CardReports_Masters_1 from 'src/components/Reports&Masters/Details_Reports&Masters/Home_Details_Reports_Masters'
+import CardReportMenu from 'src/components/Menu/CardReportMenu'
+import CardYourShortcut from 'src/components/Menu/CardYourShortcut'
+
+// ** dummy data
+import { homecontent } from 'src/dummy/Homecontent'
+import { AccountingYourShortcut, AccountingReport } from 'src/dummy/accounting'
 
 const CardSupport = () => {
   const handleClickOpen = () => {
@@ -87,18 +92,11 @@ const CardSupport = () => {
             }
           />
           <Grid item sm={12} md={12} lg={12}>
-            <CardShortcuts
-              CardShortcutsName={`Your Shortcuts`}
-              Content={
-                <React.Fragment>
-                  <Btn />
-                </React.Fragment>
-              }
-            />
+            <CardYourShortcut menus={AccountingYourShortcut} />
           </Grid>
           <Grid item sm={12} md={12} lg={12}>
             <React.Fragment>
-              <CardReports_Masters_1 Reports_MastersName_1={'Reports & Masters'} />\
+              <CardReportMenu menus={AccountingReport} />
             </React.Fragment>
           </Grid>
         </Grid>

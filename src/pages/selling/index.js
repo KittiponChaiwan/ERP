@@ -5,12 +5,17 @@ import React, { useState } from 'react'
 // ** Components Imports
 import CardDetails from 'src/components/Details/CardDetails'
 import Btn from 'src/components/Button/Button'
+import CardYourShortcut from 'src/components/Menu/CardYourShortcut'
 
+import CardReportMenu from 'src/components/Menu/CardReportMenu'
+
+// ** dummy data
 import { homecontent } from 'src/dummy/Homecontent'
-import CardShortcuts from 'src/components/Shortcuts/Home_Detail_Shortcut'
-import CardReports_Masters_1 from 'src/components/Reports&Masters/Details_Reports&Masters/Home_Details_Reports_Masters'
+import { SellingShortcut, SellingReport } from 'src/dummy/selling'
 
 const CardSupport = () => {
+  console.log(SellingReport)
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -78,17 +83,10 @@ const CardSupport = () => {
           />
 
           <Grid item sm={12} md={12} lg={12}>
-            <CardShortcuts
-              CardShortcutsName={`Your Shortcuts`}
-              Content={
-                <React.Fragment>
-                  <Btn />
-                </React.Fragment>
-              }
-            />
+            <CardYourShortcut menus={SellingShortcut} />
           </Grid>
           <Grid item sm={12} md={12} lg={12}>
-            <CardReports_Masters_1 Reports_MastersName_1={'Reports & Masters'} />
+            <CardReportMenu menus={SellingReport} />
           </Grid>
         </Grid>
       </Grid>
