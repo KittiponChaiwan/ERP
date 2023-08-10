@@ -7,7 +7,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
 export const generateToken = payload => {
   // คีย์สำหรับเซ็น JWT (ส่วนตัว)
   // สร้าง JWT โดยใช้คีย์ส่วนตัว
-  const token = jwt.sign({ data: payload }, PRIVATE_KEY, { expiresIn: '3h' })
+  const token = jwt.sign({ data: payload }, PRIVATE_KEY, { expiresIn: '1h' })
 
-  Cookies.set('jwtToken', token, { expiresIn: '3h' })
+  Cookies.set('jwtToken', token)
 }
