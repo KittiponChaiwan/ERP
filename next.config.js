@@ -14,5 +14,10 @@ module.exports = {
     }
 
     return config
+  },
+  env: {
+    API_TOKEN: process.env.API_TOKEN,
+    API_URL: process.env.API_URL,
+    PRIVATE_KEY: process.env.PRIVATE_KEY
   }
 }
