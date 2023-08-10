@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
-import Btn from '../../Button/Button'
+import Btn from '../Button/Button'
 import { OnHover, Visible } from 'src/components/Motion'
 import CardMenu from 'src/components/Menu/CardMenu'
 import { useRouter } from 'next/router'
@@ -40,7 +40,7 @@ function CardShowAccounting({
             <Visible>
               <OnHover>
                 <CardMenu
-                  handleClick={() => router.push('/webbrowser/item_shortcuts')}
+                  handleButtonClick={() => router.push('/webbrowser/item_shortcuts')}
                   MenuIcon={MenuIcon_1}
                   MenuName={MenuName_1}
                 />
@@ -55,7 +55,7 @@ function CardShowAccounting({
             <Visible>
               <OnHover>
                 <CardMenu
-                  handleClick={() => router.push('/pages/masterdata/curriculums')}
+                  handleButtonClick={() => router.push('/webbrowser/customer_shotcuts')}
                   MenuIcon={MenuIcon_2}
                   MenuName={MenuName_2}
                 />
@@ -70,7 +70,7 @@ function CardShowAccounting({
             <Visible>
               <OnHover>
                 <CardMenu
-                  handleClick={() => router.push('/pages/masterdata/curriculums')}
+                  handleButtonClick={() => router.push('/webbrowser/supplier_shotcuts')}
                   MenuIcon={MenuIcon_3}
                   MenuName={MenuName_3}
                 />
@@ -85,7 +85,7 @@ function CardShowAccounting({
             <Visible>
               <OnHover>
                 <CardMenu
-                  handleClick={() => router.push('/pages/masterdata/curriculums')}
+                  handleButtonClick={() => router.push('/webbrowser/sales_invoice_shortcuts')}
                   MenuIcon={MenuIcon_4}
                   MenuName={MenuName_4}
                 />
@@ -100,7 +100,7 @@ function CardShowAccounting({
             <Visible>
               <OnHover>
                 <CardMenu
-                  handleClick={() => router.push('/pages/masterdata/curriculums')}
+                  handleButtonClick={() => router.push('/webbrowser/leaderboard_shortcuts')}
                   MenuIcon={MenuIcon_5}
                   MenuName={MenuName_5}
                 />

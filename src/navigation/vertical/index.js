@@ -33,6 +33,23 @@ const navigation = () => {
       path: '/webbrowser',
       openInNewTab: true
     },
+    {
+      title: 'Accounting',
+      icon: Cog,
+      path: '/accounting'
+    },
+    {
+      title: 'Buying',
+      icon: Cog,
+      path: '/buying',
+      openInNewTab: true
+    },
+    {
+      title: 'Seling',
+      icon: Cog,
+      path: '/seling',
+      openInNewTab: true
+    },
 
     // {
     //   title: 'Login',
@@ -40,6 +57,7 @@ const navigation = () => {
     //   path: '/pages/login',
     //   openInNewTab: true
     // },
+
     // {
     //   title: 'Register',
     //   icon: AccountPlusOutline,

@@ -35,8 +35,6 @@ const CardSupport = () => {
     setShowCard(true)
   }
 
-  // object.values(objectData).map(x => console.log(x))
-
   return (
     <Box m={12} mb={20}>
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -55,37 +53,30 @@ const CardSupport = () => {
               <React.Fragment>
                 <Btn
                   numminwid={280}
-                  detailbutton='Item'
+                  detailbutton=' Selling Settings'
                   bgcolorbutton='secondary.E'
                   handleButtonClick={() =>
-                    handleButtonClick(homecontent[0].head, homecontent[0].body, homecontent[0].footer)
-                  }
-                />
-
-                <Btn
-                  numminwid={280}
-                  detailbutton=' Create a Customer'
-                  bgcolorbutton='secondary.F'
-                  handleButtonClick={() =>
                     handleButtonClick(
-                      homecontent[1].head,
-                      homecontent[1].body,
-                      homecontent[1].footer,
-                      homecontent[1].footer_1,
-                      homecontent[1].footer_2,
-                      homecontent[1].footer_3
+                      homecontent[13].head,
+                      homecontent[13].body,
+                      homecontent[13].footer,
+                      homecontent[13].footer_1,
+                      homecontent[13].footer_2
                     )
                   }
                 />
                 <Btn
                   numminwid={280}
-                  detailbutton='Create Your First Sales Invoice'
+                  detailbutton='Sales Order'
                   bgcolorbutton='secondary.G'
-                  handleButtonClick={() => handleButtonClick(homecontent[2].head, homecontent[2].body)}
+                  handleButtonClick={() =>
+                    handleButtonClick(homecontent[14].head, homecontent[14].body, homecontent[14].footer)
+                  }
                 />
               </React.Fragment>
             }
           />
+
           <Grid item sm={12} md={12} lg={12}>
             <CardShortcuts
               CardShortcutsName={`Your Shortcuts`}
@@ -97,9 +88,7 @@ const CardSupport = () => {
             />
           </Grid>
           <Grid item sm={12} md={12} lg={12}>
-            <React.Fragment>
-              <CardReports_Masters_1 Reports_MastersName_1={'Reports & Masters'} />\
-            </React.Fragment>
+            <CardReports_Masters_1 Reports_MastersName_1={'Reports & Masters'} />
           </Grid>
         </Grid>
       </Grid>

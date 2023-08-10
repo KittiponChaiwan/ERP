@@ -9,9 +9,7 @@ import { useTheme } from '@mui/material/styles'
 function CardDetails({ DetailsName, Details, Content, showCard, head, body, footer, footer_1, footer_2, footer_3 }) {
   const theme = useTheme()
 
-  const handleOnClick = () => {
-    alert('คุณคลิกที่ตัวหนังสือแล้ว!')
-  }
+  const handleOnClick = () => {}
 
   return (
     <Card
@@ -73,48 +71,65 @@ function CardDetails({ DetailsName, Details, Content, showCard, head, body, foot
                       padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`
                     }}
                   >
-                    <Card sx={{ mb: 5 }}>
-                      <Typography variant='body1' sx={{ color: theme.palette.grey[300] }}>
-                        {head}
-                      </Typography>
-                    </Card>
-                    <Card sx={{ mb: 5 }}>
-                      <Typography variant='body2' sx={{ fornSize: 19, color: theme.palette.grey[300] }}>
-                        {body}
-                      </Typography>
-                    </Card>
-                    <Card>
-                      <Typography style={{ fontSize: '13px', color: theme.palette.grey[300] }} variant='body2'>
-                        {footer}
-                      </Typography>
-                    </Card>
-                    <Card>
-                      <Typography
-                        style={{ fontSize: '13px' }}
-                        variant='body2'
-                        sx={{ ml: 11.5, color: theme.palette.grey[300] }}
-                      >
-                        {footer_1}
-                      </Typography>
-                    </Card>
-                    <Card>
-                      <Typography
-                        style={{ fontSize: '13px' }}
-                        variant='body2'
-                        sx={{ ml: 11.5, color: theme.palette.grey[300] }}
-                      >
-                        {footer_2}
-                      </Typography>
-                    </Card>
-                    <Card>
-                      <Typography
-                        style={{ fontSize: '13px' }}
-                        variant='body2'
-                        sx={{ ml: 11.5, color: theme.palette.grey[300] }}
-                      >
-                        {footer_3}
-                      </Typography>
-                    </Card>
+                    {head && (
+                      <Card sx={{ mb: 5 }}>
+                        <Typography variant='body1' sx={{ color: theme.palette.grey[300] }}>
+                          {head}
+                        </Typography>
+                      </Card>
+                    )}
+
+                    {body && (
+                      <Card sx={{ mb: 5 }}>
+                        <Typography variant='body2' sx={{ fornSize: 19, color: theme.palette.grey[300] }}>
+                          {body}
+                        </Typography>
+                      </Card>
+                    )}
+
+                    {footer && (
+                      <Card>
+                        <Typography style={{ fontSize: '13px', color: theme.palette.grey[300] }} variant='body2'>
+                          {footer}
+                        </Typography>
+                      </Card>
+                    )}
+
+                    {footer_1 && (
+                      <Card>
+                        <Typography
+                          style={{ fontSize: '13px' }}
+                          variant='body2'
+                          sx={{ ml: 11.5, color: theme.palette.grey[300] }}
+                        >
+                          {footer_1}
+                        </Typography>
+                      </Card>
+                    )}
+
+                    {footer_2 && (
+                      <Card>
+                        <Typography
+                          style={{ fontSize: '13px' }}
+                          variant='body2'
+                          sx={{ ml: 11.5, color: theme.palette.grey[300] }}
+                        >
+                          {footer_2}
+                        </Typography>
+                      </Card>
+                    )}
+
+                    {footer_3 && (
+                      <Card>
+                        <Typography
+                          style={{ fontSize: '13px' }}
+                          variant='body2'
+                          sx={{ ml: 11.5, color: theme.palette.grey[300] }}
+                        >
+                          {footer_3}
+                        </Typography>
+                      </Card>
+                    )}
                   </Card>
                 )}
               </Grid>

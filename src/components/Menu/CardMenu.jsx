@@ -7,7 +7,7 @@ import Box from '@mui/material/Grid'
 import Icon from '@mdi/react'
 import { useTheme } from '@mui/material/styles'
 
-function CardMenu({ handleClick, MenuName, MenuIcon }) {
+function CardMenu({ handleButtonClick, MenuName, MenuIcon }) {
   const theme = useTheme()
 
   return (
@@ -18,7 +18,7 @@ function CardMenu({ handleClick, MenuName, MenuIcon }) {
         minWidth: 250
       }}
       style={{ background: theme.palette.grey[300] }}
-      onClick={() => handleClick()}
+      onClick={() => handleButtonClick()}
     >
       <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
         <Box>

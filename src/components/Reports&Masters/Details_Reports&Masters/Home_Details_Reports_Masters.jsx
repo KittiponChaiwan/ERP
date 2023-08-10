@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Box from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import { mdiFolderOpenOutline } from '@mdi/js'
-import CardShowAccounting from './Details_Reports&Masters/CardShowAccounting_1'
+import CardShowAccounting from '../CardShowAccounting'
 
 function CardReports_Masters({ Reports_MastersName_1 }) {
   const theme = useTheme()

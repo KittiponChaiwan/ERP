@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import Btn from '../Button/Button'
 import { useRouter } from 'next/router'
+import { Accounting_Detail_Shortcut } from 'src/dummy/Homecontent'
 
 function CardShortcuts({ CardShortcutsName }) {
   const theme = useTheme()
@@ -44,20 +45,16 @@ function CardShortcuts({ CardShortcutsName }) {
           }}
         >
           <Grid container alignItems={'center'} justifyContent={'center'}>
-            <Btn
-              detailbutton=' Items'
-              bgcolorbutton='secondary.C'
-              numminwid={280}
-              handleClick={() => router.push('/pages/webbrowser/item_shortcuts')}
-            />
-
-            <Btn detailbutton=' Customer' bgcolorbutton='secondary.D' numminwid={280} />
-
-            <Btn detailbutton=' Supplier' bgcolorbutton='secondary.E' numminwid={280} />
-
-            <Btn detailbutton=' Sales Invoice' bgcolorbutton='secondary.F' numminwid={280} />
-
-            <Btn detailbutton=' Leaderbord' bgcolorbutton='secondary.G' numminwid={280} />
+            {Accounting_Detail_Shortcut?.map((x, index) => (
+              <React.Fragment key={x.id}>
+                <Btn
+                  detailbutton={x.detailbutton}
+                  bgcolorbutton={x.bgcolorbutton}
+                  numminwid={x.numminwid}
+                  handleButtonClick={() => router.push('/webbrowser/item_shortcuts')}
+                />
+              </React.Fragment>
+            ))}
           </Grid>
         </CardContent>
       </Card>
