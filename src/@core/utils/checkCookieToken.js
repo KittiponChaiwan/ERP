@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken') // นำเข้า jsonwebtoken หากใช้ใน Node.js
 
 // คีย์สำหรับการยืนยัน token
-const PRIVATE_KEY = process.env.PRIVATE_KEY
+const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY
 
 export const checkCookieToken = token => {
   try {

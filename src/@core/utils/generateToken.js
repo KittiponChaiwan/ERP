@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 
 const jwt = require('jsonwebtoken')
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY
+const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY
 
 export const generateToken = payload => {
   // คีย์สำหรับเซ็น JWT (ส่วนตัว)
