@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import Box from '@mui/material/Grid'
+import Grid from '@mui/material/Grid'
 import { useTheme } from '@mui/material/styles'
 import Btn from '../Button/Button'
-import CardShowAccounting from './Details_Reports&Masters/CardShowAccounting'
+import { useRouter } from 'next/router'
+import { Home_Detail_Shortcut } from 'src/dummy/Homecontent'
 
-function CardReports_Masters({ Reports_MastersName }) {
+function CardShortcuts({ CardShortcutsName }) {
   const theme = useTheme()
+  const router = useRouter()
 
   return (
     <Card
@@ -26,7 +28,7 @@ function CardReports_Masters({ Reports_MastersName }) {
     >
       <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
         <Typography variant='h6' fontWeight={'bold'}>
-          {Reports_MastersName}
+          {CardShortcutsName}
         </Typography>
       </Box>
 
@@ -38,18 +40,21 @@ function CardReports_Masters({ Reports_MastersName }) {
             textAlign: 'left',
             flexDirection: 'row',
             alignItems: 'center',
-            padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`
+            padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`,
+            minWidth: 100
           }}
         >
-          <Grid container spacing={1} sx={{ display: 'flex' }}>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <CardShowAccounting
-                Accounting={'Accounting'}
-                Stock={'Stock'}
-                CRM={'Crm'}
-                Data_import_and_Settings={'Data import and Settings'}
-              />
-            </Grid>
+          <Grid container alignItems={'center'} justifyContent={'center'}>
+            {Home_Detail_Shortcut?.map((x, index) => (
+              <React.Fragment key={x.id}>
+                <Btn
+                  detailbutton={x.detailbutton}
+                  bgcolorbutton={x.bgcolorbutton}
+                  numminwid={x.numminwid}
+                  handleButtonClick={() => router.push('/webbrowser/item_shortcuts')}
+                />
+              </React.Fragment>
+            ))}
           </Grid>
         </CardContent>
       </Card>
@@ -57,4 +62,4 @@ function CardReports_Masters({ Reports_MastersName }) {
   )
 }
 
-export default CardReports_Masters
+export default CardShortcuts

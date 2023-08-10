@@ -14,9 +14,9 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import NotificationDropdown from 'src/@core/layouts/components/shared-components/NotificationDropdown'
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 import { useTheme } from '@mui/material/styles'
-import Carditem_shortcuts from './carditem'
+import Cardcustomer from './cardcustomer'
 
-const Item_shortcuts = props => {
+const Customer = props => {
   // ** Props
   const { toggleNavVisibility } = props
 
@@ -25,7 +25,7 @@ const Item_shortcuts = props => {
   const theme = useTheme()
 
   return (
-    <Box sx={{ bgcolor: 'red' }}>
+    <Box>
       <Box>
         <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
           <Box>
@@ -54,12 +54,12 @@ const Item_shortcuts = props => {
         </Box>
       </Box>
       <Box>
-        <Carditem_shortcuts />
+        <Cardcustomer />
       </Box>
     </Box>
   )
 }
 
-Item_shortcuts.getLayout = page => <BlankLayout>{page}</BlankLayout>
+Customer.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-export default Item_shortcuts
+export default Customer

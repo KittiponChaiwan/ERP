@@ -8,6 +8,7 @@ function Btn(props) {
     <Box sx={{ width: 'auto' }}>
       <Button
         sx={{
+          maxWidth: numminwid,
           minWidth: numminwid,
           textAlign: 'left',
           justifyContent: 'flex-start',
