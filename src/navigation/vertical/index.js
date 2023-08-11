@@ -30,22 +30,22 @@ const navigation = () => {
     {
       title: 'HOME',
       icon: Cog,
-      path: '/webbrowser'
+      path: '/app'
     },
     {
       title: 'Accounting',
       icon: Cog,
-      path: '/webbrowser/accounting'
+      path: '/app/accounting'
     },
     {
       title: 'Buying',
       icon: Cog,
-      path: '/webbrowser/buying'
+      path: '/app/buying'
     },
     {
       title: 'Selling',
       icon: Cog,
-      path: '/webbrowser/selling'
+      path: '/app/selling'
     },
 
     // {
