@@ -31,18 +31,21 @@ const AccountingMenuButton = [
 
 const AccountingContent = [
   {
+    id: 1,
     head: `Chart Of Accounts`,
     body: `ERPNext sets up a simple chart of accounts for each Company you create, but you can modify it according to business and legal requirements.`
   },
 
   ////////////// 4 ////////////////
   {
+    id: 2,
     head: `Setting up Taxes`,
     body: `ERPNext lets you configure your taxes so that they are automatically applied in your buying and selling transactions. You can configure them globally or even on Items. ERPNext taxes are pre-configured for most regions.`
   },
 
   ////////////// 5 ////////////////
   {
+    id: 3,
     head: `Account Settings `,
     body: `In ERPNext, Accounting features are configurable as per your business needs. Accounts Settings is the place to define some of your accounting preferences like:  `,
     footer: `- Credit Limit and over billing settings
@@ -52,6 +55,7 @@ const AccountingContent = [
 
   ////////////// 6 ////////////////
   {
+    id: 4,
     head: `Cost Centers for Budgeting and Analysis`,
     body: `While your Books of Accounts are framed to fulfill statutory requirements, you can set up Cost Center and Accounting Dimensions to address your companies reporting and budgeting requirements.  `,
     footer: `Click here to learn more about how Cost Center and Dimensions allow you to get advanced financial analytics reports from ERPNext.`
@@ -59,6 +63,7 @@ const AccountingContent = [
 
   ////////////// 7 ////////////////
   {
+    id: 5,
     head: `Create your first Purchase Invoice `,
     body: `A Purchase Invoice is a bill received from a Supplier for a product(s) or service(s) delivery to your company. You can track payables through Purchase Invoice and process Payment Entries against it.`,
     footer: `Purchase Invoices can also be created against a Purchase Order or Purchase Receipt.`
@@ -66,12 +71,14 @@ const AccountingContent = [
 
   ////////////// 8 ////////////////
   {
+    id: 6,
     head: `Updating Opening Balances `,
     body: `Once you close the financial statement in previous accounting software, you can update the same as opening in your ERPNext's Balance Sheet accounts. This will allow you to get complete financial statements from ERPNext in the coming years, and discontinue the parallel accounting system right away. `
   },
 
   ////////////// 9 ////////////////
   {
+    id: 7,
     head: `Financial Statements `,
     body: `In ERPNext, you can get crucial financial reports like [Balance Sheet] and [Profit and Loss] statements with a click of a button. You can run in the report for a different period and plot analytics charts premised on statement data. For more reports, check sections like Financial Statements, General Ledger, and Profitability reports. `
   }
