@@ -79,7 +79,7 @@ function CardGuideVue({ MenuButton, RightSideContent }) {
                     sx={{
                       border: '1px solid black',
                       fontWeight: 'bold',
-                      width: '50%',
+                      width: '100%',
                       textAlign: 'left',
                       justifyContent: 'flex-start',
                       bgcolor: theme => (buttonId === item.id ? theme.palette.secondary.D : theme.palette.secondary.C),

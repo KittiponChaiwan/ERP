@@ -14,7 +14,10 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import NotificationDropdown from 'src/@core/layouts/components/shared-components/NotificationDropdown'
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 import { useTheme } from '@mui/material/styles'
-import Cardleaderboard from './cardleaderboard'
+import Cardleaderboard from './card_Left_Leaderboard'
+import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
+import Card_Left_Leaderboard from './card_Left_Leaderboard'
+import Card_Right_Leaderboard from './card_Right_Leaderboard'
 
 const Leaderboard_shortcuts = props => {
   // ** Props
@@ -25,7 +28,7 @@ const Leaderboard_shortcuts = props => {
   const theme = useTheme()
 
   return (
-    <Box sx={{ bgcolor: 'red' }}>
+    <Box sx={{}}>
       <Box>
         <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
           <Box>
@@ -54,7 +57,7 @@ const Leaderboard_shortcuts = props => {
         </Box>
       </Box>
       <Box>
-        <Cardleaderboard />
+        <CardDividerContent contentLeft={<Card_Left_Leaderboard />} contentRight={<Card_Right_Leaderboard />} />
       </Box>
     </Box>
   )
