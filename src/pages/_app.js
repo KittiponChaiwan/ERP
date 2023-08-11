@@ -8,6 +8,7 @@ import { Router, useRouter } from 'next/router'
 // ** Redux Imports
 import { wrapper } from '../@core/redux/store'
 import { useDispatch } from 'react-redux'
+import { logoutUser } from 'src/@core/redux/authSlice'
 
 // ** Cookies Import
 import Cookies from 'js-cookie'
