@@ -35,17 +35,17 @@ const navigation = () => {
     {
       title: 'Accounting',
       icon: Cog,
-      path: '/accounting'
+      path: '/webbrowser/accounting'
     },
     {
       title: 'Buying',
       icon: Cog,
-      path: '/buying'
+      path: '/webbrowser/buying'
     },
     {
       title: 'Selling',
       icon: Cog,
-      path: '/selling'
+      path: '/webbrowser/selling'
     },
 
     // {
