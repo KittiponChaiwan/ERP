@@ -1,5 +1,6 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
+
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import TabPanel from '@mui/lab/TabPanel'
@@ -26,7 +27,6 @@ import { mdiMagnify } from '@mdi/js'
 
 // ** Components
 
-import { useTheme } from '@mui/material/styles'
 import Iconbtn from 'src/components/Button/IconButton/iconbutton'
 import Accounting_item from './accounting_item'
 import Details_item from './details_item'
@@ -37,12 +37,11 @@ import Sales_item from './sales_item'
 import Tex_item from './tex_item'
 import Quality_item from './quality_item'
 import Manufacturing_item from './manufacturing_item'
+import Dawer_item from './dawer_item'
 
 const Carditem_shortcuts = props => {
   // ** Props
   const { toggleNavVisibility } = props
-
-  const theme = useTheme()
 
   const [value, setValue] = useState('1')
 
@@ -137,27 +136,8 @@ const Carditem_shortcuts = props => {
   return (
     <Box sx={{ bgcolor: 'white' }}>
       <Box sx={{ display: 'flex' }}>
-        <Box>
-          <div style={{ display: 'flex', height: '100vh' }}>
-            <div
-              style={{
-                width: '40px',
-                background: theme.palette.secondary.F,
-                color: 'white',
-                transition: 'transform 0.3s ease-in-out'
-              }}
-            >
-              <Box>
-                <Iconbtn icon={mdiAccountBoxOutline} />
-                <Iconbtn icon={mdiAccountBoxOutline} />
-                <Iconbtn icon={mdiAccountBoxOutline} />
-                <Iconbtn icon={mdiAccountBoxOutline} />
-                <Iconbtn icon={mdiAccountBoxOutline} />
-              </Box>
-            </div>
-          </div>
-        </Box>
-        <Grid container sx={{ width: '100%' }}>
+        <Dawer_item />
+        <Grid container sx={{ width: '100%', mt: 8 }}>
           <Grid xs={12} sm={12} md={6} lg={6} item sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography sx={{ bgcolor: 'white' }} variant='h5'>
               Manage Item
