@@ -88,52 +88,52 @@ const AccountingYourShortcut = [
   {
     name: 'Chart of Accounts',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/accounting/account'
   },
   {
-    name: ' Sales Invice',
+    name: 'Sales Invice',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: '/app/accounting/sales-invoice'
   },
   {
-    name: ' Purchase Invoice',
+    name: 'Purchase Invoice',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/accounting/purchase-invoice'
   },
   {
-    name: ' Journal Entry',
+    name: 'Journal Entry',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: '/app/accounting/journal-entry'
   },
   {
-    name: ' Payment Entry',
+    name: 'Payment Entry',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/accounting/payment-entry'
   },
   {
-    name: ' Accounts Receivable',
+    name: 'Accounts Receivable',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: '/app/accounting/accounts-receivable'
   },
   {
-    name: ' General Ledger',
+    name: 'General Ledger',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/accounting/general-ledger'
   },
   {
-    name: ' Trial Balance',
+    name: 'Trial Balance',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: '/app/accounting/trial-balance'
   },
   {
-    name: ' Dashboard',
+    name: 'Dashboard',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/accounting/dashboard'
   },
   {
-    name: ' Learn Accounting',
+    name: 'Learn Accounting',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: 'https://frappe.school/courses/erpnext-accounting?utm_source=in_app'
   }
 ]
 
