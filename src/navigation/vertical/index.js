@@ -30,8 +30,7 @@ const navigation = () => {
     {
       title: 'HOME',
       icon: Cog,
-      path: '/webbrowser',
-      openInNewTab: true
+      path: '/webbrowser'
     },
     {
       title: 'Accounting',
@@ -41,14 +40,12 @@ const navigation = () => {
     {
       title: 'Buying',
       icon: Cog,
-      path: '/buying',
-      openInNewTab: true
+      path: '/buying'
     },
     {
-      title: 'Seling',
+      title: 'Selling',
       icon: Cog,
-      path: '/seling',
-      openInNewTab: true
+      path: '/selling'
     },
 
     // {

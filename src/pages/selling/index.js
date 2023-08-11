@@ -10,21 +10,19 @@ import CardYourShortcut from 'src/components/Menu/CardYourShortcut'
 import CardReportMenu from 'src/components/Menu/CardReportMenu'
 
 // ** dummy data
-import { AccountingMenuButton, AccountingContent, AccountingYourShortcut, AccountingReport } from 'src/dummy/accounting'
+import { SellingMenuButton, SellingContent, SellingShortcut, SellingReport } from 'src/dummy/selling'
 
 const CardSupport = () => {
   return (
     <Box m={12} mb={20}>
       <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
         <Grid item sm={12} md={12} lg={12}>
-          <CardGuideVue MenuButton={AccountingMenuButton} RightSideContent={AccountingContent} />
+          <CardGuideVue MenuButton={SellingMenuButton} RightSideContent={SellingContent} />
           <Grid item sm={12} md={12} lg={12}>
-            <CardYourShortcut menus={AccountingYourShortcut} />
+            <CardYourShortcut menus={SellingShortcut} />
           </Grid>
           <Grid item sm={12} md={12} lg={12}>
-            <React.Fragment>
-              <CardReportMenu menus={AccountingReport} />
-            </React.Fragment>
+            <CardReportMenu menus={SellingReport} />
           </Grid>
         </Grid>
       </Grid>
