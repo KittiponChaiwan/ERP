@@ -1,3 +1,32 @@
+const SellingMenuButton = [
+  {
+    id: 1,
+    buttonName: 'Selling Settings'
+  },
+  {
+    id: 2,
+    buttonName: ' Sales Order'
+  }
+]
+
+const SellingContent = [
+  {
+    id: 1,
+    head: `Selling Settings`,
+    body: `CRM and Selling module’s features are configurable as per your business needs. Selling Settings is the place where you can set your preferences for: `,
+    footer: `- Customer naming and default values 
+             - Billing and shipping preference in selling transactions`
+  },
+
+  ////////////// 13 ////////////////
+  {
+    id: 2,
+    head: `Sales Order`,
+    body: `A Sales Order is a confirmation of an order from your customer. It is also referred to as Proforma Invoice.`,
+    footer: `Sales Order at the heart of your sales and purchase transactions. Sales Orders are linked in Delivery Note, Sales Invoices, Material Request, and Maintenance transactions. Through Sales Order, you can track fulfillment of the overall deal towards the customer.`
+  }
+]
+
 const SellingShortcut = [
   {
     name: 'Item',
@@ -136,4 +165,4 @@ const SellingReport = [
   }
 ]
 
-export { SellingShortcut, SellingReport }
+export { SellingMenuButton, SellingContent, SellingShortcut, SellingReport }

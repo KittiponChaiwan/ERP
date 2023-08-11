@@ -1,3 +1,39 @@
+const BuyingMenuButton = [
+  {
+    id: 1,
+    buttonName: 'Buying Settings'
+  },
+  {
+    id: 2,
+    buttonName: ' Track Material Request'
+  },
+  {
+    id: 3,
+    buttonName: ' Create first Purchase Order'
+  }
+]
+
+const BuyingContent = [
+  {
+    head: `Buying Settings`,
+    body: `Buying module’s features are highly configurable as per your business needs. Buying Settings is the place where you can set your preferences for: `,
+    footer: `- Supplier naming and default values
+             - Billing and shipping preference in buying transactions`
+  },
+
+  ////////////// 11 ////////////////
+  {
+    head: `Track Material Request`,
+    body: `Also known as Purchase Request or an Indent, is a document identifying a requirement of a set of items (products or services) for various purposes like procurement, transfer, issue, or manufacturing. Once the Material Request is validated, a purchase manager can take the next actions for purchasing items like requesting RFQ from a supplier or directly placing an order with an identified Supplier.`
+  },
+
+  ////////////// 12 ////////////////
+  {
+    head: `Create first Purchase Order`,
+    body: `Purchase Order is at the heart of your buying transactions. In ERPNext, Purchase Order can can be created against a Purchase Material Request (indent) and Supplier Quotation as well. Purchase Orders is also linked to Purchase Receipt and Purchase Invoices, allowing you to keep a birds-eye view on your purchase deals.  `
+  }
+]
+
 const BuyingYourShortcut = [
   {
     name: 'Cost Centers for Budgeting and Analysis',
@@ -156,4 +192,4 @@ const BuyingReport = [
   }
 ]
 
-export { BuyingYourShortcut, BuyingReport }
+export { BuyingMenuButton, BuyingContent, BuyingYourShortcut, BuyingReport }
