@@ -83,25 +83,25 @@ const BuyingReport = [
       {
         id: 1,
         name: 'Material Request',
-        router: '/webbrowser/material_request_shortcuts',
+        router: '/app/stock/material-request',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Purchase Order',
-        router: '/webbrowser/purchase_Order_shortcuts',
+        router: '/app/buying/purchase-order',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Purchase Invoice',
-        router: '/webbrowser/purchase_invoice_shortcuts',
+        router: '/app/buying/purchase-invoice',
         imgIcon: 'icon-account'
       },
       {
         id: 4,
         name: 'Request for Quotation',
-        router: '/webbrowser/request_for_quotation_shortcuts',
+        router: '/app/buying/request-for-quotation',
         imgIcon: 'icon-account'
       }
     ]
@@ -113,19 +113,19 @@ const BuyingReport = [
       {
         id: 1,
         name: 'Item',
-        router: '/webbrowser/items_and_pricing_shortcuts',
+        router: '/app/stock/item',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Item Price',
-        router: '/webbrowser/item_price_shortcuts',
+        router: '/app/stock/item-price',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Price List',
-        router: '/webbrowser/price_list_shortcuts',
+        router: '/app/stock/price-list',
         imgIcon: 'icon-account'
       }
     ]
@@ -137,7 +137,7 @@ const BuyingReport = [
       {
         id: 1,
         name: 'supplier',
-        router: '/webbrowser/supplier_shortcuts',
+        router: '/app/buying/supplier',
         imgIcon: 'icon-account'
       }
     ]
@@ -149,37 +149,37 @@ const BuyingReport = [
       {
         id: 1,
         name: 'Purchase Analytics',
-        router: '/webbrowser/purchase_analytics_shortcuts',
+        router: '/app/buying/purchase-analytics',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Purchase Order Analysis',
-        router: '/webbrowser/purchase_order_analysis_shortcuts',
+        router: '/app/buying/purchase-order-analysis',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Supplier-Wise Sales Analytics',
-        router: '/webbrowser/supplier_wise_sales_analytics_shortcuts',
+        router: '/app/buying/supplier-wise-sales-analytics',
         imgIcon: 'icon-account'
       },
       {
         id: 4,
         name: 'Items to Order and Receive',
-        router: '/webbrowser/items_to_order_and_receive_shortcuts',
+        router: '/app/buying/items-to-order-and-receive',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Purchase Order Trends',
-        router: '/webbrowser/purchase_order_trends_shortcuts',
+        router: '/app/buying/purchase-order-trends',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Procurement Tracker',
-        router: '/webbrowser/procurement_tracker_shortcuts',
+        router: '/app/buying/procurement-tracker',
         imgIcon: 'icon-account'
       }
     ]
@@ -191,19 +191,19 @@ const BuyingReport = [
       {
         id: 1,
         name: 'Items To Be Requested',
-        router: '/webbrowser/items_to_be_requested_shortcuts',
+        router: '/app/buying/items-to-be-requested',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Item-wise Purchase History',
-        router: '/webbrowser/item_wise_purchase_history_shortcuts',
+        router: '/app/buying/item-wise-purchase-history',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Supplier Quotation Comparison',
-        router: '/webbrowser/supplier_quotation_comparison_shortcuts',
+        router: '/app/buying/supplier-quotation-comparison',
         imgIcon: 'icon-account'
       }
     ]
