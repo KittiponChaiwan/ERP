@@ -30,27 +30,27 @@ const SellingContent = [
 const SellingShortcut = [
   {
     name: 'Item',
-    route: '/'
+    route: '/app/stock/item'
   },
   {
-    name: ' Sales Order',
-    route: '/'
+    name: 'Sales Order',
+    route: '/app/selling/sales-order'
   },
   {
     name: ' Sales Analytics',
-    route: '/'
+    route: '/app/selling/sales-analytics'
   },
   {
     name: ' Point of Sale',
-    route: '/'
+    route: '/app/selling/point-of-sale'
   },
   {
     name: ' Selling Dashboard',
-    route: '/'
+    route: '/app/selling/selling-dashboard'
   },
   {
     name: 'Sales Management',
-    route: '/'
+    route: 'https://frappe.school/courses/sales-management-course?utm_source=in_app'
   }
 ]
 

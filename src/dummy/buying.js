@@ -39,24 +39,39 @@ const BuyingContent = [
 
 const BuyingYourShortcut = [
   {
-    name: 'Cost Centers for Budgeting and Analysis',
+    name: 'Item',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/stock/item'
   },
   {
-    name: ' Create Your First Purchase Invoice',
+    name: 'Material Request',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: '/app/buying/material-request'
   },
   {
-    name: ' Updating Opening Balances',
+    name: 'Purchase Order',
     bgcolorbutton: 'secondary.D',
-    route: '/'
+    route: '/app/buying/purchase-order'
   },
   {
-    name: ' Financial Statements',
+    name: 'Purchase Analytics',
     bgcolorbutton: 'secondary.C',
-    route: '/'
+    route: '/app/buying/purchase-analytics'
+  },
+  {
+    name: 'Purchase Order Analysis',
+    bgcolorbutton: 'secondary.D',
+    route: '/app/buying/purchase-order-analysis'
+  },
+  {
+    name: 'Buying Dashboard',
+    bgcolorbutton: 'secondary.C',
+    route: '/app/buying/buying-dashboard'
+  },
+  {
+    name: 'Learn Procurement',
+    bgcolorbutton: 'secondary.D',
+    route: 'https://frappe.school/courses/procurement?utm_source=in_app'
   }
 ]
 
