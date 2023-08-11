@@ -4,7 +4,6 @@ import { HYDRATE } from 'next-redux-wrapper'
 const initialState = {
   name: '', // เพิ่ม property สำหรับชื่อ
   status: '', // เพิ่ม property สำหรับสถานะ
-  token: '', // เพิ่ม property สำหรับโทเคน
   authState: false // เพิ่ม property สำหรับสถานะการอนุญาต
 }
 
