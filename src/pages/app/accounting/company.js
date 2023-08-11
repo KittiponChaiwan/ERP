@@ -1,47 +1,21 @@
 // ** React Imports
 import React, { useState } from 'react'
+import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 
 // ** MUI Imports
-import { Grid, Divider, Button } from '@mui/material'
 
 const CompanyPage = () => {
-  // initial state
-  const contentSizeInit = {
-    left: 4,
-    right: 6
-  }
-
-  // state
-  const [contentState, setContentState] = useState(false)
-  const [contentSize, setContentSize] = useState(contentSizeInit)
-
-  const handleContentSize = () => {
-    if (contentState) {
-      setContentSize(contentSizeInit)
-      setContentState(false)
-    } else {
-      setContentSize({
-        left: 6,
-        right: 4
-      })
-      setContentState(true)
-    }
-  }
-
   return (
-    <Grid container>
-      <Grid item xs={contentSize.left}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo. Nulla ut facilisis
-        ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed malesuada lobortis pretium.
-      </Grid>
-      <Divider orientation='vertical' flexItem>
-        <Button onClick={() => handleContentSize()}>test</Button>
-      </Divider>
-      <Grid item xs={contentSize.right}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dignissim justo. Nulla ut facilisis
-        ligula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed malesuada lobortis pretium.
-      </Grid>
-    </Grid>
+    <div>
+      <CardDividerContent
+        contentLeft={
+          'loEa esse magna Lorem eiusmod nisi non consectetur minim consectetur. Do in elit amet nostrud ex deserunt eu. Et adipisicing id anim irure minim do.'
+        }
+        contentRight={
+          'Reprehenderit Lorem officia fugiat sunt pariatur culpa minim aliquip dolore in est. Ullamco Lorem excepteur incididunt proident proident consectetur proident officia cillum pariatur consequat elit culpa magna. Elit nulla ea esse aliqua do nostrud ex esse cupidatat culpa velit velit veniam. Eiusmod aute aute cillum id qui aliquip deserunt minim incididunt exercitation minim dolore.'
+        }
+      />
+    </div>
   )
 }
 

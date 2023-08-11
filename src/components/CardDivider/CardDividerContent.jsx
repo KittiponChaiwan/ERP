@@ -1,20 +1,43 @@
 // ** React Imports
-import React from 'react'
+import React, { useState } from 'react'
 
-// ** Mui Components
-import { Grid, Divider } from '@mui/material'
+// ** MUI Imports
+import { Grid, Divider, Button } from '@mui/material'
 
-function CardDividerContent() {
+function CardDividerContent({ contentLeft, contentRight }) {
+  // initial state
+  const contentSizeInit = {
+    left: 4,
+    right: 6
+  }
+
+  // state
+  const [contentState, setContentState] = useState(false)
+  const [contentSize, setContentSize] = useState(contentSizeInit)
+
+  const handleContentSize = () => {
+    if (contentState) {
+      setContentSize(contentSizeInit)
+      setContentState(false)
+    } else {
+      setContentSize({
+        left: 6,
+        right: 4
+      })
+      setContentState(true)
+    }
+  }
+
   return (
     <Grid container>
-      <Grid item xs>
-        {content}
+      <Grid item xs={contentSize.left}>
+        {contentLeft}
       </Grid>
       <Divider orientation='vertical' flexItem>
-        VERTICAL
+        <Button onClick={() => handleContentSize()}>test</Button>
       </Divider>
-      <Grid item xs>
-        {content}
+      <Grid item xs={contentSize.right}>
+        {contentRight}
       </Grid>
     </Grid>
   )
