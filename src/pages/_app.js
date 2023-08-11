@@ -7,6 +7,7 @@ import { Router, useRouter } from 'next/router'
 
 // ** Redux Imports
 import { wrapper } from '../@core/redux/store'
+import { useDispatch } from 'react-redux'
 
 // ** Cookies Import
 import Cookies from 'js-cookie'
@@ -58,6 +59,7 @@ if (themeConfig.routingLoader) {
 const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) => {
   // ** Router
   const Router = useRouter()
+  const dispatch = useDispatch()
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
@@ -66,6 +68,7 @@ const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) =>
   useEffect(() => {
     if (!UserStatus) {
       // เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบ หรือเส้นทางที่คุณต้องการ
+      dispatch(logoutUser)
       Router.push('/pages/login')
     }
   }, [])

@@ -24,8 +24,8 @@ import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 
 // ** redux
-import { useDispatch } from 'react-redux'
-import { logoutUser } from 'src/@core/redux/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser, selectAuthUser } from 'src/@core/redux/authSlice'
 
 // ** Cookies Import
 import Cookies from 'js-cookie'
@@ -46,6 +46,11 @@ const UserDropdown = () => {
   // ** Hooks
   const router = useRouter()
   const dispatch = useDispatch()
+
+  // ** Store Vars
+  const User = useSelector(selectAuthUser)
+
+  console.log(User)
 
   const handleDropdownOpen = event => {
     setAnchorEl(event.currentTarget)
@@ -112,7 +117,7 @@ const UserDropdown = () => {
               <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
+              <Typography sx={{ fontWeight: 600 }}>{User.name}</Typography>
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
                 Admin
               </Typography>
