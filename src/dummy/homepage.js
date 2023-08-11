@@ -45,23 +45,23 @@ const HomeContent = [
 const HomeShortcut = [
   {
     name: 'Item',
-    route: '/webbrowser/item_shortcuts'
+    route: '/app/item_shortcuts'
   },
   {
     name: ' Customer',
-    route: '/webbrowser/customer_shortcuts'
+    route: '/app/selling/customer'
   },
   {
     name: ' Supplier',
-    route: '/webbrowser/supplier_shortcuts'
+    route: '/app/buying/supplier'
   },
   {
     name: ' Sales Invoice',
-    route: '/webbrowser/sales_invoice_shortcuts'
+    route: '/app/selling/sales-invoice'
   },
   {
     name: ' Leaderbord',
-    route: '/webbrowser/leaderboard_shortcuts'
+    route: '/app/leaderboard'
   }
 ]
 
