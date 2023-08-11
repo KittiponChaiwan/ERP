@@ -8,7 +8,7 @@ function CardDividerContent({ contentLeft, contentRight }) {
   // initial state
   const contentSizeInit = {
     left: 4,
-    right: 6
+    right: 7
   }
 
   // state
@@ -21,7 +21,7 @@ function CardDividerContent({ contentLeft, contentRight }) {
       setContentState(false)
     } else {
       setContentSize({
-        left: 6,
+        left: 7,
         right: 4
       })
       setContentState(true)
@@ -34,7 +34,7 @@ function CardDividerContent({ contentLeft, contentRight }) {
         {contentLeft}
       </Grid>
       <Divider orientation='vertical' flexItem>
-        <Button onClick={() => handleContentSize()}>test</Button>
+        <Button onClick={() => handleContentSize()}> test </Button>
       </Divider>
       <Grid item xs={contentSize.right}>
         {contentRight}
