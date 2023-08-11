@@ -6,8 +6,7 @@ const DefaultPalette = (mode, themeColor) => {
 
   const primaryGradient = () => {
     if (themeColor === 'primary') {
-      // return '#C6A7FE'
-      return '#3A5A7E'
+      return '#1D5B79'
     } else if (themeColor === 'secondary') {
       return '#9C9FA4'
     } else if (themeColor === 'success') {
@@ -32,10 +31,16 @@ const DefaultPalette = (mode, themeColor) => {
       white: '#FFF'
     },
     mode: mode,
+    // primary: {
+    //   light: '#9E69FD',
+    //   main: '#9155FD',
+    //   dark: '#804BDF',
+    //   contrastText: '#FFF'
+    // },
     primary: {
-      light: '#253950',
-      main: '#3C5571',
-      dark: '#486688',
+      light: '#9DB2BF',
+      main: '#526D82',
+      dark: '#27374D',
       contrastText: '#FFF'
     },
 
@@ -49,21 +54,14 @@ const DefaultPalette = (mode, themeColor) => {
       light: '#9C9FA4',
       main: '#8A8D93',
       dark: '#777B82',
-      A: '#F2F4F4',
-      B: '#D6DBDF',
-      C: '#AEB6BF',
-      D: '#85929E',
-      E: '#5D6D7E',
-      F: '#34495E',
-      G: '#2E4053',
-      H: '#283747',
-      I: '#212F3C',
-      J: '#1B2631',
-      K: '#1C2833',
-      L: '#17202A',
-      M: '#000102',
-
-      contrastText: '#FFF'
+      contrastText: '#FFF',
+      A: '#eceff1',
+      B: '#cfd8dc',
+      C: '#b0bec5',
+      D: '#90a4ae',
+      E: '#78909c',
+      F: '#607d8b',
+      G: '#546e7a'
     },
     success: {
       light: '#6AD01F',
@@ -112,8 +110,8 @@ const DefaultPalette = (mode, themeColor) => {
     },
     divider: `rgba(${mainColor}, 0.12)`,
     background: {
-      paper: mode === 'light' ? '#FFF' : '#3E4E63',
-      default: mode === 'light' ? '#F4F5FA' : '#3E4E63'
+      paper: mode === 'light' ? '#27374D' : '#27374D',
+      default: mode === 'light' ? '#F4F5FA' : '#27374D'
     },
     action: {
       active: `rgba(${mainColor}, 0.54)`,
