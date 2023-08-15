@@ -2,7 +2,9 @@
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
-
+import { Button } from '@mui/material'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import InputAdornment from '@mui/material/InputAdornment'
 
 // ** Icons Imports
@@ -18,9 +20,7 @@ import Cardleaderboard from './card_Left_Leaderboard'
 import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 import Card_Left_Leaderboard from './card_Left_Leaderboard'
 import Card_Right_Leaderboard from './card_Right_Leaderboard'
-import { Button } from '@mui/material'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import Dawer_item from './dawer_item'
 
 const Leaderboard_shortcuts = props => {
   // ** Props
@@ -95,9 +95,10 @@ const Leaderboard_shortcuts = props => {
       <Box>
         <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
           <Box>
-            <IconButton color='inherit' onClick={toggleNavVisibility} sx={{ ml: -2.75 }}>
+            <Dawer_item />
+            {/* <IconButton color='inherit' onClick={toggleNavVisibility} sx={{ ml: -2.75 }}>
               <Menu />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Box className='actions-left' sx={{ mr: 2, display: 'flex', justifyContent: 'end', width: '100%' }}>
             <TextField
