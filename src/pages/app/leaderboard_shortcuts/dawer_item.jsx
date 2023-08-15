@@ -19,6 +19,11 @@ import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 
+import { HomeShortcut } from 'src/dummy/homepage'
+
+import Icon from '@mdi/react'
+import { mdiChevronRight } from '@mdi/js'
+
 const Dawer_item = () => {
   const drawerWidth = 240
 
@@ -135,11 +140,12 @@ const Dawer_item = () => {
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
-                    mr: open ? 3 : 'auto',
+                    // mr: open ? 3 : 'auto',
                     justifyContent: 'center'
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  <Icon path={mdiChevronRight} size={1} />
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
