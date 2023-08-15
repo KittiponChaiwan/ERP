@@ -65,17 +65,17 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
   }
 }))
 
-const instance = axios.create({
-  baseURL: 'https://tonen.vsiam.com',
-  withCredentials: true // ส่ง cookie ไปกับคำขอ
-})
-
 const LoginPage = () => {
   // ** State
   const [values, setValues] = useState({
     username: '',
     password: '',
     showPassword: false
+  })
+
+  const instance = axios.create({
+    baseURL: 'https://tonen.vsiam.com',
+    withCredentials: true // ส่ง cookie ไปกับคำขอ
   })
 
   // ** Hook
@@ -119,7 +119,7 @@ const LoginPage = () => {
 
         console.log('loginData: ', loginData)
         dispatch(setAuthUser(loginData))
-        router.push('/')
+        router.replace('/')
       } else {
         // Login failed
         console.error('Login failed')
