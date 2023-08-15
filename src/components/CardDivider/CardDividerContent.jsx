@@ -1,20 +1,26 @@
 // ** React Imports
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { Grid, Divider, Button } from '@mui/material'
-import Dawer_item from 'src/pages/app/leaderboard_shortcuts/dawer_item'
+import { Grid, Divider, Button, Box } from '@mui/material'
+import DrawerSidebar from '../ContentPages/DrawerSidebar'
 
-function CardDividerContent({ contentLeft, contentRight }) {
+function CardDividerContent({ contentLeft, contentRight, selectRowState }) {
   // initial state
   const contentSizeInit = {
-    left: 4,
+    left: 5,
     right: 6
   }
 
   // state
   const [contentState, setContentState] = useState(false)
   const [contentSize, setContentSize] = useState(contentSizeInit)
+  const [openContent, setOpenContent] = useState(selectRowState)
+
+  useEffect(() => {
+    console.log('selectRowState: ', selectRowState)
+    setOpenContent(selectRowState)
+  }, [selectRowState])
 
   const handleContentSize = () => {
     if (contentState) {
@@ -23,25 +29,32 @@ function CardDividerContent({ contentLeft, contentRight }) {
     } else {
       setContentSize({
         left: 6,
-        right: 4
+        right: 5
       })
       setContentState(true)
     }
   }
 
-  return (
-    <Grid container>
-      <Dawer_item />
-      <Grid item xs={contentSize.left}>
-        {contentLeft}
+  return openContent ? (
+    <Box sx={{ margin: '1.5rem' }}>
+      <DrawerSidebar />
+      <Grid container>
+        <Grid item xs={contentSize.left}>
+          {contentLeft}
+        </Grid>
+        <Divider orientation='vertical' flexItem>
+          <Button onClick={() => handleContentSize()}> test </Button>
+        </Divider>
+        <Grid item xs={contentSize.right}>
+          {contentRight}
+        </Grid>
       </Grid>
-      <Divider orientation='vertical' flexItem>
-        <Button onClick={() => handleContentSize()}> test </Button>
-      </Divider>
-      <Grid item xs={contentSize.right}>
-        {contentRight}
-      </Grid>
-    </Grid>
+    </Box>
+  ) : (
+    <Box sx={{ margin: '1.5rem' }}>
+      <DrawerSidebar />
+      {contentLeft}
+    </Box>
   )
 }
 
