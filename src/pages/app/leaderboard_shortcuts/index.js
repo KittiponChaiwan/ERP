@@ -77,7 +77,7 @@ const Leaderboard_shortcuts = props => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/Item?fields=["*"]`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
         headers: {
           Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
         }
@@ -91,35 +91,27 @@ const Leaderboard_shortcuts = props => {
   }, [])
 
   return (
-    <Box sx={{}}>
-      <Box>
-        <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-          <Box>
-            <Dawer_item />
-            {/* <IconButton color='inherit' onClick={toggleNavVisibility} sx={{ ml: -2.75 }}>
-              <Menu />
-            </IconButton> */}
-          </Box>
-          <Box className='actions-left' sx={{ mr: 2, display: 'flex', justifyContent: 'end', width: '100%' }}>
-            <TextField
-              size='small'
-              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <Magnify fontSize='small' />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </Box>
+    <Box>
+      <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+        <Box className='actions-left' sx={{ mr: 2, display: 'flex', justifyContent: 'end', width: '100%' }}>
+          <TextField
+            size='small'
+            sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <Magnify fontSize='small' />
+                </InputAdornment>
+              )
+            }}
+          />
+        </Box>
 
-          <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
-            <NotificationDropdown />
-            <UserDropdown />
-          </Box>
+        <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
+          <UserDropdown />
         </Box>
       </Box>
+
       <Box>
         <CardDividerContent
           contentLeft={<Card_Left_Leaderboard columns={columns} dataItem={dataItem} />}
