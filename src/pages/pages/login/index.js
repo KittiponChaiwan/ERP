@@ -95,8 +95,9 @@ const LoginPage = () => {
 
     try {
       // Send login credentials to the backend API
+
       const response = await axios.post(
-        'http://111.223.38.20/api/method/login',
+        `${process.env.NEXT_PUBLIC_BASE_URL}api/method/login`,
         {
           usr: values.username,
           pwd: values.password

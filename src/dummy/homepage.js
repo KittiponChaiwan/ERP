@@ -73,25 +73,25 @@ const HomeReport = [
       {
         id: 1,
         name: 'Chart of Accounts',
-        route: '/webbrowser/chart_of_accounts_shortcuts',
+        route: '/app/accounting/account',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Company',
-        route: '/webbrowser/company_shortcuts',
+        route: '/app/accounting/company',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Customer',
-        route: '/webbrowser/customer_shortcuts',
+        route: '/app/search/customer',
         imgIcon: 'icon-account'
       },
       {
         id: 4,
         name: 'Supplier',
-        route: '/webbrowser/supplier_shortcuts',
+        route: '/app/buying/supplier',
         imgIcon: 'icon-account'
       }
     ]
@@ -103,31 +103,31 @@ const HomeReport = [
       {
         id: 1,
         name: 'Item',
-        route: '/webbrowser/item_shortcuts',
+        route: '/app/stock/item',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Warehouse',
-        route: '/webbrowser/warehouse_shortcuts',
+        route: '/app/stock/warehouse',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Brand',
-        route: '/webbrowser/brand_shortcuts',
+        route: '/app/stock/brand',
         imgIcon: 'icon-account'
       },
       {
         id: 4,
         name: 'Unit of Measure (UOM)',
-        route: '/webbrowser/unit_of_measure_shortcuts',
+        route: '/app/uom',
         imgIcon: 'icon-account'
       },
       {
         id: 5,
         name: 'Stock Reconciliation',
-        route: '/webbrowser/stock_reconciliation_shortcuts',
+        route: '/app/stock/stock-reconciliation',
         imgIcon: 'icon-account'
       }
     ]
@@ -139,19 +139,19 @@ const HomeReport = [
       {
         id: 1,
         name: 'Lead',
-        route: '/webbrowser/lead_shortcuts',
+        route: '/app/crm/lead',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Customer Group',
-        route: '/webbrowser/customer_group_shortcuts',
+        route: '/app/selling/customer-group',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Territory',
-        route: '/webbrowser/territory_shortcuts',
+        route: '/app/selling/territory',
         imgIcon: 'icon-account'
       }
     ]
@@ -163,31 +163,31 @@ const HomeReport = [
       {
         id: 1,
         name: 'Import Data',
-        route: '/webbrowser/data_import_and_settings_shortcuts',
+        route: '/app/data-import-tool',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Opening Invoice Creation Tool',
-        route: '/webbrowser/opening_invoice_creation _tool_shortcuts',
+        route: '/app/accounting/opening-invoice-creation-tool',
         imgIcon: 'icon-account'
       },
       {
         id: 3,
         name: 'Chart of Accounts Importer',
-        route: '/webbrowser/chart_of_accounts_importer_shortcuts',
+        route: '/app/accounting/chart-of-accounts-importer',
         imgIcon: 'icon-account'
       },
       {
         id: 4,
         name: 'Letter Head',
-        route: '/webbrowser/letter_head_shortcuts',
+        route: '/app/letter-head',
         imgIcon: 'icon-account'
       },
       {
         id: 5,
         name: 'Email Account',
-        route: '/webbrowser/email_account_shortcuts',
+        route: '/app/email-account',
         imgIcon: 'icon-account'
       }
     ]

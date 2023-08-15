@@ -145,13 +145,13 @@ const AccountingReport = [
       {
         id: 1,
         name: 'Company',
-        route: '/webbrowser/company_shortcuts',
+        route: '/app/accounting/company',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Chart of Accounts',
-        route: '/webbrowser/chart_of_accounts_shortcuts',
+        route: '/app/accounting/account',
         imgIcon: 'icon-account'
       }
     ]
@@ -163,13 +163,13 @@ const AccountingReport = [
       {
         id: 1,
         name: 'Sales Invoice',
-        route: '/webbrowser/sales_invoice_shortcuts',
+        route: '/app/selling/sales-invoice',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Customer',
-        route: '/webbrowser/customer_shortcuts',
+        route: '/app/selling/customer',
         imgIcon: 'icon-account'
       }
     ]
@@ -181,13 +181,13 @@ const AccountingReport = [
       {
         id: 1,
         name: 'Purchase Invoice',
-        route: '/webbrowser/purchase_invoice_shortcuts',
+        route: '/app/buying/purchase-invoice',
         imgIcon: 'icon-account'
       },
       {
         id: 2,
         name: 'Supplier',
-        route: '/webbrowser/supplier_shortcuts',
+        route: '/app/buying/supplier',
         imgIcon: 'icon-account'
       }
     ]

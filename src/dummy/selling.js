@@ -62,31 +62,31 @@ const SellingReport = [
       {
         id: 1,
         name: 'Customer',
-        route: '/webbrowser/customer_shortcuts',
+        route: '/app/selling/customer',
         imgIcon: 'MenuIcon'
       },
       {
         id: 2,
         name: 'Quotation',
-        route: '/webbrowser/cuotation_shortcuts',
+        route: '/app/selling/quotation',
         imgIcon: 'MenuIcon'
       },
       {
         id: 3,
         name: 'Sales Order',
-        route: '/webbrowser/sales_order_shortcuts',
+        route: '/app/selling/sales-order',
         imgIcon: 'MenuIcon'
       },
       {
         id: 4,
         name: 'Sales Invoice',
-        route: '/webbrowser/sales_invoice_shortcuts',
+        route: '/app/selling/sales-invoice',
         imgIcon: 'MenuIcon'
       },
       {
         id: 5,
         name: 'Blanket Order',
-        route: '/webbrowser/blanket_order_shortcuts',
+        route: '/manufacturing/blanket-order',
         imgIcon: 'MenuIcon'
       }
     ]
@@ -98,25 +98,25 @@ const SellingReport = [
       {
         id: 1,
         name: 'Item',
-        route: '/webbrowser/items_and_pricing_shortcuts',
+        route: '/app/stock/item',
         imgIcon: 'MenuIcon'
       },
       {
         id: 2,
         name: 'Item Price',
-        route: '/webbrowser/item_price_shortcuts',
+        route: '/app/selling/item-price',
         imgIcon: 'MenuIcon'
       },
       {
         id: 3,
         name: 'Price List',
-        route: '/webbrowser/price_list_shortcuts',
+        route: '/app/selling/price-list',
         imgIcon: 'MenuIcon'
       },
       {
         id: 4,
         name: 'Item Group',
-        route: '/webbrowser/item_group_shortcuts',
+        route: '/app/stock/item-group',
         imgIcon: 'MenuIcon'
       }
     ]
@@ -128,13 +128,13 @@ const SellingReport = [
       {
         id: 1,
         name: 'Terms and Conditions Template',
-        route: '/webbrowser/terms_and_conditions_template_shortcuts',
+        route: '/app/selling/terms-and-conditions-template',
         imgIcon: 'MenuIcon'
       },
       {
         id: 2,
         name: 'Sales Taxes and Charges Template',
-        route: '/webbrowser/sales_taxes_and_charges_template_shortcuts',
+        route: '/app/selling/sales-taxes-and-charges-template',
         imgIcon: 'MenuIcon'
       }
     ]
@@ -146,19 +146,19 @@ const SellingReport = [
       {
         id: 1,
         name: 'Sales Analytics',
-        route: '/webbrowser/sales_analytics_shortcuts',
+        route: '/app/selling/sales-analytics',
         imgIcon: 'MenuIcon'
       },
       {
         id: 2,
         name: 'Sales Order Analysis',
-        route: '/webbrowser/sales_order_analysis_shortcuts',
+        route: '/app/selling/sales-order-analysis',
         imgIcon: 'MenuIcon'
       },
       {
         id: 3,
         name: 'Sales Funnel',
-        route: '/webbrowser/sales_funnel_shortcuts',
+        route: '/app/selling/sales-funnel',
         imgIcon: 'MenuIcon'
       }
     ]
