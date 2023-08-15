@@ -6,7 +6,8 @@ const DefaultPalette = (mode, themeColor) => {
 
   const primaryGradient = () => {
     if (themeColor === 'primary') {
-      return '#1D5B79'
+      // return '#C6A7FE'
+      return '#e394b5'
     } else if (themeColor === 'secondary') {
       return '#9C9FA4'
     } else if (themeColor === 'success') {
@@ -27,7 +28,7 @@ const DefaultPalette = (mode, themeColor) => {
       tableHeaderBg: mode === 'light' ? '#F9FAFC' : '#3D3759'
     },
     common: {
-      black: '#92B4D7',
+      black: '#000',
       white: '#FFF'
     },
     mode: mode,
@@ -38,30 +39,16 @@ const DefaultPalette = (mode, themeColor) => {
     //   contrastText: '#FFF'
     // },
     primary: {
-      light: '#9DB2BF',
-      main: '#526D82',
-      dark: '#27374D',
+      light: '#f7cac9',
+      main: '#dec2cb',
+      dark: '#c5b9cd',
       contrastText: '#FFF'
     },
-
-    // primary: {
-    //   light: '#f7cac9',
-    //   main: '#dec2cb',
-    //   dark: '#c5b9cd',
-    //   contrastText: '#FFF'
-    // },
     secondary: {
       light: '#9C9FA4',
       main: '#8A8D93',
       dark: '#777B82',
-      contrastText: '#FFF',
-      A: '#eceff1',
-      B: '#cfd8dc',
-      C: '#b0bec5',
-      D: '#90a4ae',
-      E: '#78909c',
-      F: '#607d8b',
-      G: '#546e7a'
+      contrastText: '#FFF'
     },
     success: {
       light: '#6AD01F',
@@ -110,8 +97,8 @@ const DefaultPalette = (mode, themeColor) => {
     },
     divider: `rgba(${mainColor}, 0.12)`,
     background: {
-      paper: mode === 'light' ? '#27374D' : '#27374D',
-      default: mode === 'light' ? '#F4F5FA' : '#27374D'
+      paper: mode === 'light' ? '#FFF' : '#312D4B',
+      default: mode === 'light' ? '#F4F5FA' : '#28243D'
     },
     action: {
       active: `rgba(${mainColor}, 0.54)`,

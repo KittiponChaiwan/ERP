@@ -18,6 +18,9 @@ import Cardleaderboard from './card_Left_Leaderboard'
 import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 import Card_Left_Leaderboard from './card_Left_Leaderboard'
 import Card_Right_Leaderboard from './card_Right_Leaderboard'
+import { Button } from '@mui/material'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Leaderboard_shortcuts = props => {
   // ** Props
@@ -26,6 +29,66 @@ const Leaderboard_shortcuts = props => {
   // ** Hook
 
   const theme = useTheme()
+
+  const [dataItem, setDataItem] = useState('')
+  const [getRow, setGetRow] = useState('')
+
+  const columns = [
+    { field: 'item_name', headerName: 'Item Name', width: 280 },
+    {
+      field: 'Status',
+      headerName: 'Status',
+      width: 150,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => (
+        <Button
+          variant='text'
+          onClick={() => {
+            console.log(params.row)
+          }}
+        >
+          Status
+        </Button>
+      )
+    },
+    { field: 'item_group', headerName: 'Item Group', width: 150 },
+    { field: 'description', headerName: 'ID', width: 250 },
+    {
+      field: 'Data',
+      headerName: 'Data',
+      width: 150,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => (
+        <Button
+          sx={{ backgroundColor: '#ffff8d' }}
+          variant='text'
+          onClick={() => {
+            console.log(params.row)
+            setGetRow(params.row)
+          }}
+        >
+          OPEN
+        </Button>
+      )
+    }
+  ]
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/Item?fields=["*"]`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setDataItem(res.data.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <Box sx={{}}>
@@ -57,7 +120,10 @@ const Leaderboard_shortcuts = props => {
         </Box>
       </Box>
       <Box>
-        <CardDividerContent contentLeft={<Card_Left_Leaderboard />} contentRight={<Card_Right_Leaderboard />} />
+        <CardDividerContent
+          contentLeft={<Card_Left_Leaderboard columns={columns} dataItem={dataItem} />}
+          contentRight={<Card_Right_Leaderboard getRow={getRow} dataItem={dataItem} />}
+        />
       </Box>
     </Box>
   )
