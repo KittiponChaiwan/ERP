@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 // ** MUI Imports
 import { Grid, Divider, Button } from '@mui/material'
+import Dawer_item from 'src/pages/app/leaderboard_shortcuts/dawer_item'
 
 function CardDividerContent({ contentLeft, contentRight }) {
   // initial state
@@ -30,11 +31,12 @@ function CardDividerContent({ contentLeft, contentRight }) {
 
   return (
     <Grid container>
+      <Dawer_item />
       <Grid item xs={contentSize.left}>
         {contentLeft}
       </Grid>
       <Divider orientation='vertical' flexItem>
-        <Button onClick={() => handleContentSize()}>test</Button>
+        <Button onClick={() => handleContentSize()}> test </Button>
       </Divider>
       <Grid item xs={contentSize.right}>
         {contentRight}
