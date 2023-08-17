@@ -30,17 +30,18 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Dummy Data
 import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/dropdown/itemDropdown'
+import { ItemContentMenu } from 'src/dummy/rightContentMenu'
 
 // ** Custom Components
-import DetailItem from './ContentRight/DetailItem'
-import DashboardItem from './ContentRight/DashboardItem'
-import InventoryItem from './ContentRight/InventoryItem'
-import AccountingItem from './ContentRight/AccountingItem'
-import PurchasingItem from './ContentRight/PurchasingItem'
-import SalesItem from './ContentRight/SalesItem'
-import TexItem from './ContentRight/TexItem'
-import QualityItem from './ContentRight/QualityItem'
-import ManufacturingItem from './ContentRight/ManufacturingItem'
+import DetailItem from 'src/components/ContentPages/ContentRight/ItemPage/DetailItem'
+import DashboardItem from 'src/components/ContentPages/ContentRight/ItemPage/DashboardItem'
+import InventoryItem from 'src/components/ContentPages/ContentRight/ItemPage/InventoryItem'
+import AccountingItem from 'src/components/ContentPages/ContentRight/ItemPage/AccountingItem'
+import PurchasingItem from 'src/components/ContentPages/ContentRight/ItemPage/PurchasingItem'
+import SalesItem from 'src/components/ContentPages/ContentRight/ItemPage/SalesItem'
+import TexItem from 'src/components/ContentPages/ContentRight/ItemPage/TexItem'
+import QualityItem from 'src/components/ContentPages/ContentRight/ItemPage/QualityItem'
+import ManufacturingItem from 'src/components/ContentPages/ContentRight/ItemPage/ManufacturingItem'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
   const theme = useTheme()
@@ -61,7 +62,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
         <Card sx={{ height: 'auto' }}>
           <TabContext value={value}>
             <TabList onChange={handleChange} aria-label='card navigation example'>
-              {ContentMenu?.map(item => (
+              {ItemContentMenu?.map(item => (
                 <Tab value={item.id} label={item.name} key={item.id} />
               ))}
             </TabList>
