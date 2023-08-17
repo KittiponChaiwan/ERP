@@ -49,7 +49,6 @@ function CardReportMenu({ menus }) {
       <Card style={{ background: theme.palette.secondary.E }} sx={{ width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
-            display: 'flex',
             textAlign: 'left',
             flexDirection: 'row',
             alignItems: 'center',
