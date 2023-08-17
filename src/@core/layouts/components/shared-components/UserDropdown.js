@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, useEffect, Fragment } from 'react'
+import { useState, Fragment } from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
@@ -29,7 +29,6 @@ import { logoutUser, selectAuthUser } from 'src/@core/redux/authSlice'
 
 // ** Cookies Import
 import Cookies from 'js-cookie'
-import { checkCookieToken } from '../../../utils/checkCookieToken'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -81,13 +80,6 @@ const UserDropdown = () => {
       color: 'text.secondary'
     }
   }
-
-  useEffect(() => {
-    const UserStatus = checkCookieToken(Cookies.get('jwtToken'))
-    if (!UserStatus) {
-      router.push('/pages/login')
-    }
-  }, [])
 
   return (
     <Fragment>

@@ -2,7 +2,19 @@
 import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { Box, Button, InputAdornment, TextField, useTheme } from '@mui/material'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  InputAdornment,
+  Tab,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material'
 
 // ** Axios Imports
 import axios from 'axios'
@@ -13,12 +25,81 @@ import Magnify from 'mdi-material-ui/Magnify'
 // ** Custom Components
 import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import CardContentRight from 'src/components/ContentPages/CardContentRight'
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/dropdown/itemDropdown'
+import { defaultMaterialRequestType, valuationMethod, ItemContentMenu } from 'src/dummy/contentPages/itemPage'
+
+// ** Custom Components
+import DetailItem from 'src/components/ContentPages/ContentRight/ItemPage/DetailItem'
+import DashboardItem from 'src/components/ContentPages/ContentRight/ItemPage/DashboardItem'
+import InventoryItem from 'src/components/ContentPages/ContentRight/ItemPage/InventoryItem'
+import AccountingItem from 'src/components/ContentPages/ContentRight/ItemPage/AccountingItem'
+import PurchasingItem from 'src/components/ContentPages/ContentRight/ItemPage/PurchasingItem'
+import SalesItem from 'src/components/ContentPages/ContentRight/ItemPage/SalesItem'
+import TexItem from 'src/components/ContentPages/ContentRight/ItemPage/TexItem'
+import QualityItem from 'src/components/ContentPages/ContentRight/ItemPage/QualityItem'
+import ManufacturingItem from 'src/components/ContentPages/ContentRight/ItemPage/ManufacturingItem'
+
+const CardContentRight = ({ getDataRow, dropDowns }) => {
+  const theme = useTheme()
+
+  const [value, setValue] = useState(1)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  return (
+    <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
+      <Grid container sx={{ width: '100%' }}>
+        <Box>
+          <Typography>{getDataRow.name}</Typography>
+        </Box>
+
+        <Card sx={{ height: 'auto' }}>
+          <TabContext value={value}>
+            <TabList onChange={handleChange} aria-label='card navigation example'>
+              {ItemContentMenu?.map(item => (
+                <Tab value={item.id} label={item.name} key={item.id} />
+              ))}
+            </TabList>
+            <CardContent>
+              <TabPanel value={1} sx={{ p: 0 }}>
+                <DetailItem getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={2} sx={{ p: 0 }}>
+                <DashboardItem />
+              </TabPanel>
+              <TabPanel value={3} sx={{ p: 0 }}>
+                <InventoryItem getDataRow={getDataRow} dropDowns={dropDowns} />
+              </TabPanel>
+              <TabPanel value={4} sx={{ p: 0 }}>
+                <AccountingItem />
+              </TabPanel>
+              <TabPanel value={5} sx={{ p: 0 }}>
+                <PurchasingItem />
+              </TabPanel>
+              <TabPanel value={6} sx={{ p: 0 }}>
+                <SalesItem />
+              </TabPanel>
+              <TabPanel value={7} sx={{ p: 0 }}>
+                <TexItem />
+              </TabPanel>
+              <TabPanel value={8} sx={{ p: 0 }}>
+                <QualityItem />
+              </TabPanel>
+              <TabPanel value={9} sx={{ p: 0 }}>
+                <ManufacturingItem />
+              </TabPanel>
+            </CardContent>
+          </TabContext>
+        </Card>
+      </Grid>
+    </Box>
+  )
+}
 
 const ItemPage = ({ data }) => {
   // ** States
