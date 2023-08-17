@@ -45,7 +45,7 @@ const HomeContent = [
 const HomeShortcut = [
   {
     name: 'Item',
-    route: '/app/item_shortcuts'
+    route: '/app/stock/item'
   },
   {
     name: ' Customer',
@@ -57,7 +57,7 @@ const HomeShortcut = [
   },
   {
     name: ' Sales Invoice',
-    route: '/app/selling/sales-invoice'
+    route: '/app/accounting/sales-invoice'
   },
   {
     name: ' Leaderbord',
@@ -85,7 +85,7 @@ const HomeReport = [
       {
         id: 3,
         name: 'Customer',
-        route: '/app/search/customer',
+        route: '/app/selling/customer',
         imgIcon: 'icon-account'
       },
       {
