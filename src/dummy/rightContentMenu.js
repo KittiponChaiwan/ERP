@@ -1,4 +1,5 @@
-const ContentMenu = [
+// ? Item
+const ItemContentMenu = [
   {
     id: 1,
     name: 'Detail'
@@ -37,4 +38,4 @@ const ContentMenu = [
   }
 ]
 
-export { ContentMenu }
+export { ItemContentMenu }

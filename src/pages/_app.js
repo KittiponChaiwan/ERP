@@ -79,7 +79,7 @@ const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) =>
         Router.push('/')
       }
     }
-  }, [Router, dispatch])
+  }, [Router.pathname])
 
   return (
     <CacheProvider value={emotionCache}>

@@ -22,7 +22,7 @@ import { useTheme } from '@mui/material/styles'
 import Iconbtn from 'src/components/Button/IconButton/iconbutton'
 
 // ** Dummy Data
-import { ContentMenu } from '../../dummy/contentMenu'
+import { ItemContentMenu } from '../../dummy/rightContentMenu'
 
 // ** Custom Components
 import DetailItem from './ContentRight/DetailItem'
@@ -54,7 +54,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
         <Card sx={{ height: 'auto' }}>
           <TabContext value={value}>
             <TabList onChange={handleChange} aria-label='card navigation example'>
-              {ContentMenu?.map(item => (
+              {ItemContentMenu?.map(item => (
                 <Tab value={item.id} label={item.name} key={item.id} />
               ))}
             </TabList>
