@@ -1,36 +1,38 @@
-// ** React Imports
-import React, { useEffect, useState } from 'react'
-
 // ** MUI Imports
-import { Box, Button, InputAdornment, TextField, useTheme } from '@mui/material'
-
-// ** Axios Imports
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import IconButton from '@mui/material/IconButton'
+import { Button } from '@mui/material'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import InputAdornment from '@mui/material/InputAdornment'
 
 // ** Icons Imports
+import Menu from 'mdi-material-ui/Menu'
 import Magnify from 'mdi-material-ui/Magnify'
 
-// ** Custom Components
-import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
-import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import CardContentRight from 'src/components/ContentPages/CardContentRight'
-import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
+// ** Components
 import BlankLayout from 'src/@core/layouts/BlankLayout'
+import NotificationDropdown from 'src/@core/layouts/components/shared-components/NotificationDropdown'
+import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
+import { useTheme } from '@mui/material/styles'
+import Cardleaderboard from './card_Left_Leaderboard'
+import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
+import Card_Left_Leaderboard from './card_Left_Leaderboard'
+import Card_Right_Leaderboard from './card_Right_Leaderboard'
+import Dawer_item from './dawer_item'
 
-// ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/dropdown/itemDropdown'
+const Leaderboard_shortcuts = props => {
+  // ** Props
+  const { toggleNavVisibility } = props
 
-const ItemPage = ({ data }) => {
-  // ** States
-  const [getDataRow, setGetDataRow] = useState([])
-  const [selectRowState, setSelectRowState] = useState(false)
+  // ** Hook
 
-  const dropDowns = {
-    defaultMaterialRequestType: defaultMaterialRequestType,
-    valuationMethod: valuationMethod
-  }
+  const theme = useTheme()
 
-  // ** Menu Column
+  const [dataItem, setDataItem] = useState('')
+  const [getRow, setGetRow] = useState('')
+
   const columns = [
     { field: 'item_name', headerName: 'Item Name', width: 280 },
     {
@@ -64,8 +66,7 @@ const ItemPage = ({ data }) => {
           variant='text'
           onClick={() => {
             console.log(params.row)
-            setGetDataRow(params.row)
-            setSelectRowState(true)
+            setGetRow(params.row)
           }}
         >
           OPEN
@@ -74,9 +75,20 @@ const ItemPage = ({ data }) => {
     }
   ]
 
-  if (!data) {
-    return <Box>Loading...</Box>
-  }
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setDataItem(res.data.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <Box>
@@ -99,43 +111,17 @@ const ItemPage = ({ data }) => {
           <UserDropdown />
         </Box>
       </Box>
+
       <Box>
         <CardDividerContent
-          contentLeft={<CardContentLeft menuColumn={columns} dataRow={data} />}
-          contentRight={<CardContentRight getDataRow={getDataRow} dropDowns={dropDowns} />}
-          selectRowState={selectRowState}
+          contentLeft={<Card_Left_Leaderboard columns={columns} dataItem={dataItem} />}
+          contentRight={<Card_Right_Leaderboard getRow={getRow} dataItem={dataItem} />}
         />
       </Box>
     </Box>
   )
 }
 
-export const getServerSideProps = async context => {
-  try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
-      headers: {
-        Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
-      }
-    })
+Leaderboard_shortcuts.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-    const data = res.data.data // No need to await here
-
-    if (res.status !== 200) {
-      return {
-        props: { data: null }
-      }
-    }
-
-    return {
-      props: { data }
-    }
-  } catch (error) {
-    return {
-      props: { data: null }
-    }
-  }
-}
-
-ItemPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
-
-export default ItemPage
+export default Leaderboard_shortcuts

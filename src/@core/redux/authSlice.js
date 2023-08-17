@@ -20,14 +20,6 @@ export const authSlice = createSlice({
     logoutUser(state) {
       return initialState
     }
-  },
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
-      return {
-        ...state,
-        ...action.payload.auth
-      }
-    }
   }
 })
 

@@ -3,11 +3,10 @@ const jwt = require('jsonwebtoken') // นำเข้า jsonwebtoken หาก
 // คีย์สำหรับการยืนยัน token
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY
 
-export const checkCookieToken = token => {
+const checkCookieToken = token => {
   try {
     // ยืนยันและถอดรหัส token
     const decodedToken = jwt.verify(token, PRIVATE_KEY)
-    console.log('decodedToken:', decodedToken)
 
     // ตรวจสอบค่าใน decodedToken เพื่อดูสถานะการเข้าสู่ระบบ
     if (decodedToken) {
@@ -23,3 +22,5 @@ export const checkCookieToken = token => {
     console.error('Invalid token:', error.message)
   }
 }
+
+export default checkCookieToken

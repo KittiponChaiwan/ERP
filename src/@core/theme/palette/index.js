@@ -7,7 +7,7 @@ const DefaultPalette = (mode, themeColor) => {
   const primaryGradient = () => {
     if (themeColor === 'primary') {
       // return '#C6A7FE'
-      return '#3A5A7E'
+      return '#e394b5'
     } else if (themeColor === 'secondary') {
       return '#9C9FA4'
     } else if (themeColor === 'success') {
@@ -28,41 +28,26 @@ const DefaultPalette = (mode, themeColor) => {
       tableHeaderBg: mode === 'light' ? '#F9FAFC' : '#3D3759'
     },
     common: {
-      black: '#92B4D7',
+      black: '#000',
       white: '#FFF'
     },
     mode: mode,
-    primary: {
-      light: '#253950',
-      main: '#3C5571',
-      dark: '#486688',
-      contrastText: '#FFF'
-    },
-
     // primary: {
-    //   light: '#f7cac9',
-    //   main: '#dec2cb',
-    //   dark: '#c5b9cd',
+    //   light: '#9E69FD',
+    //   main: '#9155FD',
+    //   dark: '#804BDF',
     //   contrastText: '#FFF'
     // },
+    primary: {
+      light: '#f7cac9',
+      main: '#dec2cb',
+      dark: '#c5b9cd',
+      contrastText: '#FFF'
+    },
     secondary: {
       light: '#9C9FA4',
       main: '#8A8D93',
       dark: '#777B82',
-      A: '#F2F4F4',
-      B: '#D6DBDF',
-      C: '#AEB6BF',
-      D: '#85929E',
-      E: '#5D6D7E',
-      F: '#34495E',
-      G: '#2E4053',
-      H: '#283747',
-      I: '#212F3C',
-      J: '#1B2631',
-      K: '#1C2833',
-      L: '#17202A',
-      M: '#000102',
-
       contrastText: '#FFF'
     },
     success: {
@@ -112,8 +97,8 @@ const DefaultPalette = (mode, themeColor) => {
     },
     divider: `rgba(${mainColor}, 0.12)`,
     background: {
-      paper: mode === 'light' ? '#FFF' : '#3E4E63',
-      default: mode === 'light' ? '#F4F5FA' : '#3E4E63'
+      paper: mode === 'light' ? '#FFF' : '#312D4B',
+      default: mode === 'light' ? '#F4F5FA' : '#28243D'
     },
     action: {
       active: `rgba(${mainColor}, 0.54)`,
