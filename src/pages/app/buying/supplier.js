@@ -18,7 +18,7 @@ import UserDropdown from 'src/@core/layouts/components/shared-components/UserDro
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/dropdown/itemDropdown'
+import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
 
 const ItemPage = ({ data }) => {
   // ** States
