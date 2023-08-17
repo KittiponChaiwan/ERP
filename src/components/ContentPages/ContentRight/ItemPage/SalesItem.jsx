@@ -5,6 +5,8 @@ import React from 'react'
 import { Box, Typography, TextField, Checkbox } from '@mui/material'
 
 const SalesItem = () => {
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+
   return (
     <Box>
       <Box>
