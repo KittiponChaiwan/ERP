@@ -73,6 +73,11 @@ const LoginPage = () => {
     showPassword: false
   })
 
+  const instance = axios.create({
+    baseURL: 'https://tonen.vsiam.com',
+    withCredentials: true // ส่ง cookie ไปกับคำขอ
+  })
+
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
@@ -96,26 +101,13 @@ const LoginPage = () => {
     try {
       // Send login credentials to the backend API
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}api/method/login`,
-        {
-          usr: values.username,
-          pwd: values.password
-        },
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: '*/*'
-          }
-        }
-      )
+      const response = await instance.post(`${process.env.NEXT_PUBLIC_BASE_URL}api/method/login`, {
+        usr: values.username,
+        pwd: values.password
+      })
 
       if (response.status === 200) {
         console.log('response: ', response)
-
-        // Login successful
-        console.log('API response:', response.data)
 
         generateToken({ name: response.data.full_name, status: response.data.message })
 

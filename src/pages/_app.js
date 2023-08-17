@@ -39,7 +39,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import '../../styles/globals.css'
 
 // ** Check Login
-import { checkCookieToken } from 'src/@core/utils/checkCookieToken'
+import checkCookieToken from 'src/@core/utils/checkCookieToken'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -64,15 +64,22 @@ const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) =>
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
-  const UserStatus = checkCookieToken(Cookies.get('jwtToken'))
 
   useEffect(() => {
+    const UserStatus = checkCookieToken(Cookies.get('jwtToken'))
+    console.log('test: ', UserStatus)
     if (!UserStatus) {
-      // เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบ หรือเส้นทางที่คุณต้องการ
-      dispatch(logoutUser)
-      Router.push('/pages/login')
+      if (Router.pathname !== '/login') {
+        dispatch(logoutUser)
+        Router.push('/pages/login')
+      }
+    } else {
+      // หากมีค่าคุกกี้ token และในเส้นทาง /login ให้เปลี่ยนเส้นทางไปยังหน้าหลัก
+      if (Router.pathname === '/pages/login') {
+        Router.push('/')
+      }
     }
-  }, [])
+  }, [Router.pathname])
 
   return (
     <CacheProvider value={emotionCache}>
