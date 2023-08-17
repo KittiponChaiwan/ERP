@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 // ** Next Imports
 import Head from 'next/head'
 import { Router, useRouter } from 'next/router'
-import { createWrapper } from 'next-redux-wrapper'
 
 // ** Redux Imports
 import { Provider, useDispatch } from 'react-redux'
 import { logoutUser } from 'src/@core/redux/authSlice'
+import { wrapper } from 'src/@core/redux/store'
 
 // ** Cookies Import
 import Cookies from 'js-cookie'
@@ -108,8 +108,5 @@ const App = ({ Component, ...rest }) => {
     </Provider>
   )
 }
-
-const makeStore = () => store
-const wrapper = createWrapper(makeStore)
 
 export default wrapper.withRedux(App)
