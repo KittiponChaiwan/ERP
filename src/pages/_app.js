@@ -6,7 +6,6 @@ import Head from 'next/head'
 import { Router, useRouter } from 'next/router'
 
 // ** Redux Imports
-import { wrapper } from '../@core/redux/store'
 import { Provider, useDispatch } from 'react-redux'
 import { logoutUser } from 'src/@core/redux/authSlice'
 
@@ -108,5 +107,8 @@ const App = ({ Component, ...rest }) => {
     </Provider>
   )
 }
+
+const makeStore = () => store
+const wrapper = createWrapper(makeStore)
 
 export default wrapper.withRedux(App)
