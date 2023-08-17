@@ -29,7 +29,7 @@ import { logoutUser, selectAuthUser } from 'src/@core/redux/authSlice'
 
 // ** Cookies Import
 import Cookies from 'js-cookie'
-import checkCookieToken from '../../../utils/checkCookieToken'
+import { checkCookieToken } from '../../../utils/checkCookieToken'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
