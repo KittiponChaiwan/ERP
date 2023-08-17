@@ -32,6 +32,7 @@ const Leaderboard_shortcuts = props => {
 
   const [dataItem, setDataItem] = useState('')
   const [getRow, setGetRow] = useState('')
+  const [filterData, setFilterData] = useState([])
 
   const columns = [
     { field: 'item_name', headerName: 'Item Name', width: 280 },
@@ -84,11 +85,27 @@ const Leaderboard_shortcuts = props => {
       })
       .then(res => {
         setDataItem(res.data.data)
+        setFilterData(res.data.data)
       })
       .catch(err => {
         console.log(err)
       })
   }, [])
+
+  const HandleFilterId = value => {
+    const res = filterData.filter(f => f.item_name.includes(value))
+    setDataItem(res)
+  }
+
+  const HandleFilterDis = value => {
+    const res = filterData.filter(f => f.description.includes(value))
+    setDataItem(res)
+  }
+
+  const HandleFilterGroup = value => {
+    const res = filterData.filter(f => f.item_group.includes(value))
+    setDataItem(res)
+  }
 
   return (
     <Box>
@@ -114,7 +131,15 @@ const Leaderboard_shortcuts = props => {
 
       <Box>
         <CardDividerContent
-          contentLeft={<Card_Left_Leaderboard columns={columns} dataItem={dataItem} />}
+          contentLeft={
+            <Card_Left_Leaderboard
+              columns={columns}
+              dataItem={dataItem}
+              HandleFilterId={HandleFilterId}
+              HandleFilterDis={HandleFilterDis}
+              HandleFilterGroup={HandleFilterGroup}
+            />
+          }
           contentRight={<Card_Right_Leaderboard getRow={getRow} dataItem={dataItem} />}
         />
       </Box>

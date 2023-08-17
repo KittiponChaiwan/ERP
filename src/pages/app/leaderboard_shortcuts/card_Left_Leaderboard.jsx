@@ -11,10 +11,11 @@ import Insertbutton from 'src/components/Button/InsertButton/insertbutton'
 import { Button } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
+import TextField from '@mui/material/TextField'
 
 const Card_Left_Leaderboard = props => {
   // ** Props
-  const { columns, dataItem } = props
+  const { columns, dataItem, HandleFilterId, HandleFilterDis, HandleFilterGroup } = props
 
   const theme = useTheme()
 
@@ -33,6 +34,38 @@ const Card_Left_Leaderboard = props => {
           Item
         </Typography>
         <Insertbutton />
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box>
+          <TextField
+            hiddenLabel
+            id='filled-hidden-label-small'
+            label='ID'
+            variant='filled'
+            size='small'
+            onChange={e => HandleFilterId(e.target.value)}
+          />
+        </Box>
+        <Box>
+          <TextField
+            hiddenLabel
+            id='filled-hidden-label-small'
+            label='Item Name'
+            variant='filled'
+            size='small'
+            onChange={e => HandleFilterDis(e.target.value)}
+          />
+        </Box>
+        <Box>
+          <TextField
+            hiddenLabel
+            id='filled-hidden-label-small'
+            label='Item Group'
+            variant='filled'
+            size='small'
+            onChange={e => HandleFilterGroup(e.target.value)}
+          />
+        </Box>
       </Box>
       <Box>
         <DataGrid rows={dataItem} columns={columns} getRowId={row => row.name} />
