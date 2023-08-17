@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 // ** Next Imports
 import Head from 'next/head'
 import { Router, useRouter } from 'next/router'
+import { createWrapper } from 'next-redux-wrapper'
 
 // ** Redux Imports
 import { Provider, useDispatch } from 'react-redux'
