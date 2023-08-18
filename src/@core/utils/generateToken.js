@@ -9,5 +9,5 @@ export const generateToken = payload => {
   // สร้าง JWT โดยใช้คีย์ส่วนตัว
   const token = jwt.sign({ data: payload }, PRIVATE_KEY, { expiresIn: '1h' })
 
-  Cookies.set('jwtToken', token)
+  Cookies.set('token', token)
 }

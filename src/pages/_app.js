@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect } from 'react'
+import React from 'react'
 
 // ** Next Imports
 import Head from 'next/head'
@@ -7,11 +7,7 @@ import { Router, useRouter } from 'next/router'
 
 // ** Redux Imports
 import { Provider, useDispatch } from 'react-redux'
-import { logoutUser } from 'src/@core/redux/authSlice'
 import { wrapper } from 'src/@core/redux/store'
-
-// ** Cookies Import
-import Cookies from 'js-cookie'
 
 // ** Loader Import
 import NProgress from 'nprogress'
@@ -37,10 +33,9 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 
 // ** Global css styles
 import '../../styles/globals.css'
+import AuthChecker from 'src/@core/utils/authChecker'
 
 // ** Check Login
-import checkCookieToken from 'src/@core/utils/checkCookieToken'
-
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
@@ -62,31 +57,16 @@ const App = ({ Component, ...rest }) => {
   const { emotionCache = clientSideEmotionCache, pageProps } = props
 
   // ** Router
-  const Router = useRouter()
+  const router = useRouter()
   const dispatch = useDispatch()
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
-  useEffect(() => {
-    const UserStatus = checkCookieToken(Cookies.get('jwtToken'))
-    console.log('test: ', UserStatus)
-    if (!UserStatus) {
-      if (Router.pathname !== '/login') {
-        dispatch(logoutUser)
-        Router.push('/pages/login')
-      }
-    } else {
-      // หากมีค่าคุกกี้ token และในเส้นทาง /login ให้เปลี่ยนเส้นทางไปยังหน้าหลัก
-      if (Router.pathname === '/pages/login') {
-        Router.push('/')
-      }
-    }
-  }, [Router.pathname])
-
   return (
     <Provider store={store}>
       <CacheProvider value={emotionCache}>
+        <AuthChecker />
         <Head>
           <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
           <meta
