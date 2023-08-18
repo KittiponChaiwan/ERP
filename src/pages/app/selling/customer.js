@@ -2,7 +2,19 @@
 import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { Box, Button, InputAdornment, TextField, useTheme } from '@mui/material'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  InputAdornment,
+  Tab,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material'
 
 // ** Axios Imports
 import axios from 'axios'
@@ -13,16 +25,59 @@ import Magnify from 'mdi-material-ui/Magnify'
 // ** Custom Components
 import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import CardContentRight from 'src/components/ContentPages/CardContentRight'
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
+import DetailCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/DetailCustomer'
+import DashboardCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/DashboardCustomer'
+import ContactAndAddress from 'src/components/ContentPages/ContentRight/CustomerPage/ContactAndAddress'
 
 // ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
+import { CustomerContentMenu, defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
 
-const ItemPage = ({ data }) => {
+const CardContentRight = ({ getDataRow, dropDowns }) => {
+  const theme = useTheme()
+
+  const [value, setValue] = useState(1)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  return (
+    <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
+      <Grid container sx={{ width: '100%' }}>
+        <Box>
+          <Typography>{getDataRow.name}</Typography>
+        </Box>
+
+        <Card sx={{ height: 'auto' }}>
+          <TabContext value={value}>
+            <TabList onChange={handleChange} aria-label='card navigation example'>
+              {CustomerContentMenu?.map(cus => (
+                <Tab value={cus.id} label={cus.name} key={cus.id} />
+              ))}
+            </TabList>
+            <CardContent>
+              <TabPanel value={1} sx={{ p: 0 }}>
+                <DetailCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={2} sx={{ p: 0 }}>
+                <DashboardCustomer />
+              </TabPanel>
+              <TabPanel value={3} sx={{ p: 0 }}>
+                <ContactAndAddress getDataRow={getDataRow} />
+              </TabPanel>
+            </CardContent>
+          </TabContext>
+        </Card>
+      </Grid>
+    </Box>
+  )
+}
+
+const CustomerPage = ({ data }) => {
   // ** States
-  const [getDataRow, setGetDataRow] = useState([])
+  const [getDataRow, setGetDataRow] = useState(data)
   const [selectRowState, setSelectRowState] = useState(false)
 
   const dropDowns = {
@@ -32,7 +87,7 @@ const ItemPage = ({ data }) => {
 
   // ** Menu Column
   const columns = [
-    { field: 'item_name', headerName: 'Item Name', width: 280 },
+    { field: 'customer_name', headerName: 'Customer Name', width: 280 },
     {
       field: 'Status',
       headerName: 'Status',
@@ -50,8 +105,9 @@ const ItemPage = ({ data }) => {
         </Button>
       )
     },
-    { field: 'item_group', headerName: 'Item Group', width: 150 },
-    { field: 'description', headerName: 'ID', width: 250 },
+    { field: 'customer_group', headerName: 'customer Group', width: 150 },
+    { field: 'territory', headerName: 'territory', width: 150 },
+    { field: 'name', headerName: 'ID', width: 150 },
     {
       field: 'Data',
       headerName: 'Data',
@@ -112,7 +168,7 @@ const ItemPage = ({ data }) => {
 
 export const getServerSideProps = async context => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Customer?fields=["*"]`, {
       headers: {
         Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
       }
@@ -136,6 +192,6 @@ export const getServerSideProps = async context => {
   }
 }
 
-ItemPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+CustomerPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-export default ItemPage
+export default CustomerPage

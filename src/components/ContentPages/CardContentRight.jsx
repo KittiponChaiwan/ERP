@@ -25,7 +25,7 @@ import Iconbtn from 'src/components/Button/IconButton/iconbutton'
 import { ItemContentMenu } from '../../dummy/rightContentMenu'
 
 // ** Custom Components
-import DetailItem from './ContentRight/DetailItem'
+import DetailItem from './ContentRight/ItemPage'
 import DashboardItem from './ContentRight/DashboardItem'
 import InventoryItem from './ContentRight/InventoryItem'
 import AccountingItem from './ContentRight/ItemPage/AccountingItem'
