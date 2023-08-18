@@ -65,8 +65,8 @@ const App = ({ Component, ...rest }) => {
 
   return (
     <Provider store={store}>
+      <AuthChecker />
       <CacheProvider value={emotionCache}>
-        <AuthChecker />
         <Head>
           <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
           <meta

@@ -62,8 +62,8 @@ const UserDropdown = () => {
   }
 
   const handleLogout = () => {
-    dispatch(logoutUser)
-    Cookies.remove('jwtToken')
+    dispatch(logoutUser())
+    Cookies.remove('token')
     router.push('/pages/login')
   }
 
