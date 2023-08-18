@@ -170,7 +170,7 @@ const HomeReport = [
         id: 2,
         name: 'Opening Invoice Creation Tool',
         route: '/app/accounting/opening-invoice-creation-tool',
-        imgIcon: 'icon-account'
+        imgIcon: 'opening-invoice-creation-tool.png'
       },
       {
         id: 3,
