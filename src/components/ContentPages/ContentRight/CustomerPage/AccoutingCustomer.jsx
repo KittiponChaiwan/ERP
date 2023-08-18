@@ -1,7 +1,24 @@
-import { Box, TextField, Typography, Checkbox, Button } from '@mui/material'
+import React, { useState } from 'react'
+import {
+  Box,
+  TextField,
+  Typography,
+  Checkbox,
+  Button,
+  CardActions,
+  IconButton,
+  Collapse,
+  Divider,
+  CardContent
+} from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 
+import ChevronUp from 'mdi-material-ui/ChevronUp'
+import ChevronDown from 'mdi-material-ui/ChevronDown'
+
 const AccountingCustomer = ({ getDataRow }) => {
+  const [collapseInformation, setCollapseInformation] = useState()
+
   const columns = [
     { field: 'id', headerName: 'No', width: 70 },
     { field: 'Company', headerName: 'Company', width: 150 },
@@ -24,6 +41,10 @@ const AccountingCustomer = ({ getDataRow }) => {
     { id: 8, Company: 'Frances', CreditLimit: 'Rossini', Bypass: 'dasd' },
     { id: 9, Company: 'Roxie', CreditLimit: 'Harvey', Bypass: 'dasd' }
   ]
+
+  const handleClickInformation = () => {
+    setCollapseInformation(!collapseInformation)
+  }
 
   return (
     <Box>
@@ -73,13 +94,29 @@ const AccountingCustomer = ({ getDataRow }) => {
           </Box>
         </Box>
         <Box>
-          <Box sx={{ mt: 20 }}>
-            <Typography variant='h5'>Loyalty Points</Typography>
+          <Box sx={{ mt: 10, display: 'flex' }}>
+            <Button size='small' variant='filled' label='' onClick={handleClickInformation}>
+              <Typography variant='h6'>Loyalty Points</Typography>
+            </Button>
+            <CardActions className='card-action-dense'>
+              <IconButton size='small' onClick={handleClickInformation}>
+                {collapseInformation ? (
+                  <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                ) : (
+                  <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                )}
+              </IconButton>
+            </CardActions>
           </Box>
-          <Box sx={{ mt: 4 }}>
-            <Typography sx={{ marginBottom: 2 }}>Loyalty Program</Typography>
-            <TextField size='small' variant='filled' label='' value={getDataRow.loyalty_program} />
-          </Box>
+          <Collapse in={collapseInformation}>
+            <Divider sx={{ margin: 0 }} />
+            <CardContent>
+              <Box sx={{ mt: 4 }}>
+                <Typography sx={{ marginBottom: 2 }}>Loyalty Program</Typography>
+                <TextField size='small' variant='filled' label='' value={getDataRow.loyalty_program} />
+              </Box>
+            </CardContent>
+          </Collapse>
         </Box>
       </Box>
     </Box>

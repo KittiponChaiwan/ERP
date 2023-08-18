@@ -11,6 +11,7 @@ import {
   Grid,
   InputAdornment,
   Tab,
+  Tabs,
   TextField,
   Typography,
   useTheme
@@ -33,6 +34,8 @@ import ContactAndAddress from 'src/components/ContentPages/ContentRight/Customer
 import TaxCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/TaxCustomer'
 import AccountingCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/AccoutingCustomer'
 import SalesTeamCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/SalesTeamCustomer'
+import SettingsCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/SettingsCustomer'
+import PotalUserCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/PortalUsersCustomer'
 
 // ** Dummy Data
 import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
@@ -50,17 +53,25 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
   return (
     <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
       <Grid container sx={{ width: '100%' }}>
-        <Box>
-          <Typography>{getDataRow.name}</Typography>
-        </Box>
+        <Box>{/* <Typography>{getDataRow.name}</Typography> */}</Box>
 
         <Card sx={{ height: 'auto' }}>
           <TabContext value={value}>
             <TabList onChange={handleChange} aria-label='card navigation example'>
-              {CustomerContentMenu?.map(cus => (
-                <Tab value={cus.id} label={cus.name} key={cus.id} />
-              ))}
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                variant='scrollable'
+                scrollButtons
+                allowScrollButtonsMobile
+                aria-label='scrollable force tabs example'
+              >
+                {CustomerContentMenu?.map(cus => (
+                  <Tab value={cus.id} label={cus.name} key={cus.id} />
+                ))}
+              </Tabs>
             </TabList>
+
             <CardContent>
               <TabPanel value={1} sx={{ p: 0 }}>
                 <DetailCustomer getDataRow={getDataRow} />
@@ -79,6 +90,12 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
               </TabPanel>
               <TabPanel value={6} sx={{ p: 0 }}>
                 <SalesTeamCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={7} sx={{ p: 0 }}>
+                <SettingsCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={8} sx={{ p: 0 }}>
+                <PotalUserCustomer />
               </TabPanel>
             </CardContent>
           </TabContext>
