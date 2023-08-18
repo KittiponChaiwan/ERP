@@ -30,9 +30,13 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import DetailCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/DetailCustomer'
 import DashboardCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/DashboardCustomer'
 import ContactAndAddress from 'src/components/ContentPages/ContentRight/CustomerPage/ContactAndAddress'
+import TaxCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/TaxCustomer'
+import AccountingCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/AccoutingCustomer'
+import SalesTeamCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/SalesTeamCustomer'
 
 // ** Dummy Data
-import { CustomerContentMenu, defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
+import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
+import { CustomerContentMenu } from 'src/dummy/contentPages/customerPage'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
   const theme = useTheme()
@@ -66,6 +70,15 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
               </TabPanel>
               <TabPanel value={3} sx={{ p: 0 }}>
                 <ContactAndAddress getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={4} sx={{ p: 0 }}>
+                <TaxCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={5} sx={{ p: 0 }}>
+                <AccountingCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={6} sx={{ p: 0 }}>
+                <SalesTeamCustomer getDataRow={getDataRow} />
               </TabPanel>
             </CardContent>
           </TabContext>
