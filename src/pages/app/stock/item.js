@@ -11,6 +11,7 @@ import {
   Grid,
   InputAdornment,
   Tab,
+  Tabs,
   TextField,
   Typography,
   useTheme
@@ -61,9 +62,18 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
         <Card sx={{ height: 'auto' }}>
           <TabContext value={value}>
             <TabList onChange={handleChange} aria-label='card navigation example'>
-              {ItemContentMenu?.map(item => (
-                <Tab value={item.id} label={item.name} key={item.id} />
-              ))}
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                variant='scrollable'
+                scrollButtons
+                allowScrollButtonsMobile
+                aria-label='scrollable force tabs example'
+              >
+                {ItemContentMenu?.map(item => (
+                  <Tab value={item.id} label={item.name} key={item.id} />
+                ))}
+              </Tabs>
             </TabList>
             <CardContent>
               <TabPanel value={1} sx={{ p: 0 }}>

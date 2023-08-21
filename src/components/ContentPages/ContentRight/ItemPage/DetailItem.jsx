@@ -7,6 +7,7 @@ import {
   Button,
   CardActions,
   CardContent,
+  Checkbox,
   Collapse,
   Divider,
   IconButton,
@@ -17,32 +18,53 @@ import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 
 const DetailItem = ({ getDataRow }) => {
-  const [collapseDescription, setCollapDescription] = useState(false)
+  const [collapseDescription, setCollapseDescription] = useState(false)
 
   const handleClickDescription = () => {
-    setCollapDescription(!collapseDescription)
+    setCollapseDescription(!collapseDescription)
   }
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   return (
     <Box>
       <Box sx={{ display: 'flex' }}>
-        <Box>
-          <Typography sx={{ margin: 1 }}>Item Name :</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.item_name} />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box>
+            <Typography sx={{ margin: 1 }}>Item Name :</Typography>
+            <TextField size='small' variant='filled' value={getDataRow.item_name} />
+          </Box>
+          <Box sx={{ mt: 4 }}>
+            <Typography sx={{ marginBottom: 2 }}>Item Group :</Typography>
+            <TextField size='small' variant='filled' label='' value={getDataRow.item_group} />
+          </Box>
         </Box>
-        <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>Valuation Rate :</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.valuation_rate} />
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex', mt: 6 }}>
-        <Box>
-          <Typography sx={{ marginBottom: 2 }}>Item Group :</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.item_group} />
-        </Box>
-        <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>Over Delivery/Receipt Allowance (%) :</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.over_delivery_receipt_allowance} />
+
+        <Box sx={{ ml: 18, display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} defaultChecked />
+            <Typography variant='subtitle2' sx={{ mt: 2 }}>
+              Disabled
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} defaultChecked />
+            <Typography variant='subtitle2' sx={{ mt: 2 }}>
+              Allow Alternative Item
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} defaultChecked />
+            <Typography variant='subtitle2' sx={{ mt: 2 }}>
+              Maintain Stock
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} defaultChecked />
+            <Typography variant='subtitle2' sx={{ mt: 2 }}>
+              Has Variants
+            </Typography>
+          </Box>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', mt: 6 }}>
@@ -51,8 +73,24 @@ const DetailItem = ({ getDataRow }) => {
           <TextField size='small' variant='filled' label='' value={getDataRow.stock_uom} />
         </Box>
         <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>Over Billing Allowance (%) :</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.over_billing_allowance} />
+          <Typography sx={{ marginBottom: 2 }}>Valuation Rate :</Typography>
+          <TextField size='small' variant='filled' label='' value={getDataRow.valuation_rate} />
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} disabled />
+            <Typography sx={{ m: 2 }}>Is Fixed Asset</Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box sx={{ display: 'flex', mt: 6 }}>
+        <Box sx={{ ml: 82 }}>
+          <Box>
+            <Typography sx={{ marginBottom: 2 }}>Over Delivery/Receipt Allowance (%) :</Typography>
+            <TextField size='small' variant='filled' label='' value={getDataRow.over_delivery_receipt_allowance} />
+          </Box>
+          <Box sx={{ mt: 4 }}>
+            <Typography sx={{ marginBottom: 2 }}>Over Billing Allowance (%) :</Typography>
+            <TextField size='small' variant='filled' label='' value={getDataRow.over_billing_allowance} />
+          </Box>
         </Box>
       </Box>
       <Box sx={{ mt: 30, display: 'flex' }}>
@@ -94,7 +132,6 @@ const DetailItem = ({ getDataRow }) => {
           </CardContent>
         </Collapse>
       </Box>
-
       <Box>
         <Typography variant='h6' sx={{ m: 2 }}>
           Add Comment

@@ -2,14 +2,24 @@
 import React from 'react'
 
 // ** MUI Imports
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
+import { DataGrid } from '@mui/x-data-grid'
 
 const AccountingItem = () => {
   const columnsAcc = [
-    { field: '', headerName: 'No.', width: 90, editable: true },
-    { field: '', headerName: 'Company', width: 280 },
-    { field: '', headerName: 'Default Warehouse', width: 280 },
-    { field: '', headerName: 'Default Price List', width: 280 }
+    { field: 'id', headerName: 'No', width: 70 },
+    { field: 'Company', headerName: 'Company', width: 150 },
+    { field: 'Warehouse', headerName: 'Default Warehouse', width: 200 },
+    { field: 'PriceList', headerName: 'Default Price List', width: 200 }
+  ]
+
+  const rowAcc = [
+    {
+      id: 1,
+      Company: 'Targaryen',
+      Warehouse: 'Daenerys',
+      PriceList: 'daeams'
+    }
   ]
 
   return (
@@ -18,19 +28,26 @@ const AccountingItem = () => {
         Item Defaults
       </Typography>
       <Box>
-        {/* <DataGrid
-          // rows={dataItem}
+        <DataGrid
+          rows={rowAcc}
           columns={columnsAcc}
-          // getRowId={row => row.name}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 }
+            }
+          }}
+          pageSizeOptions={[5, 10]}
           checkboxSelection
-          disableRowSelectionOnClick
-        /> */}
+        />
       </Box>
-      <Box sx={{ mt: 10 }}>
-        <Typography>Add a comment</Typography>
-        <TextField variant='filled' label='' multiline rows={6} fullWidth />
+      <Box>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          Add Comment
+        </Typography>
+        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+        <Button>add comment</Button>
       </Box>
-      <Box></Box>
     </Box>
   )
 }

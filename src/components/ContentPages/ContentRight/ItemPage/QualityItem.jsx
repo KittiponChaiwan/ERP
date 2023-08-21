@@ -31,9 +31,8 @@ const QualityItem = () => {
         <Box sx={{ mt: 10 }}>
           <Typography>Add a comment</Typography>
           <TextField variant='filled' label='' multiline rows={6} fullWidth />
-        </Box>
-        <Box sx={{ mt: 6 }}>
-          <Button>Comment</Button>
+          <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+          <Button>add comment</Button>
         </Box>
       </Box>
     </Box>
