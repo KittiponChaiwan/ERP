@@ -82,7 +82,7 @@ const DetailCustomer = ({ getDataRow }) => {
       </Box>
       <Box sx={{ mt: 20, display: 'flex' }}>
         <Button size='small' variant='filled' label='' onClick={handleClickInternal}>
-          Internal Customer
+          <Typography variant='h6'> Internal Customer</Typography>
         </Button>
         <Box>
           <CardActions className='card-action-dense'>
@@ -110,7 +110,7 @@ const DetailCustomer = ({ getDataRow }) => {
 
       <Box sx={{ mt: 10, display: 'flex' }}>
         <Button size='small' variant='filled' label='' onClick={handleClickMarket}>
-          More Information
+          <Typography variant='h6'> More Information</Typography>
         </Button>
         <Box>
           <CardActions className='card-action-dense'>
