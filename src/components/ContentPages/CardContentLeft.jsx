@@ -28,7 +28,7 @@ const CardContentLeft = ({ menuColumn, dataRow }) => {
     <Box sx={{ p: 5 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
-          Customer
+          Item
         </Typography>
         <Box sx={{ display: 'flex' }}>
           <PopupButton />
