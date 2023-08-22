@@ -13,7 +13,9 @@ import {
   Divider,
   IconButton,
   TextField,
-  Typography
+  Typography,
+  FormGroup,
+  FormControlLabel
 } from '@mui/material'
 
 //Icon
@@ -26,6 +28,7 @@ const PurchasingItem = () => {
   const [collapseSupplier, setCollapseSupplier] = useState(false)
   const [collapseDeferred, setCollapseDeferred] = useState(false)
   const [collapseForeign, setCollapseForeign] = useState(false)
+  const [IsDeferredCheck, setIsDeferredCheck] = useState(false)
 
   const handleSupplier = () => {
     setCollapseSupplier(!collapseSupplier)
@@ -37,6 +40,10 @@ const PurchasingItem = () => {
 
   const handleForeign = () => {
     setCollapseForeign(!collapseForeign)
+  }
+
+  const handleDeferredCheck = event => {
+    setIsDeferredCheck(event.target.checked)
   }
 
   const Columns = [
@@ -170,10 +177,25 @@ const PurchasingItem = () => {
           <Divider sx={{ margin: 0 }} />
           <CardContent>
             <Box sx={{ display: 'flex' }}>
-              <Checkbox {...label} defaultChecked />
-              <Typography variant='subtitle1' sx={{ mt: 1.5 }}>
-                Enable Deferred Expense
-              </Typography>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={IsDeferredCheck} onChange={handleDeferredCheck} />}
+                  variant='body2'
+                  label='Enable Deferred Expense'
+                />
+                {IsDeferredCheck && (
+                  <Box>
+                    <Box sx={{ mt: 4 }}>
+                      <Typography>Deferred Expense Account</Typography>
+                      <TextField label='' variant='outlined' fullWidth />
+                    </Box>
+                    <Box sx={{ mt: 4 }}>
+                      <Typography>No of Months (Expense)</Typography>
+                      <TextField label='' variant='outlined' fullWidth />
+                    </Box>
+                  </Box>
+                )}
+              </FormGroup>
             </Box>
           </CardContent>
         </Collapse>

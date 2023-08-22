@@ -147,7 +147,7 @@ const DetailCustomer = ({ getDataRow }) => {
               </Box>
             </Box>
             <Box sx={{ width: '60%', mt: 6 }}>
-              <Typography sx={{ marginBottom: 2 }}>Default Price List</Typography>
+              <Typography sx={{ marginBottom: 2 }}>Customer Details</Typography>
               <TextField
                 size='small'
                 variant='filled'
@@ -157,15 +157,19 @@ const DetailCustomer = ({ getDataRow }) => {
                 fullWidth
                 value={getDataRow.customer_details}
               />
+              <Typography variant='subtitle2'>Additional information regarding the customer.</Typography>
             </Box>
           </Box>
         </CardContent>
       </Collapse>
-
-      {/* <Box sx={{ mt: 30 }}>
-        <Typography variant='>Customer Details:</Typography>
-        <TextField size='small' variant='filled' label='' multiline rows={8} fullWidth value={getDataRow.description} />
-      </Box> */}
+      <Box>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          Add Comment
+        </Typography>
+        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+        <Button>add comment</Button>
+      </Box>
     </Box>
   )
 }

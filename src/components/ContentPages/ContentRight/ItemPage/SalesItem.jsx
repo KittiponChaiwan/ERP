@@ -12,7 +12,9 @@ import {
   IconButton,
   Collapse,
   Divider,
-  CardContent
+  CardContent,
+  FormGroup,
+  FormControlLabel
 } from '@mui/material'
 
 //Icon MUI
@@ -24,6 +26,7 @@ const SalesItem = () => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   const [collapseDeferred, setCollapseDeferred] = useState(false)
   const [collapseCustomer, setCollapseCustomer] = useState(false)
+  const [IsDeferredCheck, setIsDeferredCheck] = useState(false)
 
   const handleDeferred = () => {
     setCollapseDeferred(!collapseDeferred)
@@ -31,6 +34,10 @@ const SalesItem = () => {
 
   const handleCustomer = () => {
     setCollapseCustomer(!collapseCustomer)
+  }
+
+  const handleDeferredCheck = event => {
+    setIsDeferredCheck(event.target.checked)
   }
 
   const columnsCus = [
@@ -95,10 +102,25 @@ const SalesItem = () => {
             <Divider sx={{ margin: 0 }} />
             <CardContent>
               <Box sx={{ mt: 4, display: 'flex' }}>
-                <Checkbox {...label} defaultChecked />
-                <Typography variant='subtitle1' sx={{ m: 4 }}>
-                  Enable Deferred Revenue
-                </Typography>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={IsDeferredCheck} onChange={handleDeferredCheck} />}
+                    variant='body2'
+                    label='Enable Deferred Expense'
+                  />
+                  {IsDeferredCheck && (
+                    <Box>
+                      <Box sx={{ mt: 4 }}>
+                        <Typography>Deferred Expense Account</Typography>
+                        <TextField label='' variant='outlined' fullWidth />
+                      </Box>
+                      <Box sx={{ mt: 4 }}>
+                        <Typography>No of Months (Expense)</Typography>
+                        <TextField label='' variant='outlined' fullWidth />
+                      </Box>
+                    </Box>
+                  )}
+                </FormGroup>
               </Box>
             </CardContent>
           </Collapse>

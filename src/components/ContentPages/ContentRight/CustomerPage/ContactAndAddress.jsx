@@ -10,7 +10,7 @@ const ContactAndAddress = ({ getDataRow }) => {
   return (
     <Box>
       <Box>
-        <Typography variant='h5'>More Information</Typography>
+        <Typography variant='h6'>More Information</Typography>
       </Box>
       <Box sx={{ display: 'flex', mt: 4 }}>
         <Box sx={{ width: '30%', flexDirection: 'column', display: 'flex' }}>
@@ -41,7 +41,7 @@ const ContactAndAddress = ({ getDataRow }) => {
         </Box>
       </Box>
       <Box sx={{ mt: 20 }}>
-        <Typography variant='h5'>Primary Address and Contact</Typography>
+        <Typography variant='h6'>Primary Address and Contact</Typography>
       </Box>
       <Box sx={{ mt: 4 }}>
         <Typography variant='subtitle2'>Select, to make the customer searchable with these fields</Typography>
@@ -81,6 +81,14 @@ const ContactAndAddress = ({ getDataRow }) => {
             fullWidth
           />
         </Box>
+      </Box>
+      <Box>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          Add Comment
+        </Typography>
+        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+        <Button>add comment</Button>
       </Box>
     </Box>
   )

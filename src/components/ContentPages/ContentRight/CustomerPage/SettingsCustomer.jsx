@@ -33,6 +33,14 @@ const SettingsCustomer = () => {
           </Typography>
         </Box>
       </Box>
+      <Box>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          Add Comment
+        </Typography>
+        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+        <Button>add comment</Button>
+      </Box>
     </Box>
   )
 }

@@ -12,7 +12,9 @@ import {
   Collapse,
   Divider,
   CardContent,
-  Checkbox
+  Checkbox,
+  FormGroup,
+  FormControlLabel
 } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import React, { useState } from 'react'
@@ -29,6 +31,11 @@ const InventoryItem = ({ getDataRow, dropDowns }) => {
   const [collapsePreOder, setCollapsePreOder] = useState(false)
   const [collapseUnit, setCollapseUnit] = useState(false)
   const [collapseSerial, setCollapseSerial] = useState(false)
+  const [isInventoryCheck, setIsInventoryCheck] = useState(false)
+  const [isSerialCheck, setIsSerialCheck] = useState(false)
+  const [isAutomatically, setIsAutomatically] = useState(false)
+  const [isRetainCheck, setIsRetainCheck] = useState(false)
+
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const handleClickPreOder = () => {
@@ -41,6 +48,22 @@ const InventoryItem = ({ getDataRow, dropDowns }) => {
 
   const handleClickSerial = () => {
     setCollapseSerial(!collapseSerial)
+  }
+
+  const handleCheckBox = event => {
+    setIsInventoryCheck(event.target.checked)
+  }
+
+  const handleCheckBoxSerial = event => {
+    setIsSerialCheck(event.target.checked)
+  }
+
+  const handleCheckBoxAutomatically = event => {
+    setIsAutomatically(event.target.checked)
+  }
+
+  const handleCheckRetain = event => {
+    setIsRetainCheck(event.target.checked)
   }
 
   return (
@@ -227,16 +250,83 @@ const InventoryItem = ({ getDataRow, dropDowns }) => {
           <CardContent>
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} defaultChecked />
-                <Typography variant='subtitle2' sx={{ m: 4 }}>
-                  Has Batch No
-                </Typography>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={isInventoryCheck} onChange={handleCheckBox} />}
+                    variant='body2'
+                    label='Has Batch No'
+                    sx={{ ml: 0.5, width: 150 }}
+                  />
+                  {isInventoryCheck && (
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <Box sx={{ display: 'flex', width: 320 }}>
+                        <FormGroup>
+                          <FormControlLabel
+                            control={<Checkbox checked={isAutomatically} onChange={handleCheckBoxAutomatically} />}
+                            variant='body2'
+                            label='Automatically Create New Batch'
+                            sx={{ ml: 0.5 }}
+                          />
+                          {isAutomatically && (
+                            <Box sx={{ width: '70%' }}>
+                              <Typography>Batch Number Series</Typography>
+                              <TextField variant='outlined' />
+                              <Typography variant='subtitle2' sx={{ width: '100%' }}>
+                                Example: ABCD.#####. If series is set and Batch No is not mentioned in transactions,
+                                then automatic batch number will be created based on this series. If you always want to
+                                explicitly mention Batch No for this item, leave this blank. Note: this setting will
+                                take priority over the Naming Series Prefix in Stock Settings.
+                              </Typography>
+                            </Box>
+                          )}
+                        </FormGroup>
+                      </Box>
+                      <Box sx={{ display: 'flex', width: 300, ml: 0.5 }}>
+                        <Checkbox {...label} defaultChecked />
+                        <Typography sx={{ ml: 0.5, mt: 2 }}>Has Expiry Date</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', width: 300 }}>
+                        <FormGroup>
+                          <FormControlLabel
+                            control={<Checkbox checked={isRetainCheck} onChange={handleCheckRetain} />}
+                            variant='body2'
+                            label='Retain Sample'
+                            sx={{ ml: 0.2 }}
+                          />
+                          {isRetainCheck && (
+                            <Box sx={{ width: '70%' }}>
+                              <Typography>Max Sample Quantity</Typography>
+                              <TextField variant='outlined' />
+                              <Typography variant='subtitle2' sx={{ width: '100%' }}>
+                                Maximum sample quantity that can be retained
+                              </Typography>
+                            </Box>
+                          )}
+                        </FormGroup>
+                      </Box>
+                    </Box>
+                  )}
+                </FormGroup>
               </Box>
-              <Box sx={{ display: 'flex', ml: 20 }}>
-                <Checkbox {...label} defaultChecked />
-                <Typography variant='subtitle2' sx={{ m: 4 }}>
-                  Has Serial No
-                </Typography>
+              <Box sx={{ display: 'flex', ml: 40 }}>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={isSerialCheck} onChange={handleCheckBoxSerial} />}
+                    variant='body2'
+                    label='Has Serial No'
+                  />
+                  {isSerialCheck && (
+                    <Box sx={{ width: '70%' }}>
+                      <Typography>Serial Number Series</Typography>
+                      <TextField variant='outlined' />
+                      <Typography variant='subtitle2' sx={{ width: '100%' }}>
+                        Example: ABCD.##### If series is set and Serial No is not mentioned in transactions, then
+                        automatic serial number will be created based on this series. If you always want to explicitly
+                        mention Serial Nos for this item. leave this blank.
+                      </Typography>
+                    </Box>
+                  )}
+                </FormGroup>
               </Box>
             </Box>
           </CardContent>

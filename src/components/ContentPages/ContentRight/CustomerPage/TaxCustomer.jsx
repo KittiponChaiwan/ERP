@@ -1,4 +1,4 @@
-import { Box, TextField, Typography, Checkbox } from '@mui/material'
+import { Box, TextField, Typography, Checkbox, Button } from '@mui/material'
 
 const TaxCustomer = ({ getDataRow }) => {
   return (
@@ -20,6 +20,14 @@ const TaxCustomer = ({ getDataRow }) => {
             <TextField size='small' variant='filled' label='' value={getDataRow.tax_withholding_category} />
           </Box>
         </Box>
+      </Box>
+      <Box>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          Add Comment
+        </Typography>
+        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+        <Button>add comment</Button>
       </Box>
     </Box>
   )

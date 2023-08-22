@@ -12,6 +12,7 @@ import {
   Divider,
   IconButton,
   TextField,
+  TextareaAutosize,
   Typography
 } from '@mui/material'
 import ChevronUp from 'mdi-material-ui/ChevronUp'
@@ -115,13 +116,11 @@ const DetailItem = ({ getDataRow }) => {
           <CardContent>
             <Box>
               <Typography variant='subtitle2'>Description</Typography>
-              <TextField
+              <TextareaAutosize
+                style={{ minHeight: '200px', width: '100%' }}
                 size='small'
                 variant='filled'
                 label=''
-                multiline
-                rows={8}
-                fullWidth
                 value={getDataRow.description}
               />
             </Box>

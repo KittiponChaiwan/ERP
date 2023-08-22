@@ -73,7 +73,7 @@ const AccountingCustomer = ({ getDataRow }) => {
         </Box>
         <Box>
           <Box sx={{ mt: 20 }}>
-            <Typography variant='h5'>Default Accounts:</Typography>
+            <Typography variant='h6'>Default Accounts:</Typography>
           </Box>
           <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column' }}>
             <Typography variant='subtitle1'>Accounts</Typography>
@@ -118,6 +118,14 @@ const AccountingCustomer = ({ getDataRow }) => {
             </CardContent>
           </Collapse>
         </Box>
+      </Box>
+      <Box>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          Add Comment
+        </Typography>
+        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+        <Button>add comment</Button>
       </Box>
     </Box>
   )
