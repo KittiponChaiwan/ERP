@@ -105,9 +105,9 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
   )
 }
 
-const CustomerPage = ({ data }) => {
+const CustomerPage = ({ dataCustomer }) => {
   // ** States
-  const [getDataRow, setGetDataRow] = useState(data)
+  const [getDataRow, setGetDataRow] = useState([])
   const [selectRowState, setSelectRowState] = useState(false)
 
   const dropDowns = {
@@ -160,7 +160,7 @@ const CustomerPage = ({ data }) => {
     }
   ]
 
-  if (!data) {
+  if (!dataCustomer && !dataAddr) {
     return <Box>Loading...</Box>
   }
 
@@ -187,7 +187,7 @@ const CustomerPage = ({ data }) => {
       </Box>
       <Box>
         <CardDividerContent
-          contentLeft={<CardContentLeft menuColumn={columns} dataRow={data} />}
+          contentLeft={<CardContentLeft menuColumn={columns} dataRow={dataCustomer} />}
           contentRight={<CardContentRight getDataRow={getDataRow} dropDowns={dropDowns} />}
           selectRowState={selectRowState}
         />
@@ -198,29 +198,56 @@ const CustomerPage = ({ data }) => {
 
 export const getServerSideProps = async context => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Customer?fields=["*"]`, {
+    const resCustomer = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Customer?fields=["*"]&limit=500`, {
       headers: {
         Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
       }
     })
 
-    const data = res.data.data // No need to await here
+    // const resAddr = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Address?fields=["*"]`, {
+    //   headers: {
+    //     Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+    //   }
+    // })
 
-    if (res.status !== 200) {
-      return {
-        props: { data: null }
-      }
-    }
+    const dataCustomer = resCustomer.data.data // No need to await here
+    // const dataAddr = resAddr.data.data
 
     return {
-      props: { data }
+      props: { dataCustomer: dataCustomer }
     }
   } catch (error) {
     return {
-      props: { data: null }
+      props: { dataCustomer: [] }
     }
   }
 }
+
+// export const getServerAddress = async context => {
+//   try {
+//     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Address?fields=["*"]`, {
+//       headers: {
+//         Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+//       }
+//     })
+
+//     const addr = res.data.data // No need to await here
+
+//     if (res.status !== 200) {
+//       return {
+//         props: { addr: null }
+//       }
+//     }
+
+//     return {
+//       props: { addr }
+//     }
+//   } catch (error) {
+//     return {
+//       props: { addr: null }
+//     }
+//   }
+// }
 
 CustomerPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
 

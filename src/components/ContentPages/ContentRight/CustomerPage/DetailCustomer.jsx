@@ -2,7 +2,18 @@
 import React, { useState } from 'react'
 
 // ** Mui Import
-import { Box, TextField, Typography, Checkbox, Button, CardActions, Divider, CardContent } from '@mui/material'
+import {
+  Box,
+  TextField,
+  Typography,
+  Checkbox,
+  Button,
+  CardActions,
+  Divider,
+  CardContent,
+  FormGroup,
+  FormControlLabel
+} from '@mui/material'
 import Collapse from '@mui/material/Collapse'
 
 // ** Icons Imports
@@ -15,12 +26,17 @@ const DetailCustomer = ({ getDataRow }) => {
 
   const [collapseInternal, setCollapseInternal] = useState(false)
   const [collapseMarket, setCollapseSecMarket] = useState(false)
+  const [isCompanyCheck, setIsCompanyCheck] = useState(false)
 
   const handleClickInternal = () => {
     setCollapseInternal(!collapseInternal)
   }
   const handleClickMarket = () => {
     setCollapseSecMarket(!collapseMarket)
+  }
+
+  const handleCompanyCheck = event => {
+    setIsCompanyCheck(event.target.checked)
   }
 
   return (
@@ -100,11 +116,21 @@ const DetailCustomer = ({ getDataRow }) => {
         <Divider sx={{ margin: 0 }} />
         <CardContent>
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} defaultChecked />
-            <Typography variant='subtitle1' sx={{ m: 4 }}>
-              Is Internal Customer
-            </Typography>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox checked={isCompanyCheck} onChange={handleCompanyCheck} />}
+                variant='body2'
+                label='Is Your Company Address'
+              />
+              {isCompanyCheck && (
+                <Box sx={{ mt: 4 }}>
+                  <Typography>Represents Company *</Typography>
+                  <TextField label='' variant='outlined' fullWidth />
+                </Box>
+              )}
+            </FormGroup>
           </Box>
+          <Box></Box>
         </CardContent>
       </Collapse>
 
