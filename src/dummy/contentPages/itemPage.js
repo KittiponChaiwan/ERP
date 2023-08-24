@@ -75,4 +75,11 @@ const valuationMethod = [
   }
 ]
 
-export { defaultMaterialRequestType, valuationMethod, ItemContentMenu }
+const ItemPricePage = [
+  {
+    id: 1,
+    name: 'ItemPrice'
+  }
+]
+
+export { defaultMaterialRequestType, valuationMethod, ItemContentMenu, ItemPricePage }
