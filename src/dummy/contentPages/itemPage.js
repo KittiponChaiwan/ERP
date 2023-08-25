@@ -75,4 +75,11 @@ const valuationMethod = [
   }
 ]
 
-export { defaultMaterialRequestType, valuationMethod, ItemContentMenu }
+const ItemGroup = [
+  {
+    id: 1,
+    name: 'Item Group'
+  }
+]
+
+export { defaultMaterialRequestType, valuationMethod, ItemContentMenu, ItemGroup }
