@@ -82,4 +82,11 @@ const ItemPricePage = [
   }
 ]
 
-export { defaultMaterialRequestType, valuationMethod, ItemContentMenu, ItemPricePage }
+const ItemGroup = [
+  {
+    id: 1,
+    name: 'Item Group'
+  }
+]
+
+export { defaultMaterialRequestType, valuationMethod, ItemContentMenu, ItemGroup, ItemPricePage }
