@@ -25,15 +25,16 @@ import Iconbtn from 'src/components/Button/IconButton/iconbutton'
 import { ItemContentMenu } from '../../dummy/rightContentMenu'
 
 // ** Custom Components
-import DetailItem from './ContentRight/DetailItem'
-import DashboardItem from './ContentRight/DashboardItem'
-import InventoryItem from './ContentRight/InventoryItem'
+
+import DashboardItem from './ContentRight/ItemPage/DashboardItem'
+import InventoryItem from './ContentRight/ItemPage/InventoryItem'
 import AccountingItem from './ContentRight/ItemPage/AccountingItem'
-import PurchasingItem from './ContentRight/PurchasingItem'
-import SalesItem from './ContentRight/SalesItem'
-import TexItem from './ContentRight/TexItem'
-import QualityItem from './ContentRight/QualityItem'
-import ManufacturingItem from './ContentRight/ManufacturingItem'
+import PurchasingItem from './ContentRight/ItemPage/PurchasingItem'
+import Details_item from 'src/pages/app/leaderboard_shortcuts/details_item'
+import SalesItem from './ContentRight/ItemPage/SalesItem'
+import TexItem from './ContentRight/ItemPage/TexItem'
+import QualityItem from './ContentRight/ItemPage/QualityItem'
+import ManufacturingItem from './ContentRight/ItemPage/ManufacturingItem'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
   const theme = useTheme()
@@ -60,7 +61,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
             </TabList>
             <CardContent>
               <TabPanel value={1} sx={{ p: 0 }}>
-                <DetailItem getDataRow={getDataRow} />
+                <Details_item getDataRow={getDataRow} />
               </TabPanel>
               <TabPanel value={2} sx={{ p: 0 }}>
                 <DashboardItem />
