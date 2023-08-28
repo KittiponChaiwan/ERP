@@ -2,7 +2,20 @@
 import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { Box, Button, InputAdornment, TextField, useTheme } from '@mui/material'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  InputAdornment,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material'
 
 // ** Axios Imports
 import axios from 'axios'
@@ -13,14 +26,86 @@ import Magnify from 'mdi-material-ui/Magnify'
 // ** Custom Components
 import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import CardContentRight from 'src/components/ContentPages/CardContentRight'
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
+import DetailCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/DetailCustomer'
+import DashboardCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/DashboardCustomer'
+import ContactAndAddress from 'src/components/ContentPages/ContentRight/CustomerPage/ContactAndAddress'
+import TaxCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/TaxCustomer'
+import AccountingCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/AccoutingCustomer'
+import SalesTeamCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/SalesTeamCustomer'
+import SettingsCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/SettingsCustomer'
+import PotalUserCustomer from 'src/components/ContentPages/ContentRight/CustomerPage/PortalUsersCustomer'
 
 // ** Dummy Data
 import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
+import { CustomerContentMenu } from 'src/dummy/contentPages/customerPage'
 
-const ItemPage = ({ data }) => {
+const CardContentRight = ({ getDataRow, dropDowns }) => {
+  const theme = useTheme()
+
+  const [value, setValue] = useState(1)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  return (
+    <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
+      <Grid container sx={{ width: '100%' }}>
+        <Box>{/* <Typography>{getDataRow.name}</Typography> */}</Box>
+
+        <Card sx={{ height: 'auto' }}>
+          <TabContext value={value}>
+            <TabList onChange={handleChange} aria-label='card navigation example'>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                variant='scrollable'
+                scrollButtons
+                allowScrollButtonsMobile
+                aria-label='scrollable force tabs example'
+              >
+                {CustomerContentMenu?.map(cus => (
+                  <Tab value={cus.id} label={cus.name} key={cus.id} />
+                ))}
+              </Tabs>
+            </TabList>
+
+            <CardContent>
+              <TabPanel value={1} sx={{ p: 0 }}>
+                <DetailCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={2} sx={{ p: 0 }}>
+                <DashboardCustomer />
+              </TabPanel>
+              <TabPanel value={3} sx={{ p: 0 }}>
+                <ContactAndAddress getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={4} sx={{ p: 0 }}>
+                <TaxCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={5} sx={{ p: 0 }}>
+                <AccountingCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={6} sx={{ p: 0 }}>
+                <SalesTeamCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={7} sx={{ p: 0 }}>
+                <SettingsCustomer getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={8} sx={{ p: 0 }}>
+                <PotalUserCustomer />
+              </TabPanel>
+            </CardContent>
+          </TabContext>
+        </Card>
+      </Grid>
+    </Box>
+  )
+}
+
+const CustomerPage = ({ dataCustomer }) => {
   // ** States
   const [getDataRow, setGetDataRow] = useState([])
   const [selectRowState, setSelectRowState] = useState(false)
@@ -32,7 +117,7 @@ const ItemPage = ({ data }) => {
 
   // ** Menu Column
   const columns = [
-    { field: 'item_name', headerName: 'Item Name', width: 280 },
+    { field: 'customer_name', headerName: 'Customer Name', width: 280 },
     {
       field: 'Status',
       headerName: 'Status',
@@ -50,8 +135,9 @@ const ItemPage = ({ data }) => {
         </Button>
       )
     },
-    { field: 'item_group', headerName: 'Item Group', width: 150 },
-    { field: 'description', headerName: 'ID', width: 250 },
+    { field: 'customer_group', headerName: 'customer Group', width: 150 },
+    { field: 'territory', headerName: 'territory', width: 150 },
+    { field: 'name', headerName: 'ID', width: 150 },
     {
       field: 'Data',
       headerName: 'Data',
@@ -74,7 +160,7 @@ const ItemPage = ({ data }) => {
     }
   ]
 
-  if (!data) {
+  if (!dataCustomer && !dataAddr) {
     return <Box>Loading...</Box>
   }
 
@@ -101,7 +187,7 @@ const ItemPage = ({ data }) => {
       </Box>
       <Box>
         <CardDividerContent
-          contentLeft={<CardContentLeft menuColumn={columns} dataRow={data} />}
+          contentLeft={<CardContentLeft menuColumn={columns} dataRow={dataCustomer} />}
           contentRight={<CardContentRight getDataRow={getDataRow} dropDowns={dropDowns} />}
           selectRowState={selectRowState}
         />
@@ -112,30 +198,57 @@ const ItemPage = ({ data }) => {
 
 export const getServerSideProps = async context => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
+    const resCustomer = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Customer?fields=["*"]&limit=500`, {
       headers: {
         Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
       }
     })
 
-    const data = res.data.data // No need to await here
+    // const resAddr = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Address?fields=["*"]`, {
+    //   headers: {
+    //     Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+    //   }
+    // })
 
-    if (res.status !== 200) {
-      return {
-        props: { data: null }
-      }
-    }
+    const dataCustomer = resCustomer.data.data // No need to await here
+    // const dataAddr = resAddr.data.data
 
     return {
-      props: { data }
+      props: { dataCustomer: dataCustomer }
     }
   } catch (error) {
     return {
-      props: { data: null }
+      props: { dataCustomer: [] }
     }
   }
 }
 
-ItemPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+// export const getServerAddress = async context => {
+//   try {
+//     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Address?fields=["*"]`, {
+//       headers: {
+//         Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+//       }
+//     })
 
-export default ItemPage
+//     const addr = res.data.data // No need to await here
+
+//     if (res.status !== 200) {
+//       return {
+//         props: { addr: null }
+//       }
+//     }
+
+//     return {
+//       props: { addr }
+//     }
+//   } catch (error) {
+//     return {
+//       props: { addr: null }
+//     }
+//   }
+// }
+
+CustomerPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+
+export default CustomerPage

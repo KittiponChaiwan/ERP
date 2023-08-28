@@ -30,9 +30,10 @@ const ManufacturingItem = () => {
         <Box sx={{ mt: 10 }}>
           <Typography>Add a comment</Typography>
           <TextField variant='filled' label='' multiline rows={6} fullWidth />
+          <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
         </Box>
         <Box sx={{ mt: 6 }}>
-          <Button>Comment</Button>
+          <Button>Add Comment</Button>
         </Box>
       </Box>
     </Box>
