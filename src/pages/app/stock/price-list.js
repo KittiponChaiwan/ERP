@@ -28,7 +28,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 import StockPriceList from 'src/components/ContentPages/ContentRight/PriceListPage/StockPriceList'
 
 // ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod, pricelist } from 'src/dummy/contentPages/itemPage'
+import { defaultMaterialRequestType, valuationMethod, PriceList } from 'src/dummy/contentPages/itemPage'
 import axios from 'axios'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
@@ -58,7 +58,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
                 allowScrollButtonsMobile
                 aria-label='scrollable force tabs example'
               >
-                {pricelist?.map(item => (
+                {PriceList?.map(item => (
                   <Tab value={item.id} label={item.name} key={item.id} />
                 ))}
               </Tabs>
