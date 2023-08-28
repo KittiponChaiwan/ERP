@@ -75,7 +75,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
   )
 }
 
-const PriceList = ({ data }) => {
+const PriceListPage = ({ data }) => {
   // ** States
   const [getDataRow, setGetDataRow] = useState([])
   const [selectRowState, setSelectRowState] = useState(false)
@@ -207,6 +207,6 @@ export const getServerSideProps = async context => {
   }
 }
 
-PriceList.getLayout = page => <BlankLayout>{page}</BlankLayout>
+PriceListPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-export default PriceList
+export default PriceListPage
