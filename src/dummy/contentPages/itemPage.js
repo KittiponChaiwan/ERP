@@ -75,4 +75,19 @@ const valuationMethod = [
   }
 ]
 
-export { defaultMaterialRequestType, valuationMethod, ItemContentMenu }
+const itemStockEntry = [
+  {
+    id: 1,
+    name: 'Details'
+  },
+  {
+    id: 2,
+    name: 'Additional Costs'
+  },
+  {
+    id: 3,
+    name: 'Other Info'
+  }
+]
+
+export { defaultMaterialRequestType, valuationMethod, ItemContentMenu, itemStockEntry }
