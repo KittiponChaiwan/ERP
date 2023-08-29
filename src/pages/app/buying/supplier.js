@@ -36,6 +36,9 @@ import Tabs, { tabsClasses } from '@mui/material/Tabs'
 import Dashboard_sup from 'src/components/ContentPages/ContentRight/Supplier/DashboardSupplier'
 import TaxSupplier from 'src/components/ContentPages/ContentRight/Supplier/TaxSupplier'
 import Contact_Address from 'src/components/ContentPages/ContentRight/Supplier/Contact_Address'
+import Accounting from 'src/components/ContentPages/ContentRight/Supplier/AccountingSupplier'
+import SettingsSupplier from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
+import CustomMonthLayout from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
 
 // ** Custom Components
 
@@ -87,9 +90,15 @@ const CardContentRight = ({ getDataRow }) => {
               <TabPanel value={4} sx={{ p: 0 }}>
                 <Contact_Address />
               </TabPanel>
-              <TabPanel value={5} sx={{ p: 0 }}></TabPanel>
-              <TabPanel value={6} sx={{ p: 0 }}></TabPanel>
-              <TabPanel value={7} sx={{ p: 0 }}></TabPanel>
+              <TabPanel value={5} sx={{ p: 0 }}>
+                <Accounting />
+              </TabPanel>
+              <TabPanel value={6} sx={{ p: 0 }}>
+                <SettingsSupplier />
+              </TabPanel>
+              <TabPanel value={7} sx={{ p: 0 }}>
+                <CustomMonthLayout />
+              </TabPanel>
               <TabPanel value={8} sx={{ p: 0 }}></TabPanel>
               <TabPanel value={9} sx={{ p: 0 }}></TabPanel>
             </CardContent>
