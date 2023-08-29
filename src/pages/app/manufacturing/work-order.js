@@ -13,7 +13,8 @@ import {
   Tabs,
   TextField,
   Typography,
-  useTheme
+  useTheme,
+  Chip
 } from '@mui/material'
 
 // ** Axios Imports
@@ -29,15 +30,17 @@ import UserDropdown from 'src/@core/layouts/components/shared-components/UserDro
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Dummy Data
-import { MenuWork_order } from 'src/dummy/contentPages/menufacturingPage'
-import { defaultMaterialRequestType, valuationMethod, ItemContentMenu } from 'src/dummy/contentPages/itemPage'
+import { MenuWorkOrder } from 'src/dummy/contentPages/menufacturingPage'
+import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
+import ProductionItemPage from 'src/components/ContentPages/ContentRight/MenufucturingWork_OderPage/ProductionItem'
+import ConfigulationPage from 'src/components/ContentPages/ContentRight/MenufucturingWork_OderPage/Configulation'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
   const theme = useTheme()
 
   const [value, setValue] = useState(1)
 
-  const handleChange = newValue => {
+  const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
@@ -59,14 +62,18 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
                 allowScrollButtonsMobile
                 aria-label='scrollable force tabs example'
               >
-                {MenuWork_order?.map(item => (
-                  <Tab value={item.id} label={item.name} key={item.id} />
+                {MenuWorkOrder?.map(work => (
+                  <Tab value={work.id} label={work.name} key={work.id} />
                 ))}
               </Tabs>
             </TabList>
+
             <CardContent>
               <TabPanel value={1} sx={{ p: 0 }}>
-                {/* <DetailItem getDataRow={getDataRow} /> */}
+                <ProductionItemPage getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={2} sx={{ p: 0 }}>
+                <ConfigulationPage getDataRow={getDataRow} />
               </TabPanel>
             </CardContent>
           </TabContext>
@@ -90,22 +97,12 @@ const WorkOderPage = ({ data }) => {
   const columns = [
     { field: 'item_name', headerName: 'Item To Manufacture', width: 280 },
     {
-      field: 'Status',
+      field: 'status',
       headerName: 'Status',
       width: 150,
       renderCell: (
         params //ทั้งหมดมี button edit
-      ) => (
-        <Button
-          sx={{ backgroundColor: '#ffcdd2' }}
-          variant='text'
-          onClick={() => {
-            console.log(params.row)
-          }}
-        >
-          <Typography sx={{ color: '#f44336' }}>● {getDataRow.status}</Typography>
-        </Button>
-      )
+      ) => <Chip label={params.row.status} />
     },
     { field: 'name', headerName: 'ID', width: 300 },
     {

@@ -1,4 +1,4 @@
-const MenuWork_order = [
+const MenuWorkOrder = [
   {
     id: 1,
     name: 'Production Item'
@@ -21,4 +21,4 @@ const MenuWork_order = [
   }
 ]
 
-export { MenuWork_order }
+export { MenuWorkOrder }

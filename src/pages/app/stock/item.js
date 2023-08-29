@@ -48,7 +48,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
 
   const [value, setValue] = useState(1)
 
-  const handleChange = newValue => {
+  const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
