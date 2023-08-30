@@ -16,13 +16,7 @@ function CardYourShortcut({ menus }) {
     <Card
       style={{ background: theme.palette.grey[200] }}
       sx={{
-        mx: 2,
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`,
-        mb: 5
+        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
@@ -34,25 +28,18 @@ function CardYourShortcut({ menus }) {
       <Card style={{ background: theme.palette.secondary.E }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
-            mx: 2,
-            display: 'flex',
-            textAlign: 'left',
-            flexDirection: 'row',
-            alignItems: 'center',
             padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`,
             minWidth: 100
           }}
         >
-          <Grid container alignItems={'center'} justifyContent={'center'}>
+          <Grid container spacing={3} direction='row' alignItems='center'>
             {menus?.map((item, index) => (
-              <Box sx={{ width: 'auto' }} key={index}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index} justifyContent={'center'}>
                 <Button
                   sx={{
                     border: '1px solid black',
                     fontWeight: 'bold',
-                    width: 280,
-                    textAlign: 'left',
-                    justifyContent: 'flex-start',
+                    width: '100%',
                     bgcolor: theme => (index % 2 === 0 ? theme.palette.secondary.D : theme.palette.secondary.C),
                     color: 'secondary.G',
                     '&:hover': {
@@ -64,7 +51,7 @@ function CardYourShortcut({ menus }) {
                 >
                   {item.name}
                 </Button>
-              </Box>
+              </Grid>
             ))}
           </Grid>
         </CardContent>

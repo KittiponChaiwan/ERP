@@ -9,9 +9,6 @@ function CardGuideVue({ MenuButton, RightSideContent }) {
   // ** Hooks
   const theme = useTheme()
 
-  // ** initial State
-  const initialState = { head: '', body: '', footer: '' }
-
   // ** Vars
   const [buttonId, setButtonId] = useState(1)
   const [rightSideContent, setRightSideContent] = useState(RightSideContent[0])
@@ -29,17 +26,11 @@ function CardGuideVue({ MenuButton, RightSideContent }) {
   return (
     <Card
       sx={{
-        mx: 2,
-        display: 'flex',
-        textAlign: 'left', // Align the text to the left
-        flexDirection: 'column', // Display icon and text in a row
-        alignItems: 'center',
         backgroundColor: 'theme.palette.grey[200]',
-        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`,
-        mb: 5
+        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`
       }}
     >
-      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', mb: 4 }}>
         <Typography variant='h6' fontWeight={'bold'} color={'secondary.F'}>
           Let's begin your journey with ERPNext
         </Typography>
@@ -48,39 +39,16 @@ function CardGuideVue({ MenuButton, RightSideContent }) {
         </Typography>
       </Box>
       <Card style={{ background: theme.palette.secondary.E }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
-        <CardContent
-          sx={{
-            mx: 2,
-            display: 'flex',
-            textAlign: 'left', // Align the text to the left
-            flexDirection: 'column', // Display icon and text in a row
-            alignItems: 'center', // Center the items vertically in the row
-            padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`,
-            minWidth: 100
-          }}
-        >
-          <Grid container spacing={2} sx={{ width: '100%' }}>
-            {/* /////////////// ข้อมูลใน BOX ซ้าย /////////////////// */}
-            <Grid
-              item
-              sm={12}
-              xs={12}
-              md={5.5}
-              lg={4.5}
-              sx={{
-                display: 'flex',
-                justifyContent: { xs: 'center', sm: 'center', md: 'left', lg: 'left' },
-                flexDirection: 'column'
-              }}
-            >
+        <CardContent>
+          <Grid container spacing={4} sx={{ width: '100%' }}>
+            <Grid item sm={12} xs={12} md={4}>
               {MenuButton.map(item => (
-                <Box sx={{ width: 'auto' }} key={item.id}>
+                <Box sx={{ width: 'auto', marginBlock: 2 }} key={item.id}>
                   <Button
                     sx={{
                       border: '1px solid black',
                       fontWeight: 'bold',
                       width: '100%',
-                      textAlign: 'left',
                       justifyContent: 'flex-start',
                       bgcolor: theme => (buttonId === item.id ? theme.palette.secondary.D : theme.palette.secondary.C),
                       color: 'secondary.G',
@@ -98,35 +66,32 @@ function CardGuideVue({ MenuButton, RightSideContent }) {
             </Grid>
 
             {/* /////////////// ข้อมูลใน BOX ขวา /////////////////// */}
-            <Grid item sm={12} xs={12} md={6} lg={7.5} sx={{ display: 'flex' }}>
-              <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Grid item sm={12} xs={12} md={8}>
+              <Box>
                 <Card
                   sx={{
-                    display: 'flex',
-                    textAlign: 'left',
-                    flexDirection: 'column',
                     padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`,
                     background: theme.palette.grey[200]
                   }}
                 >
                   {rightSideContent.head && (
-                    <Grid sx={{ mb: 5, mt: -6 }}>
+                    <Box sx={{ mb: 5, mt: -6 }}>
                       <Typography variant='body1' sx={{ color: theme.palette.secondary.F }}>
                         {rightSideContent.head}
                       </Typography>
-                    </Grid>
+                    </Box>
                   )}
 
                   {rightSideContent.body && (
-                    <Grid sx={{ mb: 5 }}>
+                    <Box sx={{ mb: 5 }}>
                       <Typography variant='body2' sx={{ fornSize: 19, color: theme.palette.secondary.F }}>
                         {rightSideContent.body}
                       </Typography>
-                    </Grid>
+                    </Box>
                   )}
 
                   {rightSideContent.footer && (
-                    <Grid>
+                    <Box>
                       <Typography style={{ fontSize: '13px', color: theme.palette.secondary.F }} variant='body2'>
                         {rightSideContent.footer.split('\n').map((item, index) => (
                           <div key={index} style={{ marginBottom: '5px' }}>
@@ -134,10 +99,10 @@ function CardGuideVue({ MenuButton, RightSideContent }) {
                           </div>
                         ))}
                       </Typography>
-                    </Grid>
+                    </Box>
                   )}
                 </Card>
-              </Grid>
+              </Box>
             </Grid>
           </Grid>
         </CardContent>

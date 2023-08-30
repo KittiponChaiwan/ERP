@@ -32,43 +32,28 @@ function CardReportMenu({ menus }) {
     <Card
       style={{ background: theme.palette.grey[200] }}
       sx={{
-        mx: 2,
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`,
-        mb: 5
+        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
+      <Box>
         <Typography variant='h6' fontWeight={'bold'}>
           Reports & Masters
         </Typography>
       </Box>
-      <Card style={{ background: theme.palette.secondary.E }} sx={{ width: '100%', height: 'auto' }}>
-        <CardContent
-          sx={{
-            textAlign: 'left',
-            flexDirection: 'row',
-            alignItems: 'center',
-            padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`
-          }}
-        >
+      <Card style={{ background: theme.palette.secondary.E }} sx={{ width: '100%', height: 'auto', mb: 4 }}>
+        <CardContent>
           <Grid container>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Grid item xs={12}>
               {menus.map(menu => (
                 <Box key={menu.id}>
                   <Grid container>
-                    <Grid item>
-                      <Typography variant='h6' fontWeight={'bold'} sx={{ mt: 4, mb: 4, color: '#FFF' }}>
+                    <Grid item xs={12}>
+                      <Typography variant='h6' fontWeight={'bold'} sx={{ color: theme.palette.primary }}>
                         {menu.name}
                       </Typography>
                     </Grid>
-                  </Grid>
-                  <Grid container spacing={5}>
                     {menu.submenus.map(item => (
-                      <Grid item key={item.id}>
+                      <Grid item key={item.id} xs={4} sx={{ p: 4 }}>
                         <Visible>
                           <OnHover>
                             <CardMenu

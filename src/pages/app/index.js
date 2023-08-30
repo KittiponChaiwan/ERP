@@ -14,18 +14,16 @@ import { HomeMenuButton, HomeContent, HomeReport, HomeShortcut } from 'src/dummy
 
 const HomePage = () => {
   return (
-    <Box m={12} mb={20}>
-      <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid item sm={12} md={12} lg={12}>
+    <Box>
+      <Grid container rowSpacing={5}>
+        <Grid item xs={12}>
           <CardGuideVue MenuButton={HomeMenuButton} RightSideContent={HomeContent} />
-          <Grid item sm={12} md={12} lg={12}>
-            <CardYourShortcut menus={HomeShortcut} />
-          </Grid>
-          <Grid item sm={12} md={12} lg={12}>
-            <React.Fragment>
-              <CardReportMenu menus={HomeReport} />\
-            </React.Fragment>
-          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <CardYourShortcut menus={HomeShortcut} />
+        </Grid>
+        <Grid item xs={12}>
+          <CardReportMenu menus={HomeReport} />
         </Grid>
       </Grid>
     </Box>
