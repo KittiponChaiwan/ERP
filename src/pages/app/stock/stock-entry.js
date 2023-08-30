@@ -86,8 +86,6 @@ const StockEntry = ({ data }) => {
   const [selectRowState, setSelectRowState] = useState(false)
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
-  console.log('ss', getDataRow)
-
   const dropDowns = {
     defaultMaterialRequestType: defaultMaterialRequestType,
     valuationMethod: valuationMethod
