@@ -5,8 +5,6 @@ import React from 'react'
 import { Box, Grid, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import DorpdownButton from 'src/components/Button/Dorpdown_Text/Dorpdown_text'
-import Internal_Supplier from './DetailSupplier/Internal_supplier '
-import More_Information from './DetailSupplier/More_Information'
 
 const TaxSupplier = ({ getDataRow }) => {
   const [age, setAge] = useState('')

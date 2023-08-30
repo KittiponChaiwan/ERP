@@ -31,9 +31,6 @@ const DetailCustomer = ({ getDataRow }) => {
   const handleClickInternal = () => {
     setCollapseInternal(!collapseInternal)
   }
-  const handleClickMarket = () => {
-    setCollapseSecMarket(!collapseMarket)
-  }
 
   const handleCompanyCheck = event => {
     setIsCompanyCheck(event.target.checked)
