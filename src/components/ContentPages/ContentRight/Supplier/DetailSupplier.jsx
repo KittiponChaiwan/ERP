@@ -2,17 +2,47 @@
 import React from 'react'
 
 // ** Mui Import
-import { Box, Grid, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  Grid,
+  TextField,
+  Typography,
+  Button,
+  Divider,
+  Collapse,
+  IconButton,
+  CardContent,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  TextareaAutosize
+} from '@mui/material'
 import { useState } from 'react'
 import DorpdownButton from 'src/components/Button/Dorpdown_Text/Dorpdown_text'
-import Internal_Supplier from './DetailSupplier/Internal_supplier '
-import More_Information from './DetailSupplier/More_Information'
+
+// ** Mdi Import
+import ChevronUp from 'mdi-material-ui/ChevronUp'
+import ChevronDown from 'mdi-material-ui/ChevronDown'
 
 const DetailSupplier = ({ getDataRow }) => {
   const [age, setAge] = useState('')
 
-  const handleChange = event => {
-    setAge(event.target.value)
+  // ** State
+  const [internalSupplier, setInternalSupplier] = useState(false)
+  const [moreInformation, setMoreInformation] = useState(false)
+
+  const [isInternalSupplier, setIsInternalSupplier] = useState(false) // New state for checkbox
+
+  const handleClickInternalSupplier = () => {
+    setInternalSupplier(!internalSupplier)
+  }
+
+  const handleClickMoreInformation = () => {
+    setMoreInformation(!moreInformation)
+  }
+
+  const handleCheckboxChange = event => {
+    setIsInternalSupplier(event.target.checked)
   }
 
   return (
@@ -68,12 +98,76 @@ const DetailSupplier = ({ getDataRow }) => {
       {/* ////////////////////////////////////// แถวที่ 3 ///////////////////////////////////////////// */}
       <Grid container sx={{ mt: 10 }}>
         <Grid>
-          <Internal_Supplier />
+          <Box>
+            <Box sx={{ width: '100%' }}>
+              <Button size='small' variant='filled' label='' onClick={handleClickInternalSupplier}>
+                Internal Supplier
+              </Button>
+              <IconButton size='small' onClick={handleClickInternalSupplier}>
+                {internalSupplier ? (
+                  <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                ) : (
+                  <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                )}
+              </IconButton>
+            </Box>
+
+            <Collapse in={internalSupplier}>
+              <Divider sx={{ margin: 0 }} />
+              <CardContent>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox checked={isInternalSupplier} onChange={handleCheckboxChange} />}
+                    variant='body2'
+                    label='Is Internal Supplier'
+                  />
+                  {isInternalSupplier && <TextField label='Represents Company *' variant='outlined' fullWidth />}
+                </FormGroup>
+              </CardContent>
+            </Collapse>
+          </Box>
         </Grid>
       </Grid>
       <Grid container sx={{ mt: 5 }}>
         <Grid>
-          <More_Information />
+          <Box>
+            <Box sx={{ width: '100%' }}>
+              <Button size='small' variant='filled' label='' onClick={handleClickMoreInformation}>
+                More Information
+              </Button>
+              <IconButton size='small' onClick={handleClickMoreInformation}>
+                {moreInformation ? (
+                  <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                ) : (
+                  <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                )}
+              </IconButton>
+            </Box>
+
+            <Collapse in={moreInformation}>
+              <Divider sx={{ margin: 0 }} />
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item sm={6} md={6} lg={6} sx={{ mr: 5 }}>
+                    <Grid item sx={{ width: '100%' }}>
+                      <Typography sx={{ marginBottom: 2 }}>Supplier Details</Typography>
+                      <TextareaAutosize style={{ minHeight: '200px', width: '100%', maxWidth: 270, minWidth: 270 }} />
+                    </Grid>
+                  </Grid>
+                  <Grid item>
+                    <Grid>
+                      <Typography sx={{ marginBottom: 2 }}>Website </Typography>
+                      <TextField size='small' variant='filled' label='' value={''} />
+                    </Grid>
+                    <Grid>
+                      <Typography sx={{ marginBottom: 2 }}>Print Language </Typography>
+                      <TextField size='small' variant='filled' label='' value={''} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Collapse>
+          </Box>
         </Grid>
       </Grid>
       <Grid sx={{ mt: 5 }}>

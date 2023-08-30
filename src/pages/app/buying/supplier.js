@@ -48,7 +48,6 @@ const CardContentRight = ({ getDataRow }) => {
   const [value, setValue] = useState(1)
 
   const handleChange = (event, newValue) => {
-    console.log(newValue)
     setValue(newValue)
   }
 
@@ -88,7 +87,7 @@ const CardContentRight = ({ getDataRow }) => {
                 <TaxSupplier />
               </TabPanel>
               <TabPanel value={4} sx={{ p: 0 }}>
-                <Contact_Address />
+                <Contact_Address getDataRow={getDataRow} />
               </TabPanel>
               <TabPanel value={5} sx={{ p: 0 }}>
                 <Accounting />
