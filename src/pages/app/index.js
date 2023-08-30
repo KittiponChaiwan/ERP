@@ -23,7 +23,7 @@ const HomePage = () => {
           </Grid>
           <Grid item sm={12} md={12} lg={12}>
             <React.Fragment>
-              <CardReportMenu menus={HomeReport} />\
+              <CardReportMenu menus={HomeReport} />
             </React.Fragment>
           </Grid>
         </Grid>
