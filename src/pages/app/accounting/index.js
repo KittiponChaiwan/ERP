@@ -14,18 +14,16 @@ import { AccountingMenuButton, AccountingContent, AccountingYourShortcut, Accoun
 
 const CardSupport = () => {
   return (
-    <Box m={12} mb={20}>
-      <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid item sm={12} md={12} lg={12}>
+    <Box>
+      <Grid container rowSpacing={5}>
+        <Grid item sm={12}>
           <CardGuideVue MenuButton={AccountingMenuButton} RightSideContent={AccountingContent} />
-          <Grid item sm={12} md={12} lg={12}>
-            <CardYourShortcut menus={AccountingYourShortcut} />
-          </Grid>
-          <Grid item sm={12} md={12} lg={12}>
-            <React.Fragment>
-              <CardReportMenu menus={AccountingReport} />
-            </React.Fragment>
-          </Grid>
+        </Grid>
+        <Grid item sm={12}>
+          <CardYourShortcut menus={AccountingYourShortcut} />
+        </Grid>
+        <Grid item sm={12}>
+          <CardReportMenu menus={AccountingReport} />
         </Grid>
       </Grid>
     </Box>
