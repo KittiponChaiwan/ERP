@@ -16,13 +16,7 @@ function CardYourShortcut({ menus }) {
     <Card
       style={{ background: theme.palette.grey[200] }}
       sx={{
-        mx: 2,
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`,
-        mb: 5
+        padding: theme => `${theme.spacing(3, 5, 0.5)} !important`
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%' }}>
@@ -34,11 +28,6 @@ function CardYourShortcut({ menus }) {
       <Card style={{ background: theme.palette.secondary.E }} sx={{ mb: 5, width: '100%', height: 'auto' }}>
         <CardContent
           sx={{
-            mx: 2,
-            display: 'flex',
-            textAlign: 'left',
-            flexDirection: 'row',
-            alignItems: 'center',
             padding: theme => `${theme.spacing(9.75, 5, 9.25)} !important`,
             minWidth: 100
           }}
