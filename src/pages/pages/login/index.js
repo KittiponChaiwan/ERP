@@ -74,8 +74,7 @@ const LoginPage = () => {
   })
 
   const instance = axios.create({
-    baseURL: 'https://tonen.vsiam.com',
-    withCredentials: true // ส่ง cookie ไปกับคำขอ
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL
   })
 
   // ** Hook
@@ -101,7 +100,7 @@ const LoginPage = () => {
     try {
       // Send login credentials to the backend API
 
-      const response = await instance.post(`${process.env.NEXT_PUBLIC_BASE_URL}api/method/login`, {
+      const response = await instance.post('api/method/login', {
         usr: values.username,
         pwd: values.password
       })

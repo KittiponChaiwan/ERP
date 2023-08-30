@@ -34,6 +34,8 @@ import { MenuWorkOrder } from 'src/dummy/contentPages/menufacturingPage'
 import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
 import ProductionItemPage from 'src/components/ContentPages/ContentRight/MenufucturingWork_OderPage/ProductionItem'
 import ConfigulationPage from 'src/components/ContentPages/ContentRight/MenufucturingWork_OderPage/Configulation'
+import Operation from 'src/components/ContentPages/ContentRight/MenufucturingWork_OderPage/Operation'
+import MoreInfo from 'src/components/ContentPages/ContentRight/MenufucturingWork_OderPage/MoreInfo'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
   const theme = useTheme()
@@ -74,6 +76,12 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
               </TabPanel>
               <TabPanel value={2} sx={{ p: 0 }}>
                 <ConfigulationPage getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={3} sx={{ p: 0 }}>
+                <Operation getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={4} sx={{ p: 0 }}>
+                <MoreInfo getDataRow={getDataRow} />
               </TabPanel>
             </CardContent>
           </TabContext>
