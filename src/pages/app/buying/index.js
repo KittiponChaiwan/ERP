@@ -14,16 +14,16 @@ import { BuyingMenuButton, BuyingContent, BuyingYourShortcut, BuyingReport } fro
 
 const CardSupport = () => {
   return (
-    <Box m={12} mb={20}>
-      <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid item sm={12} md={12} lg={12}>
+    <Box>
+      <Grid container rowSpacing={5}>
+        <Grid item sm={12}>
           <CardGuideVue MenuButton={BuyingMenuButton} RightSideContent={BuyingContent} />
-          <Grid item sm={12} md={12} lg={12}>
-            <CardYourShortcut menus={BuyingYourShortcut} />
-          </Grid>
-          <Grid item sm={12} md={12} lg={12}>
-            <CardReportMenu menus={BuyingReport} />
-          </Grid>
+        </Grid>
+        <Grid item sm={12}>
+          <CardYourShortcut menus={BuyingYourShortcut} />
+        </Grid>
+        <Grid item sm={12}>
+          <CardReportMenu menus={BuyingReport} />
         </Grid>
       </Grid>
     </Box>
