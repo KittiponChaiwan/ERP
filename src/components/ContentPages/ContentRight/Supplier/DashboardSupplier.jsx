@@ -19,13 +19,16 @@ import ChevronDown from 'mdi-material-ui/ChevronDown'
 import { useState } from 'react'
 
 const Dashboard_sup = ({ getDataRow }) => {
-  const [age, setAge] = useState('')
-
   // ** State
-  const [collapse, setCollapse] = useState(false)
+  const [activity, setActivity] = useState(false)
+  const [connections, setConnections] = useState(false)
 
-  const handleClick = () => {
-    setCollapse(!collapse)
+  const handleClickActivity = () => {
+    setActivity(!activity)
+  }
+
+  const handleClickConnections = () => {
+    setConnections(!connections)
   }
 
   return (
@@ -34,15 +37,15 @@ const Dashboard_sup = ({ getDataRow }) => {
         <Grid>
           <Box>
             <Box sx={{ width: '100%' }}>
-              <Button size='small' variant='filled' label='' onClick={handleClick}>
+              <Button size='small' variant='filled' label='' onClick={handleClickActivity}>
                 Activity
               </Button>
-              <IconButton size='small' onClick={handleClick}>
-                {collapse ? <ChevronUp sx={{ fontSize: '1.875rem' }} /> : <ChevronDown sx={{ fontSize: '1.875rem' }} />}
+              <IconButton size='small' onClick={handleClickActivity}>
+                {activity ? <ChevronUp sx={{ fontSize: '1.875rem' }} /> : <ChevronDown sx={{ fontSize: '1.875rem' }} />}
               </IconButton>
             </Box>
 
-            <Collapse in={collapse}>
+            <Collapse in={activity}>
               <Divider sx={{ margin: 0 }} />
               <CardContent>
                 <Grid container spacing={2}>
@@ -72,33 +75,31 @@ const Dashboard_sup = ({ getDataRow }) => {
         <Grid>
           <Box>
             <Box sx={{ width: '100%' }}>
-              <Button size='small' variant='filled' label='' onClick={handleClick}>
+              <Button size='small' variant='filled' label='' onClick={handleClickConnections}>
                 Connections
               </Button>
-              <IconButton size='small' onClick={handleClick}>
-                {collapse ? <ChevronUp sx={{ fontSize: '1.875rem' }} /> : <ChevronDown sx={{ fontSize: '1.875rem' }} />}
+              <IconButton size='small' onClick={handleClickConnections}>
+                {connections ? (
+                  <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                ) : (
+                  <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                )}
               </IconButton>
             </Box>
 
-            <Collapse in={collapse}>
+            <Collapse in={connections}>
               <Divider sx={{ margin: 0 }} />
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item sm={6} md={6} lg={6} sx={{ mr: 5 }}>
-                    <Grid item sx={{ width: '100%' }}>
-                      <Typography sx={{ marginBottom: 2 }}>Supplier Details</Typography>
-                      <TextareaAutosize style={{ minHeight: '200px', width: '100%', maxWidth: 270, minWidth: 270 }} />
-                    </Grid>
+                    <Typography sx={{ marginBottom: 2 }}>Supplier Details</Typography>
+                    <TextareaAutosize style={{ minHeight: '200px', width: '100%', maxWidth: 270, minWidth: 270 }} />
                   </Grid>
                   <Grid item>
-                    <Grid>
-                      <Typography sx={{ marginBottom: 2 }}>Supplier Group * </Typography>
-                      <TextField size='small' variant='filled' label='' value={''} />
-                    </Grid>
-                    <Grid>
-                      <Typography sx={{ marginBottom: 2 }}>Country </Typography>
-                      <TextField size='small' variant='filled' label='' value={''} />
-                    </Grid>
+                    <Typography sx={{ marginBottom: 2 }}>Supplier Group * </Typography>
+                    <TextField size='small' variant='filled' />
+                    <Typography sx={{ marginBottom: 2 }}>Country </Typography>
+                    <TextField size='small' variant='filled' />
                   </Grid>
                 </Grid>
               </CardContent>

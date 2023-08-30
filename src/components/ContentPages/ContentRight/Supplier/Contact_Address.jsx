@@ -373,7 +373,7 @@ const Contact_Address = ({ getDataRow }) => {
                     }
                   }}
                 >
-                  <DialogTitle>Edit</DialogTitle>
+                  <DialogTitle>Edit Contect</DialogTitle>
                   <DialogContent>
                     <Card sx={{ width: '100%', p: 5 }}>
                       <Grid container spacing={3} sx={{ display: 'flex', justifyContent: 'center' }}>
