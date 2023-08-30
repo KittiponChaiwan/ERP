@@ -74,8 +74,7 @@ const LoginPage = () => {
   })
 
   const instance = axios.create({
-    baseURL: 'https://tonen.vsiam.com',
-    withCredentials: true // ส่ง cookie ไปกับคำขอ
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL
   })
 
   // ** Hook
