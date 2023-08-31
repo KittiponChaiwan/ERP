@@ -46,14 +46,14 @@ function CardReportMenu({ menus }) {
             <Grid item xs={12}>
               {menus.map(menu => (
                 <Box key={menu.id}>
-                  <Grid container>
+                  <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Typography variant='h6' fontWeight={'bold'} sx={{ color: theme.palette.primary }}>
                         {menu.name}
                       </Typography>
                     </Grid>
                     {menu.submenus.map(item => (
-                      <Grid item key={item.id} xs={4} sx={{ p: 4 }}>
+                      <Grid item key={item.id} xs={12} sm={6} md={4} lg={3} sx={{ p: 4 }}>
                         <Visible>
                           <OnHover>
                             <CardMenu

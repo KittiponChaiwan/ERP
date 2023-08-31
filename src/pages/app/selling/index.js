@@ -14,16 +14,16 @@ import { SellingMenuButton, SellingContent, SellingShortcut, SellingReport } fro
 
 const CardSupport = () => {
   return (
-    <Box m={12} mb={20}>
-      <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Grid item sm={12} md={12} lg={12}>
+    <Box>
+      <Grid container rowSpacing={5}>
+        <Grid item sm={12}>
           <CardGuideVue MenuButton={SellingMenuButton} RightSideContent={SellingContent} />
-          <Grid item sm={12} md={12} lg={12}>
-            <CardYourShortcut menus={SellingShortcut} />
-          </Grid>
-          <Grid item sm={12} md={12} lg={12}>
-            <CardReportMenu menus={SellingReport} />
-          </Grid>
+        </Grid>
+        <Grid item sm={12}>
+          <CardYourShortcut menus={SellingShortcut} />
+        </Grid>
+        <Grid item sm={12}>
+          <CardReportMenu menus={SellingReport} />
         </Grid>
       </Grid>
     </Box>

@@ -13,11 +13,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker'
 
 const SettingsSupplier = () => {
-  const [age, setAge] = useState('')
-
-  const handleChange = event => {
-    setAge(event.target.value)
-  }
+  const [setAge] = useState('')
 
   // ** State
   const [collapse, setCollapse] = useState(false)
@@ -58,7 +54,6 @@ const SettingsSupplier = () => {
             <Box>
               <Typography sx={{ marginBottom: 2 }}>Hold Type </Typography>
               <DorpdownButton />
-
               <Typography sx={{ marginBottom: 2 }}>Release Date </Typography>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <StaticDatePicker orientation='landscape' />
