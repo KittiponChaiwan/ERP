@@ -33,6 +33,10 @@ import { BomMenu } from 'src/dummy/contentPages/menufacturingPage'
 import OperationBOM from 'src/components/ContentPages/ContentRight/BOM/OperationBOM'
 import ProductItem from 'src/components/ContentPages/ContentRight/BOM/ProductItem'
 import ScapAndProcessLoss from 'src/components/ContentPages/ContentRight/BOM/ScapAndProcessLoss'
+import Costing from 'src/components/ContentPages/ContentRight/BOM/Costing'
+import MoreInfoBOM from 'src/components/ContentPages/ContentRight/BOM/MoreInfoBOM'
+import WebsiteBOM from 'src/components/ContentPages/ContentRight/BOM/WebsiteBOM'
+import ConnectionsBOM from 'src/components/ContentPages/ContentRight/BOM/ConnectionBOM'
 import { defaultMaterialRequestType, valuationMethod, RateOfMaterialsBasedOn } from 'src/dummy/contentPages/itemPage'
 
 const CardContentRight = ({ getDataRow, dropDowns }) => {
@@ -77,6 +81,18 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
               </TabPanel>
               <TabPanel value={3} sx={{ p: 0 }}>
                 <ScapAndProcessLoss getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={4} sx={{ p: 0 }}>
+                <Costing getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={5} sx={{ p: 0 }}>
+                <MoreInfoBOM getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={6} sx={{ p: 0 }}>
+                <WebsiteBOM getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={7} sx={{ p: 0 }}>
+                <ConnectionsBOM getDataRow={getDataRow} />
               </TabPanel>
             </CardContent>
           </TabContext>
