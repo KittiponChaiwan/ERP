@@ -38,7 +38,7 @@ import TaxSupplier from 'src/components/ContentPages/ContentRight/Supplier/TaxSu
 import Contact_Address from 'src/components/ContentPages/ContentRight/Supplier/Contact_Address'
 import Accounting from 'src/components/ContentPages/ContentRight/Supplier/AccountingSupplier'
 import SettingsSupplier from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
-import CustomMonthLayout from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
+import PortalUserSupplier from 'src/components/ContentPages/ContentRight/Supplier/PortalUsersSupplier'
 
 // ** Custom Components
 
@@ -96,7 +96,7 @@ const CardContentRight = ({ getDataRow }) => {
                 <SettingsSupplier />
               </TabPanel>
               <TabPanel value={7} sx={{ p: 0 }}>
-                <CustomMonthLayout />
+                <PortalUserSupplier />
               </TabPanel>
             </CardContent>
           </TabContext>

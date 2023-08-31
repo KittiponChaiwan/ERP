@@ -60,6 +60,21 @@ const defaultMaterialRequestType = [
   }
 ]
 
+const RateOfMaterialsBasedOn = [
+  {
+    id: 1,
+    name: 'Valuation Rate'
+  },
+  {
+    id: 2,
+    name: 'Last Purchase Rate'
+  },
+  {
+    id: 3,
+    name: 'Price List'
+  }
+]
+
 const valuationMethod = [
   {
     id: 1,
@@ -118,5 +133,6 @@ export {
   itemStockEntry,
   ItemGroup,
   ItemPricePage,
-  PriceList
+  PriceList,
+  RateOfMaterialsBasedOn
 }
