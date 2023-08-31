@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 // ** MUI Imports
-import { TabContext, TabList, TabPanel } from '@mui/lab'
+import { TabContext, TabPanel } from '@mui/lab'
 import {
   Box,
   Button,
@@ -98,8 +98,6 @@ const CardContentRight = ({ getDataRow }) => {
               <TabPanel value={7} sx={{ p: 0 }}>
                 <CustomMonthLayout />
               </TabPanel>
-              <TabPanel value={8} sx={{ p: 0 }}></TabPanel>
-              <TabPanel value={9} sx={{ p: 0 }}></TabPanel>
             </CardContent>
           </TabContext>
         </Card>

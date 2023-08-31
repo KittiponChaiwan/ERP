@@ -1,8 +1,20 @@
 // ** React Imports
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // ** MUI Imports
-import { Box, Button, InputAdornment, TextField, useTheme } from '@mui/material'
+import { TabContext, TabPanel } from '@mui/lab'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  InputAdornment,
+  Tab,
+  TextField,
+  Typography,
+  useTheme
+} from '@mui/material'
 
 // ** Axios Imports
 import axios from 'axios'
@@ -13,16 +25,91 @@ import Magnify from 'mdi-material-ui/Magnify'
 // ** Custom Components
 import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
 import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import CardContentRight from 'src/components/ContentPages/CardContentRight'
 import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Dummy Data
 import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
+import { SupplierContentMenu } from 'src/dummy/contentPages/supplierPage'
+import DetailSupplier from 'src/components/ContentPages/ContentRight/Supplier/DetailSupplier'
+import Tabs, { tabsClasses } from '@mui/material/Tabs'
+import Dashboard_sup from 'src/components/ContentPages/ContentRight/Supplier/DashboardSupplier'
+import TaxSupplier from 'src/components/ContentPages/ContentRight/Supplier/TaxSupplier'
+import Contact_Address from 'src/components/ContentPages/ContentRight/Supplier/Contact_Address'
+import Accounting from 'src/components/ContentPages/ContentRight/Supplier/AccountingSupplier'
+import SettingsSupplier from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
+import CustomMonthLayout from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
+import DetailSalesInvoice from 'src/components/ContentPages/ContentRight/SalesInvoice/DetailSalesInvoice'
 
-const ItemPage = ({ data }) => {
+// ** Custom Components
+
+const CardContentRight = ({ getDataRow }) => {
+  const theme = useTheme()
+
+  const [value, setValue] = useState(1)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  return (
+    <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
+      <Grid container sx={{ width: '100%' }}>
+        <Box>
+          <Typography>{getDataRow.name}</Typography>
+        </Box>
+
+        <Card sx={{ height: 'auto' }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant='scrollable'
+            scrollButtons
+            aria-label='visible arrows tabs example'
+            sx={{
+              [`& .${tabsClasses.scrollButtons}`]: {
+                '&.Mui-disabled': { opacity: 0.3 }
+              }
+            }}
+          >
+            {SupplierContentMenu?.map(sup => (
+              <Tab value={sup.id} label={sup.name} key={sup.id} />
+            ))}
+          </Tabs>
+          <TabContext value={value}>
+            <CardContent>
+              <TabPanel value={1} sx={{ p: 0 }}>
+                <DetailSalesInvoice getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={2} sx={{ p: 0 }}>
+                <Dashboard_sup />
+              </TabPanel>
+              <TabPanel value={3} sx={{ p: 0 }}>
+                <TaxSupplier />
+              </TabPanel>
+              <TabPanel value={4} sx={{ p: 0 }}>
+                <Contact_Address getDataRow={getDataRow} />
+              </TabPanel>
+              <TabPanel value={5} sx={{ p: 0 }}>
+                <Accounting />
+              </TabPanel>
+              <TabPanel value={6} sx={{ p: 0 }}>
+                <SettingsSupplier />
+              </TabPanel>
+              <TabPanel value={7} sx={{ p: 0 }}>
+                <CustomMonthLayout />
+              </TabPanel>
+            </CardContent>
+          </TabContext>
+        </Card>
+      </Grid>
+    </Box>
+  )
+}
+
+const SalesInvoice = ({ data }) => {
   // ** States
-  const [getDataRow, setGetDataRow] = useState([])
+  const [getDataRow, setGetDataRow] = useState(data)
   const [selectRowState, setSelectRowState] = useState(false)
 
   const dropDowns = {
@@ -30,9 +117,21 @@ const ItemPage = ({ data }) => {
     valuationMethod: valuationMethod
   }
 
+  function formatCurrency(params) {
+    const formattedValue = new Intl.NumberFormat('th-TH', {
+      style: 'currency',
+      currency: 'THB',
+      minimumFractionDigits: 2
+    }).format(params.value)
+
+    return formattedValue
+  }
+
+  // const formattedValue = base_grand_total.toFixed(2)
+
   // ** Menu Column
   const columns = [
-    { field: 'item_name', headerName: 'Item Name', width: 280 },
+    { field: 'customer_name', headerName: 'title', width: 280 },
     {
       field: 'Status',
       headerName: 'Status',
@@ -50,8 +149,14 @@ const ItemPage = ({ data }) => {
         </Button>
       )
     },
-    { field: 'item_group', headerName: 'Item Group', width: 150 },
-    { field: 'description', headerName: 'ID', width: 250 },
+    {
+      field: 'base_grand_total',
+      headerName: 'Grand Total ID',
+      width: 150,
+      valueFormatter: formatCurrency
+    },
+
+    { field: 'name', headerName: 'ID', width: 250 },
     {
       field: 'Data',
       headerName: 'Data',
@@ -112,13 +217,13 @@ const ItemPage = ({ data }) => {
 
 export const getServerSideProps = async context => {
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Sales%20Invoice?fields=["*"]`, {
       headers: {
         Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
       }
     })
 
-    const data = res.data.data // No need to await here
+    const data = res.data.data // No need to await heren
 
     if (res.status !== 200) {
       return {
@@ -136,6 +241,6 @@ export const getServerSideProps = async context => {
   }
 }
 
-ItemPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+SalesInvoice.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-export default ItemPage
+export default SalesInvoice
