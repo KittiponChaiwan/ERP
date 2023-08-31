@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles'
 import Iconbtn from 'src/components/Button/IconButton/iconbutton'
 import { useState } from 'react'
 import EnhancedTable from 'src/components/Table/cardtable'
-import Insertbutton from 'src/components/Button/InsertButton/insertbutton'
+import Insertbutton from 'src/components/Button/InsertButton/InsertButton'
 import PopupButton from '../Button/PopupButton/PopupButton'
 
 const Card_Left_Leaderboard = props => {

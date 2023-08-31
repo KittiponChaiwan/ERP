@@ -26,7 +26,7 @@ import ChevronDown from 'mdi-material-ui/ChevronDown'
 //import Dummy and Components
 import { Columns, Rows, ColumnPreOrder, RowsPreOrder, ColumnUnit, RowsUnit } from './DummyInventoryItem/DummyInventory'
 
-const InventoryItem = ({ getDataRow, dropDowns }) => {
+const InventoryItem = ({ dataRow, dropDowns }) => {
   console.log('1: ', dropDowns.defaultMaterialRequestType)
   const [collapsePreOder, setCollapsePreOder] = useState(false)
   const [collapseUnit, setCollapseUnit] = useState(false)
@@ -71,21 +71,21 @@ const InventoryItem = ({ getDataRow, dropDowns }) => {
       <Box sx={{ display: 'flex' }}>
         <Box>
           <Typography sx={{ marginBottom: 2 }}> Shelf Life In Days :</Typography>
-          <TextField variant='filled' label='' value={getDataRow.shelf_life_in_days} />
+          <TextField variant='filled' label='' value={dataRow.shelf_life_in_days} />
         </Box>
         <Box sx={{ ml: 20 }}>
           <Typography sx={{ marginBottom: 2 }}>Warranty Period (in days) :</Typography>
-          <TextField variant='filled' label='' value={getDataRow.warranty_period} />
+          <TextField variant='filled' label='' value={dataRow.warranty_period} />
         </Box>
       </Box>
       <Box sx={{ mt: 6, display: 'flex' }}>
         <Box>
           <Typography sx={{ marginBottom: 2 }}>End of Life:</Typography>
-          <TextField variant='filled' label='' value={getDataRow.end_of_life} />
+          <TextField variant='filled' label='' value={dataRow.end_of_life} />
         </Box>
         <Box sx={{ ml: 20 }}>
           <Typography sx={{ marginBottom: 2 }}>Weight Per Unit:</Typography>
-          <TextField variant='filled' label='' value={getDataRow.weight_per_unit} />
+          <TextField variant='filled' label='' value={dataRow.weight_per_unit} />
         </Box>
       </Box>
       <Box sx={{ mt: 6, display: 'flex' }}>
@@ -110,7 +110,7 @@ const InventoryItem = ({ getDataRow, dropDowns }) => {
         </Box>
         <Box sx={{ ml: 14 }}>
           <Typography sx={{ marginBottom: 2 }}>Weight UOM:</Typography>
-          <TextField variant='filled' label='' value={getDataRow.weight_uom} />
+          <TextField variant='filled' label='' value={dataRow.weight_uom} />
         </Box>
       </Box>
       <Box sx={{ mt: 6, display: 'flex' }}>

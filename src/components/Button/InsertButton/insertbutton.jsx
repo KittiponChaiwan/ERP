@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Box } from '@mui/material'
 import Typography from '@mui/material/Typography'
 
-function Insertbutton(props) {
+function InsertButton(props) {
   const { handleButtonClick } = props
 
   return (
@@ -29,4 +29,4 @@ function Insertbutton(props) {
   )
 }
 
-export default Insertbutton
+export default InsertButton
