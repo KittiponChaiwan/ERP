@@ -9,7 +9,7 @@ import PopupButton from 'src/components/Button/PopupButton/PopupButton'
 
 const ContentLeft = ({ menuColumn, dataRow, handleRowClick }) => {
   return (
-    <Box sx={{ p: 5 }}>
+    <Box sx={{ p: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
           Item
@@ -26,8 +26,11 @@ const ContentLeft = ({ menuColumn, dataRow, handleRowClick }) => {
             key={item.name}
             onClick={() => handleRowClick(item)}
           >
-            <Button variant='outlined' fullWidth sx={{ justifyContent: 'space-between' }}>
-              {item.name} <Chip label={'enable'} size='small' />
+            <Button variant='outlined' fullWidth sx={{ justifyContent: 'space-between', textAlign: 'left' }}>
+              <Typography variant='body2' sx={{ fontWeight: 'bold' }}>
+                {item.name}
+              </Typography>
+              <Chip label={'enable'} size='small' />
             </Button>
           </Box>
         ))}

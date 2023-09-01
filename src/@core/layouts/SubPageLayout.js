@@ -1,5 +1,12 @@
+// ** React Imports
 import * as React from 'react'
+
+// ** Router Imports
+import { useRouter } from 'next/router'
+
+// ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
+import { Button, InputAdornment, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -16,11 +23,14 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+
+// ** Icons
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
-import UserDropdown from './components/shared-components/UserDropdown'
-import { InputAdornment, TextField } from '@mui/material'
 import { Magnify } from 'mdi-material-ui'
+
+// ** Components
+import UserDropdown from './components/shared-components/UserDropdown'
 
 // Styled component for Blank Layout component
 const BlankLayoutWrapper = styled(Box)(({ theme }) => ({
@@ -92,6 +102,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const SubPageLayout = ({ children }) => {
   const theme = useTheme()
+  const router = useRouter()
   const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
@@ -108,30 +119,36 @@ const SubPageLayout = ({ children }) => {
         <CssBaseline />
         <AppBar position='fixed' open={open}>
           <Toolbar>
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerOpen}
-              edge='start'
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-              TEST
-            </Typography>
-            <TextField
-              size='small'
-              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 }, borderRadius: 4, background: 'white' }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position='start'>
-                    <Magnify fontSize='small' />
-                  </InputAdornment>
-                )
-              }}
-            />
-            <UserDropdown />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+              <Box>
+                <IconButton
+                  color='inherit'
+                  aria-label='open drawer'
+                  onClick={handleDrawerOpen}
+                  edge='start'
+                  sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Button variant='text' color='inherit' onClick={() => router.push('/app')}>
+                  ERP NextJS
+                </Button>
+              </Box>
+              <Box>
+                <TextField
+                  size='small'
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 }, borderRadius: 4, background: 'white' }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <Magnify fontSize='small' />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+                <UserDropdown />
+              </Box>
+            </Box>
           </Toolbar>
         </AppBar>
         <Drawer
