@@ -1,28 +1,63 @@
 import { Box, Button, Grid, TextField, Typography, Checkbox } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
-const OperationBOM = () => {
+const OperationBOM = ({ getDataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const columns = [
-    { field: 'id', headerName: 'No', width: 70 },
-    { field: 'Operation', headerName: 'Operation', width: 150 },
-    { field: 'WorkstationType', headerName: 'Workstation Type', width: 150 },
-    { field: 'OperationTime ', headerName: 'Operation Time ', width: 150 },
-    { field: 'FixedTime', headerName: 'Fixed Time', width: 150 },
-    { field: 'OperatingCost ', headerName: 'Operating Cost (THB)', width: 150 }
-  ]
-
-  const rows = [
+    { field: 'idx', headerName: 'No', width: 70 },
+    { field: 'operation', headerName: 'Operation', width: 150 },
+    { field: '', headerName: 'Workstation Type', width: 150 },
+    { field: 'time_in_mins', headerName: 'Operation Time ', width: 150 },
     {
-      id: 1,
-      Operation: 'Sidw',
-      WorkstationType: '100',
-      OperationTime: 'Nos',
-      FixedTime: '50.00',
-      OperatingCost: '5,000'
+      field: 'Fixed Time',
+      headerName: 'Fixed Time',
+      width: 50,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => <Checkbox {...label} disabled />
+    },
+    { field: 'operating_cost', headerName: 'Operating Cost (THB)', width: 150 },
+    {
+      field: 'Edit',
+      headerName: 'Edit',
+      width: 50,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => (
+        <Button
+          variant='text'
+          onClick={() => {
+            console.log(params.row)
+          }}
+        >
+          Edit
+        </Button>
+      )
     }
   ]
+  const [getOperationsBOM, setGetOperationsBOM] = useState('')
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}BOM/${getDataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setGetOperationsBOM(res.data.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  if (getOperationsBOM.length === 0) {
+    return 'waiting...'
+  }
 
   return (
     <Grid>
@@ -49,8 +84,9 @@ const OperationBOM = () => {
         <Box>
           <Typography>Operations</Typography>
           <DataGrid
-            rows={rows}
+            rows={getOperationsBOM.operations}
             columns={columns}
+            getRowId={row => row.name}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 }
