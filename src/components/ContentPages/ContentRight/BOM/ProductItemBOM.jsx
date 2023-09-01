@@ -47,7 +47,7 @@ const ProductItemBOM = ({ getDataRow, dropDowns }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [getDataRow])
 
   const columns = [
     { field: 'id', headerName: 'No', width: 70 },

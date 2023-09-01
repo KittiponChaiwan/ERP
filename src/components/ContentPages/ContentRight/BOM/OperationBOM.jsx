@@ -53,7 +53,7 @@ const OperationBOM = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [getDataRow])
 
   if (getOperationsBOM.length === 0) {
     return 'waiting...'
