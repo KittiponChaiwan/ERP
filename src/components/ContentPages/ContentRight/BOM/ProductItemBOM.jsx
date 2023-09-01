@@ -16,32 +16,51 @@ import {
   MenuItem
 } from '@mui/material'
 import Collapse from '@mui/material/Collapse'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 //Import Icon
 import { ChevronUp } from 'mdi-material-ui'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 import IconButton from '@mui/material/IconButton'
 import { DataGrid } from '@mui/x-data-grid'
+import axios from 'axios'
 
-const ProductItem = ({ getDataRow, dropDowns }) => {
+const ProductItemBOM = ({ getDataRow, dropDowns }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   const [collapseConfig, setCollapseConfig] = useState([])
+  const [getDataItem, setGetDataItem] = useState('')
 
   const handleChickConfig = () => {
     setCollapseConfig(!collapseConfig)
   }
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}BOM/${getDataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setGetDataItem(res.data.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
   const columns = [
     { field: 'id', headerName: 'No', width: 70 },
-    { field: 'ItemCode', headerName: 'Item Code', width: 150 },
-    { field: 'Qty', headerName: 'Qty', width: 150 },
-    { field: 'Uom', headerName: 'UOM', width: 150 },
-    { field: 'Rate', headerName: 'Rate(THB)', width: 150 },
-    { field: 'Amount', headerName: 'Amount (THB)', width: 150 }
+    { field: 'item_code', headerName: 'Item Code', width: 150 },
+    { field: 'qty', headerName: 'Qty', width: 150 },
+    { field: 'uom', headerName: 'UOM', width: 150 },
+    { field: 'rate', headerName: 'Rate(THB)', width: 150 },
+    { field: 'amount', headerName: 'Amount (THB)', width: 150 }
   ]
 
-  const rows = [{ id: 1, ItemCode: 'Sidw', Qty: '100', Uom: 'Nos', Rate: '50.00', Amount: '5,000' }]
+  if (getDataItem.length === 0) {
+    return 'waiting...'
+  }
 
   return (
     <Grid>
@@ -139,8 +158,9 @@ const ProductItem = ({ getDataRow, dropDowns }) => {
           <Box sx={{ mt: 8 }}>
             <Typography>Item</Typography>
             <DataGrid
-              rows={rows}
+              rows={getDataItem.items}
               columns={columns}
+              getRowId={row => row.name}
               initialState={{
                 pagination: {
                   paginationModel: { page: 0, pageSize: 5 }
@@ -164,4 +184,4 @@ const ProductItem = ({ getDataRow, dropDowns }) => {
   )
 }
 
-export default ProductItem
+export default ProductItemBOM

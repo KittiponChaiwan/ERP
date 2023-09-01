@@ -31,7 +31,7 @@ import UserDropdown from 'src/@core/layouts/components/shared-components/UserDro
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 import { BomMenu } from 'src/dummy/contentPages/menufacturingPage'
 import OperationBOM from 'src/components/ContentPages/ContentRight/BOM/OperationBOM'
-import ProductItem from 'src/components/ContentPages/ContentRight/BOM/ProductItem'
+import ProductItemBOM from 'src/components/ContentPages/ContentRight/BOM/ProductItemBOM'
 import ScapAndProcessLoss from 'src/components/ContentPages/ContentRight/BOM/ScapAndProcessLoss'
 import Costing from 'src/components/ContentPages/ContentRight/BOM/Costing'
 import MoreInfoBOM from 'src/components/ContentPages/ContentRight/BOM/MoreInfoBOM'
@@ -74,7 +74,7 @@ const CardContentRight = ({ getDataRow, dropDowns }) => {
 
             <CardContent>
               <TabPanel value={1} sx={{ p: 0 }}>
-                <ProductItem getDataRow={getDataRow} dropDowns={dropDowns} />
+                <ProductItemBOM getDataRow={getDataRow} dropDowns={dropDowns} />
               </TabPanel>
               <TabPanel value={2} sx={{ p: 0 }}>
                 <OperationBOM getDataRow={getDataRow} />
