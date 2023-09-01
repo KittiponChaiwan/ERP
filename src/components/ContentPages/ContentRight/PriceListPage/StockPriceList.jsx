@@ -1,5 +1,7 @@
 import { Box, Button, Grid, TextField, Typography, Checkbox } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const StockPriceList = ({ getDataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -26,7 +28,7 @@ const StockPriceList = ({ getDataRow }) => {
 
   return (
     <Grid>
-      <Box sx={{ display: 'flex', width: '100%' }}>
+      <Box sx={{ display: 'flex', width: 1080 }}>
         <Checkbox {...label} />
         <Typography sx={{ m: 2 }}>Enabled</Typography>
       </Box>
