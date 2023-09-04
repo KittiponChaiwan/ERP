@@ -10,6 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 const ProductionItemPage = ({ getDataRow }) => {
   const [getRequiredItem, setGetRequiredItem] = useState('')
+  const [getRequiredRow, setGetRuquiredRow] = useState('')
   const [open, setOpen] = useState(false)
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
@@ -31,7 +32,7 @@ const ProductionItemPage = ({ getDataRow }) => {
       .then(res => {
         setGetRequiredItem(res.data.data)
       })
-  }, [])
+  }, [getDataRow])
 
   const columnsApp = [
     { field: 'idx', headerName: 'No', width: 80 },
@@ -51,6 +52,7 @@ const ProductionItemPage = ({ getDataRow }) => {
         <Button
           variant='text'
           onClick={() => {
+            setGetRuquiredRow(params.row)
             handleClickOpen(true)
             console.log(params.row)
           }}
@@ -146,21 +148,21 @@ const ProductionItemPage = ({ getDataRow }) => {
               <Box sx={{ display: 'flex' }}>
                 <Box>
                   <Typography variant='subtitle1'>Item Code</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.item_code || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.item_code || ''} />
                 </Box>
                 <Box sx={{ ml: 24 }}>
                   <Typography variant='subtitle1'>Item Name</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.item_name || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.item_name || ''} />
                 </Box>
               </Box>
               <Box sx={{ display: 'flex', mt: 8 }}>
                 <Box>
                   <Typography variant='subtitle1'>Source Warehouse</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.source_warehouse || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.source_warehouse || ''} />
                 </Box>
                 <Box sx={{ ml: 24 }}>
                   <Typography variant='subtitle1'>Description</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.description || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.description || ''} />
                 </Box>
               </Box>
               <Box sx={{ mt: 8, ml: 82, display: 'flex' }}>
@@ -177,31 +179,31 @@ const ProductionItemPage = ({ getDataRow }) => {
               <Box sx={{ display: 'flex' }}>
                 <Box sx={{ mt: 2 }}>
                   <Typography variant='subtitle1'>Required Qty</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.required_qty || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.required_qty || ''} />
                 </Box>
                 <Box sx={{ ml: 24, mt: 2 }}>
                   <Typography variant='subtitle1'>Description</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.description || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.description || ''} />
                 </Box>
               </Box>
               <Box sx={{ display: 'flex', mt: 4 }}>
                 <Box sx={{ mt: 2 }}>
                   <Typography variant='subtitle1'>Rate</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.rate || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.rate || ''} />
                 </Box>
                 <Box sx={{ ml: 24, mt: 2 }}>
                   <Typography variant='subtitle1'>Consumed Qty</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.consumed_qty || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.consumed_qty || ''} />
                 </Box>
               </Box>
               <Box sx={{ display: 'flex', mt: 4 }}>
                 <Box sx={{ mt: 2 }}>
                   <Typography variant='subtitle1'>Amount</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.amount || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.amount || ''} />
                 </Box>
                 <Box sx={{ ml: 24, mt: 2 }}>
                   <Typography variant='subtitle1'>Returned Qty</Typography>
-                  <TextField size='small' variant='filled' value={getRequiredItem.returned_qty || ''} />
+                  <TextField size='small' variant='filled' value={getRequiredRow.returned_qty || ''} />
                 </Box>
               </Box>
               <Box sx={{ ml: 86, mt: 4 }}>
@@ -209,12 +211,12 @@ const ProductionItemPage = ({ getDataRow }) => {
                 <TextField
                   size='small'
                   variant='filled'
-                  value={getRequiredItem.available_qty_at_source_warehouse || ''}
+                  value={getRequiredRow.available_qty_at_source_warehouse || ''}
                 />
               </Box>
               <Box sx={{ ml: 86, mt: 4 }}>
                 <Typography variant='subtitle1'>Available Qty at WIP Warehouse</Typography>
-                <TextField size='small' variant='filled' value={getRequiredItem.available_qty_at_wip_warehouse || ''} />
+                <TextField size='small' variant='filled' value={getRequiredRow.available_qty_at_wip_warehouse || ''} />
               </Box>
             </Box>
           </DialogContentText>

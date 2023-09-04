@@ -13,29 +13,33 @@ import {
   FormControlLabel
 } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
+import { useEffect, useState } from 'react'
 
 const Operation = ({ getDataRow }) => {
+  const [getDataOperation , setGetDataOperation] = useState('')
+
   const column = [
     { field: 'id', headerName: 'No', width: 150 },
-    { field: 'Operation', headerName: 'Operation', width: 150 },
-    { field: 'CompletedQty', headerName: 'Completed Qty', width: 150 },
-    { field: 'ProcessLossQty', headerName: 'Process Loss Qty', width: 150 },
-    { field: 'BOM', headerName: 'BOM', width: 150 },
+    { field: 'operation', headerName: 'Operation', width: 150 },
+    { field: 'completed_qty', headerName: 'Completed Qty', width: 150 },
+    { field: 'process_loss_qty', headerName: 'Process Loss Qty', width: 150 },
+    { field: 'bom', headerName: 'BOM', width: 150 },
     { field: 'Workstation', headerName: 'Workstation', width: 150 },
     { field: 'Time', headerName: 'Time', width: 150 }
   ]
 
-  const row = [
-    {
-      id: 1,
-      Operation: 'Metal Cutting Machine(การตัด)',
-      CompletedQty: '20',
-      ProcessLossQty: '0',
-      BOM: 'Metal Cutting Machine(การตัด)',
-      Workstation: 'เครื่องตัดโลหะ (Metal Cutting Machine)',
-      Time: '10'
-    }
-  ]
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Work Order/${getDataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setGetDataOperation(res.data.data)
+      })
+  }, [getDataRow])
+
 
   return (
     <Grid>
