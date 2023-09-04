@@ -5,24 +5,40 @@ import {
   CardActions,
   CardContent,
   Checkbox,
+  Chip,
   Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   Grid,
   IconButton,
   TextField,
   Typography
 } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 //Icon mdi
 import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 import { DataGrid } from '@mui/x-data-grid'
+import axios from 'axios'
 
 const DetailStockEntry = ({ getDataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   const [collapseBOM, setCollapseBOM] = useState(false)
   const [collapseWarehouse, setCollapseWarehouse] = useState(false)
+  const [collapseDiscription, setCollapseDiscription] = useState(false)
+  const [collapseAccouting, setCollapseAccouting] = useState(false)
+  const [collapseMoreInfo, setCollpseMoreInfo] = useState(false)
+
+  const [open, setOpen] = useState(false)
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleClickBOM = () => {
     setCollapseBOM(!collapseBOM)
@@ -32,23 +48,70 @@ const DetailStockEntry = ({ getDataRow }) => {
     setCollapseWarehouse(!collapseWarehouse)
   }
 
-  const columns = [
-    { field: 'id', headerName: 'No', width: 150 },
-    { field: 'SourceWarehouse', headerName: 'Source Warehouse', width: 150 },
-    { field: 'TargetWarehouse', headerName: 'Target Warehouse', width: 150 },
-    { field: 'ItemCode', headerName: 'Item Code*', width: 150 },
-    { field: 'Qty', headerName: 'Qty*', width: 150 },
-    { field: 'BasicRate', headerName: 'Basic Rate(as per Stock UOM)', width: 150 }
-  ]
+  const handleClickDiscription = () => {
+    setCollapseDiscription(!collapseDiscription)
+  }
 
-  const row = [
+  const handleAccouting = () => {
+    setCollapseAccouting(!collapseAccouting)
+  }
+
+  const handleClickMoreInfo = () => {
+    setCollpseMoreInfo(!collapseMoreInfo)
+  }
+
+  const handleRowClick = params => {
+    setOpen(true)
+    setGetItem(params.row)
+  }
+
+  const [getDataItem, setGetDataItem] = useState('')
+  const [getItem, setGetItem] = useState('')
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Stock Entry/${getDataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setGetDataItem(res.data.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [getDataRow])
+
+  if (Object.values(getDataItem)?.length === 0) {
+    return 'waiting...'
+  }
+
+  const columns = [
+    { field: 'idx', headerName: 'No', width: 150 },
+    { field: 's_warehouse', headerName: 'Source Warehouse', width: 150 },
+    { field: 't_warehouse', headerName: 'Target Warehouse', width: 150 },
+    { field: 'item_code', headerName: 'Item Code*', width: 150 },
+    { field: 'qty', headerName: 'Qty*', width: 150 },
+    { field: 'basic_rate', headerName: 'Basic Rate(as per Stock UOM)', width: 150 },
     {
-      id: 1,
-      SourceWarehouse: 'Stores - VCL',
-      TargetWarehouse: 'Stores - VCL',
-      ItemCode: 'M42 HSS-001',
-      Qty: '10',
-      BasicRate: '$50.00'
+      field: 'Edit',
+      headerName: 'Edit',
+      width: 50,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => (
+        <Button
+          variant='text'
+          onClick={() => {
+            setGetItem(params.row)
+            setOpen(true)
+            console.log(params.row)
+          }}
+        >
+          Edit
+        </Button>
+      )
     }
   ]
 
@@ -178,8 +241,10 @@ const DetailStockEntry = ({ getDataRow }) => {
         </Box>
         <Box>
           <DataGrid
-            rows={row}
+            rows={getDataItem.items}
             columns={columns}
+            getRowId={row => row.name}
+            onRowClick={handleRowClick}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 }
@@ -220,6 +285,228 @@ const DetailStockEntry = ({ getDataRow }) => {
         <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
         <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
         <Button>add comment</Button>
+      </Box>
+      <Box>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+          maxWidth={'lg'}
+        >
+          <DialogTitle id='Editing Row #1'>{'Editing Row #1'}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              <Box sx={{ display: 'flex' }}>
+                <Box>
+                  <Typography variant='subtitle1'>Source Warehouse</Typography>
+                  <TextField size='small' variant='filled' value={getItem.s_warehouse} />
+                </Box>
+                <Box sx={{ ml: 30 }}>
+                  <Typography variant='subtitle1'>Target Warehouse</Typography>
+                  <TextField size='small' variant='filled' value={getItem.t_warehouse} />
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', mt: 8 }}>
+                <Box>
+                  <Typography variant='subtitle1'>Item Code</Typography>
+                  <TextField size='small' variant='filled' value={getItem.item_code} />
+                </Box>
+                <Box sx={{ ml: 30 }}>
+                  <Box sx={{ display: 'flex' }}>
+                    <Checkbox {...label} disabled />
+                    <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex' }}>
+                    <Checkbox {...label} disabled />
+                    <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
+                  </Box>
+                </Box>
+              </Box>
+              <Box>
+                <Box>
+                  <Typography variant='subtitle1'>Item Name</Typography>
+                  <TextField size='small' variant='filled' value={getItem.item_name} />
+                </Box>
+              </Box>
+              <Box>
+                <Box sx={{ mt: 5, display: 'flex' }}>
+                  <Button size='small' variant='filled' label='' onClick={handleClickDiscription}>
+                    <Typography variant='h6'>Default Warehouse</Typography>
+                  </Button>
+
+                  <CardActions className='card-action-dense'>
+                    <IconButton size='small' onClick={handleClickDiscription}>
+                      {collapseDiscription ? (
+                        <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                      ) : (
+                        <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                      )}
+                    </IconButton>
+                  </CardActions>
+                </Box>
+              </Box>
+              <Box>
+                <Collapse in={collapseDiscription}>
+                  <Divider sx={{ margin: 0 }} />
+                  <CardContent>
+                    <Box sx={{ display: 'flex' }}>
+                      <Box>
+                        <Typography variant='subtitle1'>Description</Typography>
+                        <TextField size='small' variant='filled' value={getItem.t_warehouse} />
+                      </Box>
+                      <Box sx={{ ml: 30 }}>
+                        <Typography variant='subtitle1'>Description</Typography>
+                        <TextField size='small' variant='filled' value={getItem.t_warehouse} />
+                      </Box>
+                    </Box>
+                    <Box sx={{ ml: 92, mt: 6 }}>
+                      <Box sx={{ width: 100, height: 100, backgroundColor: '#e0e0e0' }}></Box>
+                    </Box>
+                  </CardContent>
+                </Collapse>
+              </Box>
+              <Box sx={{ mt: 6 }}>
+                <Typography variant='h6'>Quantity</Typography>
+              </Box>
+              <Box sx={{ display: 'flex', mt: 4 }}>
+                <Box>
+                  <Typography variant='subtitle1'>Qty*</Typography>
+                  <TextField size='small' variant='filled' value={getItem.qty} />
+                </Box>
+                <Box sx={{ ml: 30 }}>
+                  <Typography variant='subtitle1'>UOM*</Typography>
+                  <TextField size='small' variant='filled' value={getItem.uom} />
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex' }}>
+                <Checkbox {...label} disabled />
+                <Typography sx={{ mt: 2 }}>Retain Sample</Typography>
+              </Box>
+              <Box sx={{ mt: 6 }}>
+                <Typography variant='h6'>Rates</Typography>
+              </Box>
+              <Box sx={{ display: 'flex', mt: 4 }}>
+                <Box>
+                  <Typography variant='subtitle1'>Basic Rate (as per Stock UOM)</Typography>
+                  <TextField size='small' variant='filled' value={getItem.basic_rate} />
+                </Box>
+                <Box sx={{ ml: 30 }}>
+                  <Typography variant='subtitle1'>Basic Amount</Typography>
+                  <TextField size='small' variant='filled' value={getItem.basic_amount} />
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', mt: 4 }}>
+                <Box>
+                  <Typography variant='subtitle1'>Additional Cost</Typography>
+                  <TextField size='small' variant='filled' value={getItem.additional_cost} />
+                </Box>
+                <Box sx={{ ml: 30 }}>
+                  <Typography variant='subtitle1'>Amount</Typography>
+                  <TextField size='small' variant='filled' value={getItem.amount} />
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex', mt: 4 }}>
+                <Box>
+                  <Typography variant='subtitle1'>Valuation Rate</Typography>
+                  <TextField size='small' variant='filled' value={getItem.valuation_rate} />
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex' }}>
+                <Checkbox {...label} disabled />
+                <Typography variant='subtitle1' sx={{ mt: 2 }}>
+                  Allow Zero Valuation Rate
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant='h6' sx={{ mt: 6 }}>
+                  Serial No / Batch
+                </Typography>
+              </Box>
+              <Box>
+                <Chip label='Add Serial / Batch No' />
+              </Box>
+              <Box>
+                <Typography variant='h6' sx={{ mt: 6 }}>
+                  Accounting
+                </Typography>
+                <Typography variant='subtitle1' sx={{ mt: 2 }}>
+                  Difference Account
+                </Typography>
+                <TextField size='small' variant='filled' value={getItem.expense_account} />
+              </Box>
+              <Box>
+                <Box sx={{ mt: 5, display: 'flex' }}>
+                  <Button size='small' variant='filled' label='' onClick={handleAccouting}>
+                    <Typography variant='h6'>Accounting</Typography>
+                  </Button>
+                  <CardActions className='card-action-dense'>
+                    <IconButton size='small' onClick={handleAccouting}>
+                      {collapseAccouting ? (
+                        <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                      ) : (
+                        <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                      )}
+                    </IconButton>
+                  </CardActions>
+                </Box>
+              </Box>
+              <Box>
+                <Collapse in={collapseAccouting}>
+                  <Divider sx={{ margin: 0 }} />
+                  <CardContent>
+                    <Box sx={{ display: 'flex' }}>
+                      <Box>
+                        <Typography variant='subtitle1'>Cost Center</Typography>
+                        <TextField size='small' variant='filled' value={getItem.cost_center} />
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Collapse>
+              </Box>
+              <Box>
+                <Box sx={{ mt: 5, display: 'flex' }}>
+                  <Button size='small' variant='filled' label='' onClick={handleClickMoreInfo}>
+                    <Typography variant='h6'>More Information</Typography>
+                  </Button>
+                  <CardActions className='card-action-dense'>
+                    <IconButton size='small' onClick={handleClickMoreInfo}>
+                      {collapseMoreInfo ? (
+                        <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                      ) : (
+                        <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                      )}
+                    </IconButton>
+                  </CardActions>
+                </Box>
+              </Box>
+              <Box>
+                <Collapse in={collapseMoreInfo}>
+                  <Divider sx={{ margin: 0 }} />
+                  <CardContent>
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <Box>
+                        <Typography variant='subtitle1'>Actual Qty (at source/target)</Typography>
+                        <TextField size='small' variant='filled' value={getItem.actual_qty} />
+                      </Box>
+                      <Box>
+                        <Typography variant='subtitle1'>Transferred Qty</Typography>
+                        <TextField size='small' variant='filled' value={getItem.transferred_qty} />
+                      </Box>
+                      <Box sx={{ display: 'flex' }}>
+                        <Checkbox {...label} disabled />
+                        <Typography sx={{ mt: 2 }}>Allow Alternative Item</Typography>
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Collapse>
+              </Box>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Insert Below</Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Grid>
   )
