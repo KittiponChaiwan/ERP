@@ -34,6 +34,11 @@ const ProductionItemPage = ({ getDataRow }) => {
       })
   }, [getDataRow])
 
+  const handleRowClick = params => {
+    setOpen(true)
+    setGetRuquiredRow(params.row)
+  }
+
   const columnsApp = [
     { field: 'idx', headerName: 'No', width: 80 },
     { field: 'item_code', headerName: 'Item Code', width: 110 },
@@ -124,6 +129,7 @@ const ProductionItemPage = ({ getDataRow }) => {
             rows={getRequiredItem.required_items}
             columns={columnsApp}
             getRowId={row => row.name}
+            onRowClick={handleRowClick}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 }
