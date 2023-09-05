@@ -36,6 +36,10 @@ const WebsiteBOM = ({ getDataRow }) => {
     setCollapesSpacifications(!collapsSpacifications)
   }
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   return (
     <Grid>
       <Box>
@@ -85,13 +89,13 @@ const WebsiteBOM = ({ getDataRow }) => {
                     <Divider sx={{ margin: 0 }} />
                     <CardContent>
                       <Box sx={{ display: 'flex' }}>
-                        <Checkbox {...label} />
+                        <Checkbox {...label} checked={getDataRow.show_items} onChange={handleCheckboxChange} />
                         <Typography variant='subtitle2' sx={{ mt: 2 }}>
                           Show Items
                         </Typography>
                       </Box>
                       <Box sx={{ display: 'flex' }}>
-                        <Checkbox {...label} />
+                        <Checkbox {...label} checked={getDataRow.show_operations} onChange={handleCheckboxChange} />
                         <Typography variant='subtitle2' sx={{ mt: 2 }}>
                           Show Operations
                         </Typography>
