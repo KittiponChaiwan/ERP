@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 // ** MUI Imports
 import { styled, useTheme } from '@mui/material/styles'
-import { Button, InputAdornment, TextField } from '@mui/material'
+import { Button, Grid, InputAdornment, TextField } from '@mui/material'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -119,8 +119,8 @@ const SubPageLayout = ({ children }) => {
         <CssBaseline />
         <AppBar position='fixed' open={open}>
           <Toolbar>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <Box>
+            <Grid container alignItems='center' justifyContent='space-between'>
+              <Grid item xs={2}>
                 <IconButton
                   color='inherit'
                   aria-label='open drawer'
@@ -130,14 +130,15 @@ const SubPageLayout = ({ children }) => {
                 >
                   <MenuIcon />
                 </IconButton>
-                <Button variant='text' color='inherit' onClick={() => router.push('/app')}>
-                  ERP NextJS
-                </Button>
-              </Box>
-              <Box>
+              </Grid>
+              <Grid item xs={10} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'right' }}>
                 <TextField
                   size='small'
-                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 }, borderRadius: 4, background: 'white' }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': { borderRadius: 4 },
+                    borderRadius: 4,
+                    background: 'white'
+                  }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position='start'>
@@ -147,8 +148,8 @@ const SubPageLayout = ({ children }) => {
                   }}
                 />
                 <UserDropdown />
-              </Box>
-            </Box>
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -165,6 +166,9 @@ const SubPageLayout = ({ children }) => {
           open={open}
         >
           <DrawerHeader>
+            <ListItemButton onClick={() => router.push('/app')}>
+              <ListItemText primary={'ERP NextJS'} />
+            </ListItemButton>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>

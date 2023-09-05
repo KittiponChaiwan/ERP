@@ -1,246 +1,68 @@
 // ** React Imports
-import React, { useState, useEffect } from 'react'
-
-// ** MUI Imports
-import { TabContext, TabPanel } from '@mui/lab'
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  InputAdornment,
-  Tab,
-  TextField,
-  Typography,
-  useTheme
-} from '@mui/material'
+import React from 'react'
 
 // ** Axios Imports
 import axios from 'axios'
-
-// ** Icons Imports
-import Magnify from 'mdi-material-ui/Magnify'
-
-// ** Custom Components
-import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
-import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
-import BlankLayout from 'src/@core/layouts/BlankLayout'
+import SubPages from 'src/views/sub-pages/SubPages'
 
 // ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod } from 'src/dummy/contentPages/itemPage'
-import { SupplierContentMenu } from 'src/dummy/contentPages/supplierPage'
-import DetailSupplier from 'src/components/ContentPages/ContentRight/Supplier/DetailSupplier'
-import Tabs, { tabsClasses } from '@mui/material/Tabs'
-import Dashboard_sup from 'src/components/ContentPages/ContentRight/Supplier/DashboardSupplier'
-import TaxSupplier from 'src/components/ContentPages/ContentRight/Supplier/TaxSupplier'
-import Contact_Address from 'src/components/ContentPages/ContentRight/Supplier/Contact_Address'
-import Accounting from 'src/components/ContentPages/ContentRight/Supplier/AccountingSupplier'
-import SettingsSupplier from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
-import CustomMonthLayout from 'src/components/ContentPages/ContentRight/Supplier/SettingsSupplier'
-import DetailSalesInvoice from 'src/components/ContentPages/ContentRight/SalesInvoice/DetailSalesInvoice'
+import { ItemContentMenu, defaultMaterialRequestType } from 'src/dummy/contentPages/itemPage'
 
 // ** Custom Components
+import DetailItem from 'src/components/SubPages/DetailItem'
+import DashboardItem from 'src/components/SubPages/DashboardItem'
+import InventoryItem from 'src/components/SubPages/InventoryItem'
+import AccountingItem from 'src/components/SubPages/AccountingItem'
+import PurchasingItem from 'src/components/SubPages/PurchasingItem'
+import SalesItem from 'src/components/SubPages/SalesItem'
+import TexItem from 'src/components/SubPages/TexItem'
+import QualityItem from 'src/components/SubPages/QualityItem'
+import ManufacturingItem from 'src/components/SubPages/ManufacturingItem'
 
-const CardContentRight = ({ getDataRow }) => {
-  const theme = useTheme()
-
-  const [value, setValue] = useState(1)
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
-  return (
-    <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
-      <Grid container sx={{ width: '100%' }}>
-        <Box>
-          <Typography>{getDataRow.name}</Typography>
-        </Box>
-
-        <Card sx={{ height: 'auto' }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant='scrollable'
-            scrollButtons
-            aria-label='visible arrows tabs example'
-            sx={{
-              [`& .${tabsClasses.scrollButtons}`]: {
-                '&.Mui-disabled': { opacity: 0.3 }
-              }
-            }}
-          >
-            {SupplierContentMenu?.map(sup => (
-              <Tab value={sup.id} label={sup.name} key={sup.id} />
-            ))}
-          </Tabs>
-          <TabContext value={value}>
-            <CardContent>
-              <TabPanel value={1} sx={{ p: 0 }}>
-                <DetailSalesInvoice getDataRow={getDataRow} />
-              </TabPanel>
-              <TabPanel value={2} sx={{ p: 0 }}>
-                <Dashboard_sup />
-              </TabPanel>
-              <TabPanel value={3} sx={{ p: 0 }}>
-                <TaxSupplier />
-              </TabPanel>
-              <TabPanel value={4} sx={{ p: 0 }}>
-                <Contact_Address getDataRow={getDataRow} />
-              </TabPanel>
-              <TabPanel value={5} sx={{ p: 0 }}>
-                <Accounting />
-              </TabPanel>
-              <TabPanel value={6} sx={{ p: 0 }}>
-                <SettingsSupplier />
-              </TabPanel>
-              <TabPanel value={7} sx={{ p: 0 }}>
-                <CustomMonthLayout />
-              </TabPanel>
-            </CardContent>
-          </TabContext>
-        </Card>
-      </Grid>
-    </Box>
-  )
-}
+// ** Layouts
+import SubPageLayout from 'src/@core/layouts/SubPageLayout'
+import DetailSalesInvoice from 'src/components/ContentPages/ContentRight/SalesInvoice/DetailSalesInvoice'
 
 const SalesInvoice = ({ data }) => {
-  // ** States
-  const [getDataRow, setGetDataRow] = useState(data)
-  const [selectRowState, setSelectRowState] = useState(false)
+  const [dataRow, setDataRow] = React.useState({})
 
-  const dropDowns = {
-    defaultMaterialRequestType: defaultMaterialRequestType,
-    valuationMethod: valuationMethod
-  }
-
-  function formatCurrency(params) {
-    const formattedValue = new Intl.NumberFormat('th-TH', {
-      style: 'currency',
-      currency: 'THB',
-      minimumFractionDigits: 2
-    }).format(params.value)
-
-    return formattedValue
-  }
-
-  // const formattedValue = base_grand_total.toFixed(2)
-
-  // ** Menu Column
-  const columns = [
-    { field: 'customer_name', headerName: 'title', width: 280 },
-    {
-      field: 'Status',
-      headerName: 'Status',
-      width: 150,
-      renderCell: (
-        params //ทั้งหมดมี button edit
-      ) => (
-        <Button
-          variant='text'
-          onClick={() => {
-            console.log(params.row)
-          }}
-        >
-          Status
-        </Button>
-      )
-    },
-    {
-      field: 'base_grand_total',
-      headerName: 'Grand Total ID',
-      width: 150,
-      valueFormatter: formatCurrency
-    },
-
-    { field: 'name', headerName: 'ID', width: 250 },
-    {
-      field: 'Data',
-      headerName: 'Data',
-      width: 150,
-      renderCell: (
-        params //ทั้งหมดมี button edit
-      ) => (
-        <Button
-          sx={{ backgroundColor: '#ffff8d' }}
-          variant='text'
-          onClick={() => {
-            console.log(params.row)
-            setGetDataRow(params.row)
-            setSelectRowState(true)
-          }}
-        >
-          OPEN
-        </Button>
-      )
-    }
+  const showContent = [
+    <DetailSalesInvoice key='detail' dataRow={dataRow} />,
+    <DashboardItem key='dashboard' />,
+    <InventoryItem key='inventory' dataRow={dataRow} dropDowns={defaultMaterialRequestType} />,
+    <AccountingItem key='accounting' />,
+    <PurchasingItem key='purchasing' />,
+    <SalesItem key='sales' />,
+    <TexItem key='tex' />,
+    <QualityItem key='quality' />,
+    <ManufacturingItem key='manufacturing' />
   ]
 
-  if (!data) {
-    return <Box>Loading...</Box>
-  }
-
   return (
-    <Box>
-      <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-        <Box className='actions-left' sx={{ mr: 2, display: 'flex', justifyContent: 'end', width: '100%' }}>
-          <TextField
-            size='small'
-            sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <Magnify fontSize='small' />
-                </InputAdornment>
-              )
-            }}
-          />
-        </Box>
-
-        <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
-          <UserDropdown />
-        </Box>
-      </Box>
-      <Box>
-        <CardDividerContent
-          contentLeft={<CardContentLeft menuColumn={columns} dataRow={data} />}
-          contentRight={<CardContentRight getDataRow={getDataRow} dropDowns={dropDowns} />}
-          selectRowState={selectRowState}
-        />
-      </Box>
-    </Box>
+    <SubPages
+      data={data}
+      menuContent={ItemContentMenu}
+      showContent={showContent}
+      dataRow={dataRow}
+      setDataRow={setDataRow}
+    />
   )
 }
 
-export const getServerSideProps = async context => {
-  try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Sales%20Invoice?fields=["*"]`, {
-      headers: {
-        Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
-      }
-    })
+SalesInvoice.getLayout = page => <SubPageLayout>{page}</SubPageLayout>
 
-    const data = res.data.data // No need to await heren
+// nextJS SSR
+export async function getServerSideProps() {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Sales%20Invoice?fields=["*"]`, {
+    headers: {
+      Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+    }
+  })
+  const data = res.data.data
 
-    if (res.status !== 200) {
-      return {
-        props: { data: null }
-      }
-    }
-
-    return {
-      props: { data }
-    }
-  } catch (error) {
-    return {
-      props: { data: null }
-    }
+  return {
+    props: { data: data }
   }
 }
-
-SalesInvoice.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
 export default SalesInvoice
