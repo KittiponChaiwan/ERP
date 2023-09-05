@@ -54,10 +54,16 @@ ItemPage.getLayout = page => <SubPageLayout>{page}</SubPageLayout>
 export async function getServerSideProps() {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Item?fields=["*"]`, {
     headers: {
-      Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+      Authorization: process.env.NEXT_PUBLIC_API_TOKEN
     }
   })
   const data = res.data.data
+
+  if (!data) {
+    return {
+      props: { data: [] }
+    }
+  }
 
   return {
     props: { data: data }

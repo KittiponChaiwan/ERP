@@ -2,11 +2,8 @@
 import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { Box, Button, Card, Divider, Grid, IconButton, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Card, Divider, Grid, IconButton, Tab, Tabs, Typography } from '@mui/material'
 import { TabPanel, TabContext } from '@mui/lab' // Import TabContext
-
-// ** Axios Imports
-import axios from 'axios'
 
 // ** Icons Imports
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
@@ -14,13 +11,6 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import CloseIcon from '@mui/icons-material/Close'
 
 // ** Custom Components
-import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
-import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
-import SubPageLayout from 'src/@core/layouts/SubPageLayout'
-
-// ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod, ItemContentMenu } from 'src/dummy/contentPages/itemPage'
 import ContentLeft from 'src/views/sub-pages/ContentLeft'
 
 const SubPages = ({ data, menuContent, showContent, dataRow, setDataRow }) => {
@@ -102,15 +92,15 @@ const SubPages = ({ data, menuContent, showContent, dataRow, setDataRow }) => {
         {sideContentOpen && (
           <>
             {!screenMD && (
-              <Divider orientation='vertical' flexItem>
-                <IconButton aria-label='delete' onClick={() => handleContentSizeChange()}>
+              <Divider orientation='vertical' flexItem onClick={() => handleContentSizeChange()}>
+                <IconButton aria-label='delete'>
                   {buttonArrow ? <KeyboardDoubleArrowRightIcon /> : <KeyboardDoubleArrowLeftIcon />}
                 </IconButton>
               </Divider>
             )}
 
             {(screenMDSelect || !screenMD) && (
-              <Grid item xs md={contentSize} sx={{ p: 6, ml: 5 }}>
+              <Grid item xs md={contentSize} sx={{ p: 5 }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                   <Box
                     sx={{
@@ -143,6 +133,20 @@ const SubPages = ({ data, menuContent, showContent, dataRow, setDataRow }) => {
                         variant='scrollable'
                         scrollButtons
                         allowScrollButtonsMobile
+                        sx={{
+                          backgroundColor: 'primary.light',
+                          '& .MuiTab-root.Mui-selected': {
+                            color: 'white',
+                            backgroundColor: 'primary.main'
+                          }
+                        }}
+
+                        // TabIndicatorProps={{
+                        //   style: {
+                        //     backgroundColor: 'white',
+                        //     height: 3
+                        //   }
+                        // }}
                       >
                         {menuContent?.map(item => (
                           <Tab value={item.id} label={item.name} key={item.id} />
