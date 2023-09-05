@@ -114,6 +114,10 @@ const BomPage = ({ data }) => {
     RateOfMaterialsBasedOn: RateOfMaterialsBasedOn
   }
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   // ** Menu Column
   const columns = [
     { field: 'name', headerName: 'ID', width: 280 },
@@ -132,7 +136,7 @@ const BomPage = ({ data }) => {
       width: 150,
       renderCell: (
         params //ทั้งหมดมี button edit
-      ) => <Checkbox {...label} defaultChecked />
+      ) => <Checkbox {...label} checked={getDataRow.is_active} onChange={handleCheckboxChange} />
     },
     {
       field: 'Is Default',
@@ -140,7 +144,7 @@ const BomPage = ({ data }) => {
       width: 150,
       renderCell: (
         params //ทั้งหมดมี button edit
-      ) => <Checkbox {...label} />
+      ) => <Checkbox {...label} checked={getDataRow.is_default} onChange={handleCheckboxChange} />
     },
     { field: 'total_cost', headerName: 'Total Cost', width: 300 },
     {
@@ -149,7 +153,7 @@ const BomPage = ({ data }) => {
       width: 150,
       renderCell: (
         params //ทั้งหมดมี button edit
-      ) => <Checkbox {...label} disabled />
+      ) => <Checkbox {...label} checked={getDataRow.has_variants} onChange={handleCheckboxChange} />
     },
     {
       field: 'Data',
