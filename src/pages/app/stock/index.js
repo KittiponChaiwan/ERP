@@ -10,7 +10,7 @@ import CardYourShortcut from 'src/components/Menu/CardYourShortcut'
 import CardReportMenu from 'src/components/Menu/CardReportMenu'
 
 // ** dummy data
-import { StockMenuButton, StockContent } from 'src/dummy/stock'
+import { StockMenuButton, StockContent, StockShortcut, StockReport } from 'src/dummy/stock'
 
 const StockPage = () => {
   return (
@@ -20,10 +20,10 @@ const StockPage = () => {
           <CardGuideVue MenuButton={StockMenuButton} RightSideContent={StockContent} />
         </Grid>
         <Grid item sm={12}>
-          {/* <CardYourShortcut menus={SellingShortcut} /> */}
+          <CardYourShortcut menus={StockShortcut} />
         </Grid>
         <Grid item sm={12}>
-          {/* <CardReportMenu menus={SellingReport} /> */}
+          <CardReportMenu menus={StockReport} />
         </Grid>
       </Grid>
     </Box>
