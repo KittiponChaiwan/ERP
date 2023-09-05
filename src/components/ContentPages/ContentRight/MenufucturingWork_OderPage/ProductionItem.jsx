@@ -39,6 +39,10 @@ const ProductionItemPage = ({ getDataRow }) => {
     setGetRuquiredRow(params.row)
   }
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   const columnsApp = [
     { field: 'idx', headerName: 'No', width: 80 },
     { field: 'item_code', headerName: 'Item Code', width: 110 },
@@ -172,11 +176,15 @@ const ProductionItemPage = ({ getDataRow }) => {
                 </Box>
               </Box>
               <Box sx={{ mt: 8, ml: 82, display: 'flex' }}>
-                <Checkbox {...label} disabled />
+                <Checkbox {...label} checked={getRequiredRow.allow_alternative_item} onChange={handleCheckboxChange} />
                 <Typography sx={{ mt: 2 }}>Allow Alternative Item</Typography>
               </Box>
               <Box sx={{ ml: 82, display: 'flex' }}>
-                <Checkbox {...label} defaultChecked />
+                <Checkbox
+                  {...label}
+                  checked={getRequiredRow.include_item_in_manufacturing}
+                  onChange={handleCheckboxChange}
+                />
                 <Typography sx={{ mt: 2 }}>Include Item In Manufacturing</Typography>
               </Box>
               <Box>
