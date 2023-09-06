@@ -115,6 +115,10 @@ const DetailStockEntry = ({ getDataRow }) => {
     }
   ]
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   return (
     <Grid>
       <Box sx={{ display: 'flex' }}>
@@ -127,7 +131,7 @@ const DetailStockEntry = ({ getDataRow }) => {
           <TextField size='small' variant='filled' value={getDataRow.posting_date} />
         </Box>
         <Box sx={{ ml: 16, display: 'flex', mt: 6 }}>
-          <Checkbox {...label} />
+          <Checkbox {...label} checked={getDataRow.inspection_required} onChange={handleCheckboxChange} />
           <Typography sx={{ mt: 4 }}>Inspection Required</Typography>
         </Box>
       </Box>
@@ -166,11 +170,11 @@ const DetailStockEntry = ({ getDataRow }) => {
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Box sx={{ display: 'flex' }}>
-                  <Checkbox {...label} disabled checked />
+                  <Checkbox {...label} checked={getDataRow.from_bom} onChange={handleCheckboxChange} />
                   <Typography sx={{ mt: 2 }}>From BOM</Typography>
                 </Box>
                 <Box sx={{ display: 'flex' }}>
-                  <Checkbox {...label} disabled checked />
+                  <Checkbox {...label} checked={getDataRow.use_multi_level_bom} onChange={handleCheckboxChange} />
                   <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
                 </Box>
                 <Typography variant='subtitle2'>Including items for sub assemblies</Typography>
@@ -314,12 +318,12 @@ const DetailStockEntry = ({ getDataRow }) => {
                 </Box>
                 <Box sx={{ ml: 30 }}>
                   <Box sx={{ display: 'flex' }}>
-                    <Checkbox {...label} disabled />
-                    <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
+                    <Checkbox {...label} checked={getItem.is_finished_item} onChange={handleCheckboxChange} />
+                    <Typography sx={{ mt: 2 }}>Is Finished Item</Typography>
                   </Box>
                   <Box sx={{ display: 'flex' }}>
-                    <Checkbox {...label} disabled />
-                    <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
+                    <Checkbox {...label} checked={getItem.is_scrap_item} onChange={handleCheckboxChange} />
+                    <Typography sx={{ mt: 2 }}>Is Scrap Item</Typography>
                   </Box>
                 </Box>
               </Box>
@@ -380,7 +384,7 @@ const DetailStockEntry = ({ getDataRow }) => {
                 </Box>
               </Box>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} disabled />
+                <Checkbox {...label} checked={getItem.retain_sample} onChange={handleCheckboxChange} />
                 <Typography sx={{ mt: 2 }}>Retain Sample</Typography>
               </Box>
               <Box sx={{ mt: 6 }}>
@@ -413,7 +417,7 @@ const DetailStockEntry = ({ getDataRow }) => {
                 </Box>
               </Box>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} disabled />
+                <Checkbox {...label} checked={getItem.allow_zero_valuation_rate} onChange={handleCheckboxChange} />
                 <Typography variant='subtitle1' sx={{ mt: 2 }}>
                   Allow Zero Valuation Rate
                 </Typography>
