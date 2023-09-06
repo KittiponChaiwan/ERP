@@ -3,17 +3,12 @@ import jwt from 'jsonwebtoken'
 import axios from 'axios' // อย่าลืม import Axios
 
 export default async function handler(req, res) {
-  console.log('req', req.body)
-
   // เพิ่ม async
   if (req.method === 'POST') {
     const isAuthenticated = true // สมมุติว่าผ่านการตรวจสอบแล้ว
 
     if (isAuthenticated) {
       const { usr, pwd } = req.body
-
-      console.log('usr', req.body.usr)
-      console.log('pwd', req.body.pwd)
 
       try {
         const apiResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}api/method/login`, {

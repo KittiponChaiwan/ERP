@@ -105,8 +105,6 @@ const LoginPage = () => {
         }
       )
 
-      console.log('response', response.data.data)
-
       if (response.status === 200) {
         dispatch(loginSuccess(response.data.data))
         router.push('/')
