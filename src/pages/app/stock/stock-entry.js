@@ -12,7 +12,8 @@ import {
   Typography,
   useTheme,
   Tabs,
-  Checkbox
+  Checkbox,
+  Chip
 } from '@mui/material'
 import axios from 'axios'
 
@@ -117,16 +118,7 @@ const StockEntry = ({ data }) => {
       width: 180,
       renderCell: (
         params //ทั้งหมดมี button edit
-      ) => (
-        <Button
-          variant='text'
-          onClick={() => {
-            console.log(params.row)
-          }}
-        >
-          <Typography>● {getDataRow.purpose}</Typography>
-        </Button>
-      )
+      ) => <Chip label={params.row.purpose} />
     },
     { field: 'source_warehouse_address', headerName: 'Default Source Warehouse', width: 150 },
     { field: 'to_warehouse', headerName: 'Default Target Warehouse', width: 150 },
