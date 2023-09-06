@@ -5,15 +5,19 @@ const { Grid, Box, TextField, Typography, Checkbox, Button } = require('@mui/mat
 const StockItemPricePage = ({ getDataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   return (
-    <Grid sx={{ width: '100%' }}>
+    <Grid sx={{ width: 1080 }}>
       <Box>
         <Box sx={{ display: 'flex' }}>
           <Box>
             <Typography sx={{ margin: 1 }}>Item Code*</Typography>
             <TextField size='small' variant='filled' value={getDataRow.item_code} />
           </Box>
-          <Box sx={{ ml: 20 }}>
+          <Box sx={{ ml: 40 }}>
             <Typography sx={{ marginBottom: 2 }}>Item Name</Typography>
             <TextField size='small' variant='filled' label='' value={getDataRow.item_name} />
           </Box>
@@ -23,7 +27,7 @@ const StockItemPricePage = ({ getDataRow }) => {
             <Typography sx={{ marginBottom: 2 }}>UOM</Typography>
             <TextField size='small' variant='filled' label='' value={getDataRow.uom} />
           </Box>
-          <Box sx={{ ml: 20 }}>
+          <Box sx={{ ml: 40 }}>
             <Typography sx={{ marginBottom: 2 }}>Item Description</Typography>
             <TextField size='small' variant='filled' label='' value={getDataRow.item_description} />
           </Box>
@@ -54,15 +58,15 @@ const StockItemPricePage = ({ getDataRow }) => {
                 <TextField size='small' variant='filled' label='' value={getDataRow.batch_no} />
               </Box>
             </Box>
-            <Box sx={{ ml: 20, display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ ml: 40, display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} disabled checked />
+                <Checkbox {...label} checked={getDataRow.buying} onChange={handleCheckboxChange} />
                 <Typography variant='subtitle1' sx={{ mt: 1 }}>
                   Buying
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} disabled />
+                <Checkbox {...label} checked={getDataRow.selling} onChange={handleCheckboxChange} />
                 <Typography variant='subtitle1' sx={{ mt: 1 }}>
                   Selling
                 </Typography>
@@ -75,7 +79,7 @@ const StockItemPricePage = ({ getDataRow }) => {
             <Typography sx={{ margin: 1 }}>Currency</Typography>
             <TextField size='small' variant='filled' value={getDataRow.currency} />
           </Box>
-          <Box sx={{ ml: 20 }}>
+          <Box sx={{ ml: 40 }}>
             <Typography sx={{ marginBottom: 2 }}>Rate</Typography>
             <TextField size='small' variant='filled' label='' value={getDataRow.price_list_rate} />
           </Box>
@@ -85,7 +89,7 @@ const StockItemPricePage = ({ getDataRow }) => {
             <Typography sx={{ margin: 1 }}>Valid From</Typography>
             <TextField size='small' variant='filled' value={getDataRow.valid_from} />
           </Box>
-          <Box sx={{ ml: 20 }}>
+          <Box sx={{ ml: 40 }}>
             <Typography sx={{ marginBottom: 2 }}>Valid Upto</Typography>
             <TextField size='small' variant='filled' label='' value={getDataRow.valid_upto} />
           </Box>

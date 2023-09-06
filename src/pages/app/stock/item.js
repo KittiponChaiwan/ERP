@@ -30,7 +30,7 @@ const ItemPage = ({ data }) => {
     <DashboardItem key='dashboard' />,
     <InventoryItem key='inventory' dataRow={dataRow} dropDowns={defaultMaterialRequestType} />,
     <AccountingItem key='accounting' />,
-    <PurchasingItem key='purchasing' />,
+    <PurchasingItem key='purchasing' dataRow={dataRow} />,
     <SalesItem key='sales' />,
     <TexItem key='tex' />,
     <QualityItem key='quality' />,
