@@ -1,26 +1,36 @@
 // ** React Imports
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // ** MUI Imports
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
+import axios from 'axios'
 
-const AccountingItem = () => {
+const AccountingItem = ({ dataRow }) => {
   const columnsAcc = [
-    { field: 'id', headerName: 'No', width: 70 },
-    { field: 'Company', headerName: 'Company', width: 150 },
-    { field: 'Warehouse', headerName: 'Default Warehouse', width: 200 },
-    { field: 'PriceList', headerName: 'Default Price List', width: 200 }
+    { field: 'idx', headerName: 'No', width: 70 },
+    { field: 'company', headerName: 'Company', width: 150 },
+    { field: 'default_warehouse', headerName: 'Default Warehouse', width: 200 },
+    { field: 'default_price_list', headerName: 'Default Price List', width: 200 }
   ]
 
-  const rowAcc = [
-    {
-      id: 1,
-      Company: 'Targaryen',
-      Warehouse: 'Daenerys',
-      PriceList: 'daeams'
-    }
-  ]
+  const [dataItemAccouting, setDataItemAccouting] = useState('')
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Item/${dataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setDataItemAccouting(res.data.data)
+      })
+  }, [dataRow])
+
+  if (dataItemAccouting.length === 0) {
+    return 'waiting...'
+  }
 
   return (
     <Box>
@@ -29,7 +39,7 @@ const AccountingItem = () => {
       </Typography>
       <Box>
         <DataGrid
-          rows={rowAcc}
+          rows={dataItemAccouting}
           columns={columnsAcc}
           initialState={{
             pagination: {
