@@ -22,7 +22,7 @@ import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 import { DataGrid } from '@mui/x-data-grid'
 
-const SalesItem = () => {
+const SalesItem = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   const [collapseDeferred, setCollapseDeferred] = useState(false)
   const [collapseCustomer, setCollapseCustomer] = useState(false)
@@ -56,34 +56,38 @@ const SalesItem = () => {
     }
   ]
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   return (
     <Box>
       <Box>
         <Box sx={{ display: 'flex' }}>
           <Box>
             <Typography sx={{ marginBottom: 2 }}>Default Sales Unit of Measure :</Typography>
-            <TextField variant='filled' label='' />
+            <TextField variant='filled' label='' value={dataRow.sales_uom} />
           </Box>
           <Box sx={{ ml: 20 }}>
             <Typography sx={{ marginBottom: 2 }}>Max Discount (%) :</Typography>
-            <TextField variant='filled' label='' />
+            <TextField variant='filled' label='' value={dataRow.max_discount} />
           </Box>
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox {...label} checked={dataRow.grant_commission} onChange={handleCheckboxChange} />
           <Typography variant='subtitle1' sx={{ m: 4 }}>
             Grant Commission
           </Typography>
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox {...label} checked={dataRow.is_sales_item} onChange={handleCheckboxChange} />
           <Typography variant='subtitle1' sx={{ m: 4 }}>
             Allow Sales
           </Typography>
         </Box>
         <Box sx={{ mt: 5, display: 'flex' }}>
           <Button size='small' variant='filled' label='' onClick={handleDeferred}>
-            <Typography variant='h6'>Foreign Trade Details</Typography>
+            <Typography variant='h6'>Deferred Revenue</Typography>
           </Button>
           <Box>
             <CardActions className='card-action-dense'>
@@ -112,11 +116,11 @@ const SalesItem = () => {
                     <Box>
                       <Box sx={{ mt: 4 }}>
                         <Typography>Deferred Expense Account</Typography>
-                        <TextField label='' variant='outlined' fullWidth />
+                        <TextField label='' variant='outlined' fullWidth value={dataRow.deferred_revenue_account} />
                       </Box>
                       <Box sx={{ mt: 4 }}>
                         <Typography>No of Months (Expense)</Typography>
-                        <TextField label='' variant='outlined' fullWidth />
+                        <TextField label='' variant='outlined' fullWidth value={dataRow.no_of_months} />
                       </Box>
                     </Box>
                   )}

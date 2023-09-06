@@ -4,20 +4,24 @@ import React from 'react'
 // MUI imports
 import { Box, Typography, Checkbox, TextField, Button } from '@mui/material'
 
-const ManufacturingItem = () => {
+const ManufacturingItem = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
 
   return (
     <Box>
       <Box>
         <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox {...label} checked={dataRow.include_item_in_manufacturing} onChange={handleCheckboxChange} />
           <Typography variant='subtitle1' sx={{ m: 4 }}>
             Include Item In Manufacturing
           </Typography>
         </Box>
         <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox {...label} checked={dataRow.is_sub_contracted_item} onChange={handleCheckboxChange} />
           <Typography variant='subtitle1' sx={{ m: 4 }}>
             Supply Raw Materials for Purchase
           </Typography>
