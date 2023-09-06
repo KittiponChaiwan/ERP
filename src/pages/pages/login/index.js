@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 // ** redux
 import { useDispatch } from 'react-redux'
-import { setAuthUser } from '../../../@core/redux/authSlice'
+import { loginSuccess } from 'src/redux/userSlice'
 
 // ** axios
 import axios from 'axios'
@@ -45,7 +45,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
-import { generateToken } from '../../../@core/utils/generateToken'
+import { Login } from 'mdi-material-ui'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -73,10 +73,6 @@ const LoginPage = () => {
     showPassword: false
   })
 
-  const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL
-  })
-
   // ** Hook
   const theme = useTheme()
   const router = useRouter()
@@ -95,39 +91,36 @@ const LoginPage = () => {
   }
 
   const handleLogin = async () => {
-    console.log('usr: ', values.username, 'pwd: ', values.password)
-
     try {
-      // Send login credentials to the backend API
+      const response = await axios.post(
+        '/api/login',
+        {
+          usr: values.username,
+          pwd: values.password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
 
-      const response = await instance.post('api/method/login', {
-        usr: values.username,
-        pwd: values.password
-      })
+      console.log('response', response.data.data)
 
       if (response.status === 200) {
-        console.log('response: ', response)
-
-        generateToken({ name: response.data.full_name, status: response.data.message })
-
-        const loginData = {
-          name: response.data.full_name,
-          status: response.data.message,
-          authState: true
-        }
-
-        console.log('loginData: ', loginData)
-        dispatch(setAuthUser(loginData))
-        router.replace('/')
+        dispatch(loginSuccess(response.data.data))
+        router.push('/')
       } else {
-        // Login failed
         console.error('Login failed')
       }
     } catch (error) {
-      // Handle any errors that occurred during the API call
-      console.error('Error during login:', error.message)
+      console.error('Error during login:', error)
     }
   }
+
+  useEffect(() => {
+    console.log('values', values)
+  }, [values])
 
   return (
     <Box className='content-center'>
