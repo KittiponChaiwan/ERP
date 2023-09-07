@@ -109,7 +109,7 @@ const StockReport = [
       {
         id: 2,
         name: 'Item Group',
-        route: '/app/selling/quotation',
+        route: '/app/stock/item-group',
         imgIcon: 'MenuIcon'
       },
       {
