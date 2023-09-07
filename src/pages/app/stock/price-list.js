@@ -9,7 +9,7 @@ import SubPages from 'src/views/sub-pages/SubPages'
 import { ItemContentMenu, defaultMaterialRequestType, PriceListPage } from 'src/dummy/contentPages/itemPage'
 
 // ** Custom Components
-import StockItemPricePage from 'src/components/ContentPages/ContentRight/ItemPricePage/StockItemPrice'
+import StockPriceList from 'src/components/ContentPages/ContentRight/PriceListPage/StockPriceList'
 
 // ** Layouts
 import SubPageLayout from 'src/@core/layouts/SubPageLayout'
@@ -17,7 +17,7 @@ import SubPageLayout from 'src/@core/layouts/SubPageLayout'
 const PriceList = ({ data }) => {
   const [dataRow, setDataRow] = React.useState({})
 
-  const showContent = [<StockItemPricePage key='detail' dataRow={dataRow} />]
+  const showContent = [<StockPriceList key='detail' dataRow={dataRow} />]
 
   return (
     <SubPages
