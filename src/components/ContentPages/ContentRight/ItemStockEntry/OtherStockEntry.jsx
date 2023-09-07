@@ -17,7 +17,7 @@ import { useState } from 'react'
 import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 
-const OtherStockEntry = ({ getDataRow }) => {
+const OtherStockEntry = ({ dataRow }) => {
   const [collapsePrinting, setCollapsePrinting] = useState(false)
   const [collapseInformation, setCollapseInformation] = useState(false)
 
@@ -56,7 +56,7 @@ const OtherStockEntry = ({ getDataRow }) => {
             <CardContent>
               <Box>
                 <Typography sx={{ margin: 1 }}>Print Heading</Typography>
-                <TextField size='small' variant='filled' value={getDataRow.select_print_heading} />
+                <TextField size='small' variant='filled' value={dataRow.select_print_heading} />
               </Box>
             </CardContent>
           </Collapse>
@@ -87,18 +87,18 @@ const OtherStockEntry = ({ getDataRow }) => {
               <Box sx={{ display: 'flex' }}>
                 <Box>
                   <Typography sx={{ margin: 1 }}>Is Opening</Typography>
-                  <TextField size='small' variant='filled' value={getDataRow.is_opening} />
+                  <TextField size='small' variant='filled' value={dataRow.is_opening} />
                 </Box>
                 <Box sx={{ ml: 38 }}>
                   <Typography sx={{ margin: 1 }}>Per Transferred</Typography>
-                  <TextField size='small' variant='filled' value={getDataRow.per_transferred} />
+                  <TextField size='small' variant='filled' value={dataRow.per_transferred} />
                 </Box>
               </Box>
               <Box sx={{ width: '100%', display: 'flex', mt: 4 }}>
                 <Box sx={{ width: '38%' }}></Box>
                 <Box sx={{ width: '62%' }}>
                   <Typography sx={{ margin: 1 }}>Total Amount</Typography>
-                  <TextField size='small' variant='filled' value={getDataRow.total_amount} />
+                  <TextField size='small' variant='filled' value={dataRow.total_amount} />
                 </Box>
               </Box>
             </CardContent>

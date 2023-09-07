@@ -26,7 +26,7 @@ import ChevronDown from 'mdi-material-ui/ChevronDown'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 
-const DetailStockEntry = ({ getDataRow }) => {
+const DetailStockEntry = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   const [collapseBOM, setCollapseBOM] = useState(false)
   const [collapseWarehouse, setCollapseWarehouse] = useState(false)
@@ -69,8 +69,12 @@ const DetailStockEntry = ({ getDataRow }) => {
   const [getItem, setGetItem] = useState('')
 
   useEffect(() => {
+    console.log(dataRow)
+  }, [dataRow])
+
+  useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}Stock Entry/${getDataRow.name}`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Stock Entry/${dataRow.name}`, {
         headers: {
           Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
         }
@@ -81,7 +85,7 @@ const DetailStockEntry = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [getDataRow])
+  }, [dataRow])
 
   if (Object.values(getDataItem)?.length === 0) {
     return 'waiting...'
@@ -124,25 +128,25 @@ const DetailStockEntry = ({ getDataRow }) => {
       <Box sx={{ display: 'flex' }}>
         <Box>
           <Typography sx={{ margin: 1 }}>Stock Entry Type</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.stock_entry_type} />
+          <TextField size='small' variant='filled' value={dataRow.stock_entry_type} />
         </Box>
         <Box sx={{ ml: 20 }}>
           <Typography sx={{ margin: 1 }}>Posting Date</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.posting_date} />
+          <TextField size='small' variant='filled' value={dataRow.posting_date} />
         </Box>
         <Box sx={{ ml: 16, display: 'flex', mt: 6 }}>
-          <Checkbox {...label} checked={getDataRow.inspection_required} onChange={handleCheckboxChange} />
+          <Checkbox {...label} checked={dataRow.inspection_required} onChange={handleCheckboxChange} />
           <Typography sx={{ mt: 4 }}>Inspection Required</Typography>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', mt: 6 }}>
         <Box sx={{ width: '33%' }}>
           <Typography sx={{ margin: 1 }}>Work Order</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.work_order} />
+          <TextField size='small' variant='filled' value={dataRow.work_order} />
         </Box>
         <Box sx={{ ml: 20, width: '33%' }}>
           <Typography sx={{ margin: 1 }}>Posting Time</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.posting_time} />
+          <TextField size='small' variant='filled' value={dataRow.posting_time} />
           <Typography sx={{ margin: 1 }}>Asia/Kolkata</Typography>
         </Box>
         <Box sx={{ width: '33%' }}></Box>
@@ -170,11 +174,11 @@ const DetailStockEntry = ({ getDataRow }) => {
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Box sx={{ display: 'flex' }}>
-                  <Checkbox {...label} checked={getDataRow.from_bom} onChange={handleCheckboxChange} />
+                  <Checkbox {...label} checked={dataRow.from_bom} onChange={handleCheckboxChange} />
                   <Typography sx={{ mt: 2 }}>From BOM</Typography>
                 </Box>
                 <Box sx={{ display: 'flex' }}>
-                  <Checkbox {...label} checked={getDataRow.use_multi_level_bom} onChange={handleCheckboxChange} />
+                  <Checkbox {...label} checked={dataRow.use_multi_level_bom} onChange={handleCheckboxChange} />
                   <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
                 </Box>
                 <Typography variant='subtitle2'>Including items for sub assemblies</Typography>
@@ -182,7 +186,7 @@ const DetailStockEntry = ({ getDataRow }) => {
               <Box>
                 <Box sx={{ ml: 20 }}>
                   <Typography sx={{ margin: 1 }}>Finished Good Quantity</Typography>
-                  <TextField size='small' variant='filled' value={getDataRow.fg_completed_qty} />
+                  <TextField size='small' variant='filled' value={dataRow.fg_completed_qty} />
                 </Box>
                 <Box sx={{ ml: 20 }}>
                   <Typography>As per Stock UOM</Typography>
@@ -193,7 +197,7 @@ const DetailStockEntry = ({ getDataRow }) => {
             <Box>
               <Box>
                 <Typography sx={{ margin: 1 }}>BOM No</Typography>
-                <TextField size='small' variant='filled' value={getDataRow.bom_no} />
+                <TextField size='small' variant='filled' value={dataRow.bom_no} />
               </Box>
             </Box>
           </CardContent>
@@ -224,7 +228,7 @@ const DetailStockEntry = ({ getDataRow }) => {
                 <Box sx={{ width: '40%' }}></Box>
                 <Box sx={{ width: '60%' }}>
                   <Typography sx={{ margin: 1 }}>Default Target Warehouse</Typography>
-                  <TextField size='small' variant='filled' value={getDataRow.to_warehouse} />
+                  <TextField size='small' variant='filled' value={dataRow.to_warehouse} />
                   <Typography variant='subtitle2' sx={{ margin: 1 }}>
                     Sets 'Target Warehouse' in each row of the items table.
                   </Typography>
@@ -267,18 +271,18 @@ const DetailStockEntry = ({ getDataRow }) => {
         <Box sx={{ display: 'flex' }}>
           <Box sx={{ mt: 6 }}>
             <Typography sx={{ margin: 1 }}>Total Outgoing Value (Consumption)</Typography>
-            <TextField size='small' variant='filled' value={getDataRow.total_outgoing_value} />
+            <TextField size='small' variant='filled' value={dataRow.total_outgoing_value} />
           </Box>
           <Box sx={{ mt: 6, ml: 20 }}>
             <Typography sx={{ margin: 1 }}>Total Incoming Value (Receipt)</Typography>
-            <TextField size='small' variant='filled' value={getDataRow.total_incoming_value} />
+            <TextField size='small' variant='filled' value={dataRow.total_incoming_value} />
           </Box>
         </Box>
         <Box sx={{ width: '100%', display: 'flex' }}>
           <Box sx={{ width: '43%' }}></Box>
           <Box sx={{ width: '57%', mt: 6 }}>
             <Typography sx={{ margin: 1 }}>otal Value Difference (Incoming - Outgoing)</Typography>
-            <TextField size='small' variant='filled' value={getDataRow.value_difference} />
+            <TextField size='small' variant='filled' value={dataRow.value_difference} />
           </Box>
         </Box>
       </Box>

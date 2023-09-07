@@ -67,7 +67,7 @@ const StockShortcut = [
   },
   {
     name: 'Stock Entry',
-    route: '/app/stock/entry'
+    route: '/app/stock/stock-entry'
   },
   {
     name: 'Purchase Receipt',
