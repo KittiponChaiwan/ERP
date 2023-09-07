@@ -27,6 +27,7 @@ import ChevronDown from 'mdi-material-ui/ChevronDown'
 import Icon from '@mdi/react'
 import { mdiPencil } from '@mdi/js'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import Btn from 'src/components/Button/Button'
 
 const DetailSalesInvoice = ({ dataRow }) => {
   // ** State
@@ -1415,6 +1416,25 @@ const DetailSalesInvoice = ({ dataRow }) => {
       <Divider sx={{ margin: 0, mb: 5 }} />
       <Typography variant=''>Add a comment:</Typography>
       <TextField size='small' variant='filled' label='' multiline rows={8} fullWidth value={dataRow.description} />
+      <Box sx={{ width: 'auto', marginBlock: 2 }}>
+        <Button
+          sx={{
+            border: '1px solid black',
+            fontWeight: 'bold',
+            width: 100,
+            height: 40,
+            justifyContent: 'flex-start',
+            color: 'secondary.G',
+            '&:hover': {
+              bgcolor: 'primary.dark',
+              color: 'common.white'
+            }
+          }}
+          onClick={() => handleButtonClick('')}
+        >
+          Comment
+        </Button>
+      </Box>
     </Box>
   )
 }

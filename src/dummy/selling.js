@@ -110,7 +110,7 @@ const SellingReport = [
       {
         id: 3,
         name: 'Price List',
-        route: '/app/selling/price-list',
+        route: '/app/stock/price-list',
         imgIcon: 'MenuIcon'
       },
       {
