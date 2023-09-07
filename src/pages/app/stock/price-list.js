@@ -1,212 +1,55 @@
-import React, { useState } from 'react'
+// ** React Imports
+import React from 'react'
 
-// ** MUI Imports
-import { TabContext, TabList, TabPanel } from '@mui/lab'
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  InputAdornment,
-  Tab,
-  TextField,
-  Typography,
-  useTheme,
-  Tabs,
-  Checkbox
-} from '@mui/material'
-
-// ** Icons Imports
-import Magnify from 'mdi-material-ui/Magnify'
-
-// ** Custom Components
-import CardDividerContent from 'src/components/CardDivider/CardDividerContent'
-import CardContentLeft from 'src/components/ContentPages/CardContentLeft'
-import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
-import BlankLayout from 'src/@core/layouts/BlankLayout'
-import StockPriceList from 'src/components/ContentPages/ContentRight/PriceListPage/StockPriceList'
+// ** Axios Imports
+import axios from 'axios'
+import SubPages from 'src/views/sub-pages/SubPages'
 
 // ** Dummy Data
-import { defaultMaterialRequestType, valuationMethod, PriceList } from 'src/dummy/contentPages/itemPage'
-import axios from 'axios'
+import { ItemContentMenu, defaultMaterialRequestType, ItemPricePage } from 'src/dummy/contentPages/itemPage'
 
-const CardContentRight = ({ getDataRow, dropDowns }) => {
-  const theme = useTheme()
+// ** Custom Components
+import StockItemPricePage from 'src/components/ContentPages/ContentRight/ItemPricePage/StockItemPrice'
 
-  const [value, setValue] = useState(1)
+// ** Layouts
+import SubPageLayout from 'src/@core/layouts/SubPageLayout'
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
+const PriceList = ({ data }) => {
+  const [dataRow, setDataRow] = React.useState({})
+
+  const showContent = [<StockItemPricePage key='detail' dataRow={dataRow} />]
 
   return (
-    <Box sx={{ display: 'flex', p: 2, width: '100%' }}>
-      <Grid container sx={{ width: '100%' }}>
-        <Box>
-          <Typography>{getDataRow.name}</Typography>
-        </Box>
-
-        <Card sx={{ height: 'auto' }}>
-          <TabContext value={value}>
-            <TabList onChange={handleChange} aria-label='card navigation example'>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                variant='scrollable'
-                scrollButtons
-                allowScrollButtonsMobile
-                aria-label='scrollable force tabs example'
-              >
-                {PriceList?.map(item => (
-                  <Tab value={item.id} label={item.name} key={item.id} />
-                ))}
-              </Tabs>
-            </TabList>
-            <CardContent>
-              <TabPanel value={1} sx={{ p: 0 }}>
-                <StockPriceList getDataRow={getDataRow} />
-              </TabPanel>
-            </CardContent>
-          </TabContext>
-        </Card>
-      </Grid>
-    </Box>
+    <SubPages
+      data={data}
+      menuContent={ItemPricePage}
+      showContent={showContent}
+      dataRow={dataRow}
+      setDataRow={setDataRow}
+    />
   )
 }
 
-const PriceListPage = ({ data }) => {
-  // ** States
-  const [getDataRow, setGetDataRow] = useState([])
-  const [selectRowState, setSelectRowState] = useState(false)
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+PriceList.getLayout = page => <SubPageLayout>{page}</SubPageLayout>
 
-  const dropDowns = {
-    defaultMaterialRequestType: defaultMaterialRequestType,
-    valuationMethod: valuationMethod
-  }
-
-  // ** Menu Column
-  const columns = [
-    { field: 'price_list_name', headerName: 'ID', width: 280 },
-    {
-      field: 'Status',
-      headerName: 'Status',
-      width: 150,
-      renderCell: (
-        params //ทั้งหมดมี button edit
-      ) => (
-        <Button
-          variant='text'
-          onClick={() => {
-            console.log(params.row)
-          }}
-        >
-          Status
-        </Button>
-      )
-    },
-    { field: 'currency', headerName: 'currency', width: 150 },
-    {
-      field: 'Buying',
-      headerName: 'Buying',
-      width: 150,
-      renderCell: (
-        params //ทั้งหมดมี button edit
-      ) => <Checkbox {...label} />
-    },
-    {
-      field: 'Selling',
-      headerName: 'Selling',
-      width: 150,
-      renderCell: (
-        params //ทั้งหมดมี button edit
-      ) => <Checkbox {...label} />
-    },
-    {
-      field: 'Data',
-      headerName: 'Data',
-      width: 150,
-      renderCell: (
-        params //ทั้งหมดมี button edit
-      ) => (
-        <Button
-          sx={{ backgroundColor: '#ffff8d' }}
-          variant='text'
-          onClick={() => {
-            console.log(params.row)
-            setGetDataRow(params.row)
-            setSelectRowState(true)
-          }}
-        >
-          OPEN
-        </Button>
-      )
+// nextJS SSR
+export async function getServerSideProps() {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Item Price?fields=["*"]`, {
+    headers: {
+      Authorization: process.env.NEXT_PUBLIC_API_TOKEN
     }
-  ]
+  })
+  const data = res.data.data
 
   if (!data) {
-    return <Box>Loading...</Box>
+    return {
+      props: { data: [] }
+    }
   }
 
-  return (
-    <Box>
-      <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-        <Box className='actions-left' sx={{ mr: 2, display: 'flex', justifyContent: 'end', width: '100%' }}>
-          <TextField
-            size='small'
-            sx={{ '& .MuiOutlinedInput-root': { borderRadius: 4 } }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <Magnify fontSize='small' />
-                </InputAdornment>
-              )
-            }}
-          />
-        </Box>
-
-        <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
-          <UserDropdown />
-        </Box>
-      </Box>
-      <Box>
-        <CardDividerContent
-          contentLeft={<CardContentLeft menuColumn={columns} dataRow={data} />}
-          contentRight={<CardContentRight getDataRow={getDataRow} dropDowns={dropDowns} />}
-          selectRowState={selectRowState}
-        />
-      </Box>
-    </Box>
-  )
-}
-
-export const getServerSideProps = async context => {
-  try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}Price List?fields=["*"]`, {
-      headers: {
-        Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
-      }
-    })
-
-    const data = res.data.data // No need to await here
-
-    if (res.status !== 200) {
-      return {
-        props: { data: null }
-      }
-    }
-
-    return {
-      props: { data }
-    }
-  } catch (error) {
-    return {
-      props: { data: null }
-    }
+  return {
+    props: { data: data }
   }
 }
 
-PriceListPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
-
-export default PriceListPage
+export default PriceList
