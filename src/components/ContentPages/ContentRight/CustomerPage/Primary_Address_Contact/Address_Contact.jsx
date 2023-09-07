@@ -101,7 +101,7 @@ const Address_Contact = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [getDataRow])
 
   const { Preferred_Billing_Address, Preferred_Shipping_Addressn, Disabled } = state
 

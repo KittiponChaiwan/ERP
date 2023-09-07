@@ -26,6 +26,11 @@ const DetailCustomer = ({ getDataRow }) => {
 
   const [collapseInternal, setCollapseInternal] = useState(false)
   const [collapseMarket, setCollapseSecMarket] = useState(false)
+
+  const handleClickMarket = () => {
+    setCollapseSecMarket(!collapseMarket)
+  }
+
   const [isCompanyCheck, setIsCompanyCheck] = useState(false)
 
   const handleClickInternal = () => {
