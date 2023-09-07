@@ -26,15 +26,19 @@ const ConfigulationPage = ({ getDataRow }) => {
 
   const handleClickSerial = () => [setCollapseSerial(!collapseSerial)]
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   return (
     <Grid>
       <Box sx={{ width: 1080, display: 'flex' }}>
         <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} disabled />
+          <Checkbox {...label} checked={getDataRow.allow_alternative_item} onChange={handleCheckboxChange} />
           <Typography sx={{ mt: 2 }}>Allow Alternative Item</Typography>
         </Box>
         <Box sx={{ display: 'flex', ml: 30 }}>
-          <Checkbox {...label} disabled />
+          <Checkbox {...label} checked={getDataRow.skip_transfer} onChange={handleCheckboxChange} />
           <Typography sx={{ mt: 2 }}>Skip Material Transfer to WIP Warehouse {getDataRow.item_name}</Typography>
         </Box>
       </Box>
@@ -43,11 +47,15 @@ const ConfigulationPage = ({ getDataRow }) => {
       </Box>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox {...label} checked={getDataRow.use_multi_level_bom} onChange={handleCheckboxChange} />
           <Typography sx={{ mt: 2 }}>Use Multi-Level BOM</Typography>
         </Box>
         <Box sx={{ display: 'flex', ml: 30 }}>
-          <Checkbox {...label} defaultChecked />
+          <Checkbox
+            {...label}
+            checked={getDataRow.update_consumed_material_cost_in_project}
+            onChange={handleCheckboxChange}
+          />
           <Typography sx={{ mt: 2 }}>Update Consumed Material Cost In Project</Typography>
         </Box>
       </Box>
@@ -60,12 +68,12 @@ const ConfigulationPage = ({ getDataRow }) => {
       <Box sx={{ display: 'flex', mt: 6 }}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography>Work-in-Progress Warehouse</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.wip_warehouse} />
+          <TextField size='small' variant='filled' value={getDataRow.wip_warehouse || ''} />
           <Typography variant='subtitle2'>This is a location where operations are executed.</Typography>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', ml: 20 }}>
           <Typography>Target Warehouse</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.fg_warehouse} />
+          <TextField size='small' variant='filled' value={getDataRow.fg_warehouse || ''} />
           <Typography variant='subtitle2'>This is a location where final product stored.</Typography>
         </Box>
       </Box>
@@ -91,11 +99,11 @@ const ConfigulationPage = ({ getDataRow }) => {
           <CardContent>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} disabled />
+                <Checkbox {...label} checked={getDataRow.has_serial_no} onChange={handleCheckboxChange} />
                 <Typography sx={{ mt: 2 }}>Has Serial No</Typography>
               </Box>
               <Box sx={{ display: 'flex' }}>
-                <Checkbox {...label} disabled />
+                <Checkbox {...label} checked={getDataRow.has_batch_no} onChange={handleCheckboxChange} />
                 <Typography sx={{ mt: 2 }}>Has Batch No</Typography>
               </Box>
             </Box>

@@ -27,6 +27,10 @@ const DetailItem = ({ dataRow }) => {
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
+
   return (
     <Box>
       <Box sx={{ display: 'flex' }}>
@@ -43,25 +47,25 @@ const DetailItem = ({ dataRow }) => {
 
         <Box sx={{ ml: 18, display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} defaultChecked />
+            <Checkbox {...label} checked={dataRow.disabled} onChange={handleCheckboxChange} />
             <Typography variant='subtitle2' sx={{ mt: 2 }}>
               Disabled
             </Typography>
           </Box>
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} defaultChecked />
+            <Checkbox {...label} checked={dataRow.allow_alternative_item} onChange={handleCheckboxChange} />
             <Typography variant='subtitle2' sx={{ mt: 2 }}>
               Allow Alternative Item
             </Typography>
           </Box>
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} defaultChecked />
+            <Checkbox {...label} checked={dataRow.is_stock_item} onChange={handleCheckboxChange} />
             <Typography variant='subtitle2' sx={{ mt: 2 }}>
               Maintain Stock
             </Typography>
           </Box>
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} defaultChecked />
+            <Checkbox {...label} checked={dataRow.has_variants} onChange={handleCheckboxChange} />
             <Typography variant='subtitle2' sx={{ mt: 2 }}>
               Has Variants
             </Typography>
@@ -77,7 +81,7 @@ const DetailItem = ({ dataRow }) => {
           <Typography sx={{ marginBottom: 2 }}>Valuation Rate :</Typography>
           <TextField size='small' variant='filled' label='' value={dataRow.valuation_rate} />
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} disabled />
+            <Checkbox {...label} checked={dataRow.is_fixed_asset} onChange={handleCheckboxChange} />
             <Typography sx={{ m: 2 }}>Is Fixed Asset</Typography>
           </Box>
         </Box>

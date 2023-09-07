@@ -119,7 +119,7 @@ const ItemGroup = [
   }
 ]
 
-const PriceList = [
+const PriceListPage = [
   {
     id: 1,
     name: 'Price List'
@@ -133,6 +133,6 @@ export {
   itemStockEntry,
   ItemGroup,
   ItemPricePage,
-  PriceList,
+  PriceListPage,
   RateOfMaterialsBasedOn
 }

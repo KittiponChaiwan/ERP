@@ -14,19 +14,30 @@ import {
   CardContent,
   Checkbox,
   FormGroup,
-  FormControlLabel
+  FormControlLabel,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText
 } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 //Icon
 import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
+import Icon from '@mdi/react'
+import { mdiDelete } from '@mdi/js'
+import { mdiContentDuplicate } from '@mdi/js'
+import { mdiChevronDown } from '@mdi/js'
+import { mdiKeyboardOutline } from '@mdi/js'
 
 //import Dummy and Components
-import { Columns, Rows, ColumnPreOrder, RowsPreOrder, ColumnUnit, RowsUnit } from './DummyInventoryItem/DummyInventory'
+import { ColumnPreOrder, RowsPreOrder, ColumnUnit, RowsUnit } from './DummyInventoryItem/DummyInventory'
+import axios from 'axios'
 
 const InventoryItem = ({ dataRow, dropDowns }) => {
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   console.log('1: ', dropDowns.defaultMaterialRequestType)
   const [collapsePreOder, setCollapsePreOder] = useState(false)
   const [collapseUnit, setCollapseUnit] = useState(false)
@@ -35,8 +46,15 @@ const InventoryItem = ({ dataRow, dropDowns }) => {
   const [isSerialCheck, setIsSerialCheck] = useState(false)
   const [isAutomatically, setIsAutomatically] = useState(false)
   const [isRetainCheck, setIsRetainCheck] = useState(false)
+  const [open, setOpen] = useState(false)
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleClickPreOder = () => {
     setCollapsePreOder(!collapsePreOder)
@@ -64,6 +82,56 @@ const InventoryItem = ({ dataRow, dropDowns }) => {
 
   const handleCheckRetain = event => {
     setIsRetainCheck(event.target.checked)
+  }
+
+  const handleRowClick = params => {
+    setOpen(true)
+    setGetRowBarcodes(params.row)
+  }
+
+  const Columns = [
+    { field: 'idx', headerName: 'No', width: 70 },
+    { field: 'barcode', headerName: 'Barcodes', width: 150 },
+    { field: 'barcode_type', headerName: 'Barcode Type', width: 200 },
+    { field: 'uom', headerName: 'UOM', width: 200 },
+    {
+      field: 'Edit',
+      headerName: 'Edit',
+      width: 50,
+      renderCell: (
+        params //ทั้งหมดมี button edit
+      ) => (
+        <Button
+          variant='text'
+          onClick={() => {
+            setGetRowBarcodes(params.row)
+            handleClickOpen()
+            console.log(params.row)
+          }}
+        >
+          Edit
+        </Button>
+      )
+    }
+  ]
+
+  const [getDataBarcodes, setGetDataBarcodes] = useState('')
+  const [getRowBarcodes, setGetRowBarcodes] = useState('')
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Item/${dataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setGetDataBarcodes(res.data.data)
+      })
+  }, [dataRow])
+
+  if (getDataBarcodes.length === 0) {
+    return 'waiting...'
   }
 
   return (
@@ -143,8 +211,10 @@ const InventoryItem = ({ dataRow, dropDowns }) => {
           Barcodes
         </Typography>
         <DataGrid
-          rows={Rows}
+          rows={getDataBarcodes.barcodes}
           columns={Columns}
+          getRowId={row => row.name}
+          onRowClick={handleRowClick}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 }
@@ -153,6 +223,89 @@ const InventoryItem = ({ dataRow, dropDowns }) => {
           pageSizeOptions={[5, 10]}
           checkboxSelection
         />
+      </Box>
+      <Box>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+          maxWidth={'lg'}
+        >
+          <DialogTitle id='Editing Row #' sx={{ display: 'flex' }}>
+            {'Editing Row #'}
+
+            <Box sx={{ display: 'flex', width: 850 }}>
+              <Box sx={{ width: '20%' }}>
+                <Typography variant='h6'>{getRowBarcodes.idx}</Typography>
+              </Box>
+              <Box sx={{ width: '80%' }}>
+                <Button
+                  sx={{
+                    ':hover': {
+                      bgcolor: 'red',
+                      color: 'white'
+                    },
+                    width: 10,
+                    bgcolor: 'red'
+                  }}
+                >
+                  <Icon path={mdiDelete} size={1} color='white' />
+                </Button>
+                <Button sx={{ width: 150, bgcolor: '#e0e0e0', ml: 2 }}>Insert Below</Button>
+                <Button sx={{ width: 130, bgcolor: '#e0e0e0', ml: 2 }}>Insert Above</Button>
+                <Button sx={{ width: 150, bgcolor: '#e0e0e0', ml: 2 }}>
+                  <Icon path={mdiContentDuplicate} size={1} />
+                  <Typography>Duplicate</Typography>
+                </Button>
+                <Button sx={{ width: 80, bgcolor: '#e0e0e0', ml: 2 }}>
+                  <Typography>Move</Typography>
+                </Button>
+                <Button sx={{ width: 30, bgcolor: '#e0e0e0', ml: 2 }} onClick={() => handleClose()}>
+                  <Icon path={mdiChevronDown} size={1} />
+                </Button>
+              </Box>
+            </Box>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              <Box sx={{ display: 'flex', width: 800 }}>
+                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <Box sx={{ mt: 4 }}>
+                    <Typography sx={{ marginBottom: 2 }}>Barcode*</Typography>
+                    <TextField variant='filled' label='' value={getRowBarcodes.barcode} />
+                  </Box>
+                  <Box sx={{ mt: 4 }}>
+                    <Typography sx={{ marginBottom: 2 }}>Barcode Type</Typography>
+                    <TextField variant='filled' label='' value={getRowBarcodes.barcode_type} />
+                  </Box>
+                  <Box sx={{ mt: 4 }}>
+                    <Typography sx={{ marginBottom: 2 }}>UOM</Typography>
+                    <TextField variant='filled' label='' value={getRowBarcodes.uom} />
+                  </Box>
+                </Box>
+              </Box>
+              <Box sx={{ display: 'flex' }}>
+                <Box sx={{ mt: 4, display: 'flex', width: '100%' }}>
+                  <Icon path={mdiKeyboardOutline} size={1} />
+                  <Typography>Shortcuts:</Typography>
+                  <Button sx={{ width: 100, bgcolor: '#e0e0e0', ml: 2, height: 30 }}>
+                    <Typography variant='subtitle2'>Ctrl + Up</Typography>
+                  </Button>
+                  <Button sx={{ width: 130, bgcolor: '#e0e0e0', ml: 2, height: 30 }}>
+                    <Typography variant='subtitle2'>Ctrl + Down</Typography>
+                  </Button>
+                  <Button sx={{ width: 80, bgcolor: '#e0e0e0', ml: 2, height: 30 }}>
+                    <Typography variant='subtitle2'>ESC</Typography>
+                  </Button>
+                  <Button sx={{ width: 150, bgcolor: '#e0e0e0', ml: 100, height: 30 }}>
+                    <Typography variant='subtitle2'>Insert Below</Typography>
+                  </Button>
+                </Box>
+              </Box>
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
       </Box>
       <Box sx={{ mt: 10, display: 'flex' }}>
         <Button size='small' variant='filled' label='' onClick={handleClickPreOder}>

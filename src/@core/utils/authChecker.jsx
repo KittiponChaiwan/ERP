@@ -9,7 +9,7 @@ import Cookies from 'js-cookie' // Make sure to import the correct library
 import jwt from 'jsonwebtoken'
 
 // ** Redux Imports
-import { logoutUser } from 'src/@core/redux/authSlice'
+import { logoutUser } from 'src/redux/authSlice'
 import { useDispatch } from 'react-redux'
 
 const AuthChecker = () => {

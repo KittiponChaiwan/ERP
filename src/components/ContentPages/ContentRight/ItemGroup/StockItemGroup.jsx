@@ -21,7 +21,7 @@ import { useState } from 'react'
 
 //Import Custom Components
 
-const StockItemGroup = ({ getDataRow }) => {
+const StockItemGroup = ({ dataRow }) => {
   const [IsShowWebsite, setIsShowWebsite] = useState([])
   const [collapseWebsite, setCollapseWebsite] = useState([])
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -37,11 +37,7 @@ const StockItemGroup = ({ getDataRow }) => {
     }
   ]
 
-  const rowsGroup = [
-    { id: 1, Company: 'Sidw', TaxCategory: 'Jon', DefaultWarehouse: 'dasd', DefaultPriceList: 'List' },
-    { id: 2, Company: 'Lannister', TaxCategory: 'Cersei', DefaultWarehouse: 'dasd', DefaultPriceList: 'list' },
-    { id: 3, Company: 'Lannister', TaxCategory: 'Jaime', DefaultWarehouse: 'dasd', DefaultPriceList: 'list' }
-  ]
+  const rowsGroup = [{ id: 1, Company: 'Sidw', TaxCategory: 'Jon', DefaultWarehouse: 'dasd', DefaultPriceList: 'List' }]
 
   const columns = [
     { field: 'id', headerName: 'No', width: 70 },
@@ -64,22 +60,6 @@ const StockItemGroup = ({ getDataRow }) => {
       ValidFrom: 'dasd',
       MinimumNetRate: 'dsss',
       MaximumNetRate: 'dada'
-    },
-    {
-      id: 2,
-      ItemTaxTemplate: 'Lannister',
-      TaxCategory: 'Cersei',
-      ValidFrom: 'dasd',
-      MinimumNetRate: 'daaa',
-      MaximumNetRate: 'dasd'
-    },
-    {
-      id: 3,
-      ItemTaxTemplate: 'Lannister',
-      TaxCategory: 'Jaime',
-      ValidFrom: 'dasd',
-      MinimumNetRate: 'daaa',
-      MaximumNetRate: 'dasd'
     }
   ]
 
@@ -92,14 +72,6 @@ const StockItemGroup = ({ getDataRow }) => {
     {
       id: 1,
       Fieldname: 'Sidw'
-    },
-    {
-      id: 2,
-      Fieldname: 'Lannister'
-    },
-    {
-      id: 3,
-      Fieldname: 'Lannister'
     }
   ]
 
@@ -112,14 +84,6 @@ const StockItemGroup = ({ getDataRow }) => {
     {
       id: 1,
       Attribute: 'Sidw'
-    },
-    {
-      id: 2,
-      Attribute: 'Lannister'
-    },
-    {
-      id: 3,
-      Attribute: 'Lannister'
     }
   ]
 
@@ -140,7 +104,7 @@ const StockItemGroup = ({ getDataRow }) => {
         <Box>
           <Box sx={{ mt: 4 }}>
             <Typography sx={{ margin: 1 }}>Parent Item Group</Typography>
-            <TextField size='small' variant='filled' value={getDataRow.parent_item_group} />
+            <TextField size='small' variant='filled' value={dataRow.parent_item_group} />
           </Box>
           <Box sx={{ display: 'flex' }}>
             <Checkbox {...label} defaultChecked />
@@ -205,11 +169,11 @@ const StockItemGroup = ({ getDataRow }) => {
                 <Box sx={{ display: 'flex' }}>
                   <Box>
                     <Typography sx={{ margin: 1 }}>Route</Typography>
-                    <TextField size='small' variant='filled' value={getDataRow.route} />
+                    <TextField size='small' variant='filled' value={dataRow.route} />
                   </Box>
                   <Box sx={{ ml: 30 }}>
                     <Typography sx={{ marginBottom: 2 }}>Weightage</Typography>
-                    <TextField size='small' variant='filled' label='' value={getDataRow.weightage} />
+                    <TextField size='small' variant='filled' label='' value={dataRow.weightage} />
                   </Box>
                 </Box>
               </Box>
@@ -217,11 +181,11 @@ const StockItemGroup = ({ getDataRow }) => {
                 <Box sx={{ display: 'flex' }}>
                   <Box>
                     <Typography sx={{ margin: 1 }}>Title</Typography>
-                    <TextField size='small' variant='filled' value={getDataRow.website_title} />
+                    <TextField size='small' variant='filled' value={dataRow.website_title} />
                   </Box>
                   <Box sx={{ ml: 30 }}>
                     <Typography sx={{ marginBottom: 2 }}>Slideshow</Typography>
-                    <TextField size='small' variant='filled' label='' value={getDataRow.slideshow} />
+                    <TextField size='small' variant='filled' label='' value={dataRow.slideshow} />
                     <Typography variant='subtitle2'>Show this slideshow at the top of the page</Typography>
                   </Box>
                 </Box>

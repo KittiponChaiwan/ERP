@@ -22,7 +22,7 @@ import {
 import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 
-const PurchasingItem = () => {
+const PurchasingItem = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const [collapseSupplier, setCollapseSupplier] = useState(false)
@@ -44,6 +44,10 @@ const PurchasingItem = () => {
 
   const handleDeferredCheck = event => {
     setIsDeferredCheck(event.target.checked)
+  }
+
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
   }
 
   const Columns = [
@@ -71,11 +75,11 @@ const PurchasingItem = () => {
       <Box sx={{ display: 'flex' }}>
         <Box>
           <Typography sx={{ marginBottom: 2 }}>Default Purchase Unit of Measure:</Typography>
-          <TextField variant='filled' />
+          <TextField variant='filled' value={dataRow.purchase_uom || ''} />
         </Box>
         <Box sx={{ ml: 20 }}>
           <Typography sx={{ marginBottom: 2 }}>Lead Time in days :</Typography>
-          <TextField variant='filled' label='' />
+          <TextField variant='filled' label='' value={dataRow.lead_time_days || ''} />
         </Box>
       </Box>
       <Box sx={{ display: 'flex', mt: 6 }}>
@@ -83,7 +87,7 @@ const PurchasingItem = () => {
           <Typography sx={{ marginBottom: 2 }} variant='subtitle1'>
             Minimum Order Qty:
           </Typography>
-          <TextField variant='filled' label='' />
+          <TextField variant='filled' label='' value={dataRow.min_order_qty || ''} />
           <Typography sx={{ marginBottom: 2 }} variant='subtitle2'>
             Minimum quantity should be as per Stock UOM:
           </Typography>
@@ -91,10 +95,10 @@ const PurchasingItem = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ ml: 6 }}>
             <Typography sx={{ marginBottom: 2 }}>Last Purchase Rate:</Typography>
-            <TextField variant='filled' label='' />
+            <TextField variant='filled' label='' value={dataRow.last_purchase_rate || ''} />
           </Box>
           <Box sx={{ display: 'flex', ml: 3 }}>
-            <Checkbox {...label} defaultChecked />
+            <Checkbox {...label} checked={dataRow.is_customer_provided_item} onChange={handleCheckboxChange} />
             <Typography sx={{ mt: 2 }}>Is Customer Provided Item</Typography>
           </Box>
         </Box>
@@ -103,12 +107,12 @@ const PurchasingItem = () => {
         <Box>
           <Box>
             <Typography sx={{ marginBottom: 2 }}>Safety Stock:</Typography>
-            <TextField variant='filled' label='' />
+            <TextField variant='filled' label='' value={dataRow.safety_stock || ''} />
           </Box>
           <Box sx={{ display: 'flex' }}>
-            <Checkbox {...label} defaultChecked />
+            <Checkbox {...label} checked={dataRow.is_customer_provided_item} onChange={handleCheckboxChange} />
             <Typography variant='subtitle1' sx={{ mt: 2 }}>
-              Is Frozen
+              Allow Purchase
             </Typography>
           </Box>
         </Box>
@@ -135,7 +139,12 @@ const PurchasingItem = () => {
           <CardContent>
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ display: 'flex', width: '40%' }}>
-                <Checkbox {...label} defaultChecked sx={{ height: 30 }} />
+                <Checkbox
+                  {...label}
+                  checked={dataRow.delivered_by_supplier}
+                  onChange={handleCheckboxChange}
+                  sx={{ height: 30 }}
+                />
                 <Typography variant='subtitle1'>Delivered by Supplier (Drop Ship)</Typography>
               </Box>
               <Box sx={{ width: '60%' }}>
@@ -187,11 +196,11 @@ const PurchasingItem = () => {
                   <Box>
                     <Box sx={{ mt: 4 }}>
                       <Typography>Deferred Expense Account</Typography>
-                      <TextField label='' variant='outlined' fullWidth />
+                      <TextField label='' value={dataRow.deferred_expense_account || ''} variant='outlined' fullWidth />
                     </Box>
                     <Box sx={{ mt: 4 }}>
                       <Typography>No of Months (Expense)</Typography>
-                      <TextField label='' variant='outlined' fullWidth />
+                      <TextField label='' value={dataRow.no_of_months_exp || ''} variant='outlined' fullWidth />
                     </Box>
                   </Box>
                 )}
@@ -225,13 +234,13 @@ const PurchasingItem = () => {
                 <Typography variant='subtitle1' sx={{ mt: 1.5 }}>
                   Country of Origin
                 </Typography>
-                <TextField variant='filled' label='' />
+                <TextField variant='filled' label='' value={dataRow.country_of_origin || ''} />
               </Box>
               <Box sx={{ display: 'flex', flexDirection: 'column', ml: 20 }}>
                 <Typography variant='subtitle1' sx={{ mt: 1.5 }}>
                   Customs Tariff Number
                 </Typography>
-                <TextField variant='filled' label='' />
+                <TextField variant='filled' label='' value={dataRow.customs_tariff_number || ''} />
               </Box>
             </Box>
           </CardContent>

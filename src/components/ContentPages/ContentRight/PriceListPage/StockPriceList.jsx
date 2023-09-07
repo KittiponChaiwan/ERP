@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-const StockPriceList = ({ getDataRow }) => {
+const StockPriceList = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const columnsApp = [
@@ -15,35 +15,31 @@ const StockPriceList = ({ getDataRow }) => {
     {
       id: 1,
       Country: 'Sidw'
-    },
-    {
-      id: 2,
-      Country: 'Lannister'
-    },
-    {
-      id: 3,
-      Country: 'Lannister'
     }
   ]
+
+  const handleCheckboxChange = event => {
+    console.log('Checkbox ถูกเปลี่ยนแปลงเป็น:', event.target.checked)
+  }
 
   return (
     <Grid>
       <Box sx={{ display: 'flex', width: 1080 }}>
-        <Checkbox {...label} />
+        <Checkbox checked={dataRow.enabled} onChange={handleCheckboxChange} />
         <Typography sx={{ m: 2 }}>Enabled</Typography>
       </Box>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column' }}>
           <Box>
             <Typography sx={{ margin: 1 }}>Currency</Typography>
-            <TextField size='small' variant='filled' value={getDataRow.currency} />
+            <TextField size='small' variant='filled' value={dataRow.currency} />
           </Box>
           <Box sx={{ display: 'flex', mt: 6 }}>
-            <Checkbox {...label} />
+            <Checkbox {...label} checked={dataRow.buying} onChange={handleCheckboxChange} />
             <Typography sx={{ m: 2 }}>Buying</Typography>
           </Box>
           <Box sx={{ display: 'flex', mt: 2 }}>
-            <Checkbox {...label} />
+            <Checkbox {...label} checked={dataRow.selling} onChange={handleCheckboxChange} />
             <Typography sx={{ m: 2 }}>Selling</Typography>
           </Box>
           <Box sx={{ display: 'flex', mt: 2 }}>
