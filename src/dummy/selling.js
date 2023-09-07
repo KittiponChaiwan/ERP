@@ -104,7 +104,7 @@ const SellingReport = [
       {
         id: 2,
         name: 'Item Price',
-        route: '/app/selling/item-price',
+        route: '/app/stock/item-price',
         imgIcon: 'MenuIcon'
       },
       {
