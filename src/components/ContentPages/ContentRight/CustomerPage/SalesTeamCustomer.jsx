@@ -1,4 +1,4 @@
-import { Box, TextField, Typography, Checkbox, Button } from '@mui/material'
+import { Box, TextField, Typography, Checkbox, Button, Grid } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 
 const SalesTeamCustomer = ({ getDataRow }) => {
@@ -32,55 +32,13 @@ const SalesTeamCustomer = ({ getDataRow }) => {
       ContributionNext: 'dasd',
       Commission: 's',
       Incentives: '1'
-    },
-    {
-      id: 3,
-      SalesPerson: 'Lannister',
-      Contribution: 'Jaime',
-      ContributionNext: 'dasd',
-      Commission: 's',
-      Incentives: '1'
-    },
-    { id: 4, SalesPerson: 'Stark', Contribution: 'Arya', ContributionNext: 'dasd', Commission: 's', Incentives: '1' },
-    {
-      id: 5,
-      SalesPerson: 'Targaryen',
-      Contribution: 'Daenerys',
-      ContributionNext: 'dasd',
-      Commission: 's',
-      Incentives: '1'
-    },
-    {
-      id: 6,
-      SalesPerson: 'Melisandre',
-      Contribution: null,
-      ContributionNext: 'dasd',
-      Commission: 's',
-      Incentives: '1'
-    },
-    {
-      id: 7,
-      SalesPerson: 'Clifford',
-      Contribution: 'Ferrara',
-      ContributionNext: 'dasd',
-      Commission: 's',
-      Incentives: '1'
-    },
-    {
-      id: 8,
-      SalesPerson: 'Frances',
-      Contribution: 'Rossini',
-      ContributionNext: 'dasd',
-      Commission: 's',
-      Incentives: '1'
-    },
-    { id: 9, SalesPerson: 'Roxie', Contribution: 'Harvey', ContributionNext: 'dasd', Commission: 's', Incentives: '1' }
+    }
   ]
 
   return (
-    <Box>
-      <Box>
-        <Box>
+    <Grid>
+      <Grid container spacing={2}>
+        <Grid item sm={12} md={12} lg={12}>
           <Typography>Sales Team</Typography>
           <DataGrid
             rows={rows}
@@ -96,29 +54,30 @@ const SalesTeamCustomer = ({ getDataRow }) => {
           <Box>
             <Button>Add row</Button>
           </Box>
-        </Box>
-        <Box>
-          <Box sx={{ display: 'flex', mt: 6 }}>
-            <Box>
-              <Typography sx={{ marginBottom: 2 }}>Sales Partner</Typography>
-              <TextField size='small' variant='filled' label='' value={getDataRow.default_sales_partner} />
-            </Box>
-            <Box sx={{ ml: 20 }}>
-              <Typography sx={{ marginBottom: 2 }}>Commission Rate</Typography>
-              <TextField size='small' variant='filled' label='' value={getDataRow.default_commission_rate} />
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box>
-        <Typography variant='h6' sx={{ m: 2 }}>
-          Add Comment
-        </Typography>
-        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
-        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
-        <Button>add comment</Button>
-      </Box>
-    </Box>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} sx={{ mt: 20 }}>
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography sx={{ marginBottom: 2 }}>Sales Partner</Typography>
+          <TextField size='small' variant='filled' label='' value={getDataRow.default_sales_partner} fullWidth />
+        </Grid>
+        <Grid item sx={12} md={12} lg={6}>
+          <Typography sx={{ marginBottom: 2 }}>Commission Rate</Typography>
+          <TextField size='small' variant='filled' label='' value={getDataRow.default_commission_rate} fullWidth />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12} style={{ width: '100%' }}>
+          <Typography variant='h6' sx={{ m: 2 }}>
+            Add Comment
+          </Typography>
+          <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+          <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+          <Button>add comment</Button>
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
 

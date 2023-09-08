@@ -12,7 +12,8 @@ import {
   Divider,
   CardContent,
   FormGroup,
-  FormControlLabel
+  FormControlLabel,
+  Grid
 } from '@mui/material'
 import Collapse from '@mui/material/Collapse'
 
@@ -43,66 +44,135 @@ const DetailCustomer = ({ getDataRow }) => {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex' }}>
-        <Box>
-          <Typography sx={{ margin: 1 }}>Customer Name</Typography>
-          <TextField size='small' variant='filled' value={getDataRow.customer_name} />
-        </Box>
-        <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>Territory</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.territory} />
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex', mt: 6 }}>
-        <Box>
-          <Typography sx={{ marginBottom: 2 }}>Customer Type</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.customer_type} />
-        </Box>
-        <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>From Lead</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.lead_name} />
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex', mt: 6 }}>
-        <Box>
-          <Typography sx={{ marginBottom: 2 }}>Customer Group</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.customer_group} />
-        </Box>
-        <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>From Opportunity</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.opportunity_name} />
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex', mt: 6 }}>
-        <Box sx={{ ml: 82 }}>
-          <Typography sx={{ marginBottom: 2 }}>Account Manager</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.account_manager} />
-        </Box>
-      </Box>
-      <Box sx={{ mt: 20 }}>
+      <Grid container spacing={2}>
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography>Customer Name</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            value={getDataRow.customer_name || ''}
+            fullWidth
+          />
+
+          <Typography>Territory</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.territory || ''}
+            fullWidth
+          />
+        </Grid>
+
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography>Customer Type</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.customer_type || ''}
+            fullWidth
+          />
+
+          <Typography>From Lead</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.lead_name || ''}
+            fullWidth
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography>Customer Group</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.customer_group || ''}
+            fullWidth
+          />
+        </Grid>
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography>From Opportunity</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.opportunity_name || ''}
+            fullWidth
+          />
+
+          <Typography>Account Manager</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.account_manager || ''}
+            fullWidth
+          />
+        </Grid>
+      </Grid>
+
+      <Divider sx={{ margin: 0, mb: 5 }} />
+
+      <Grid>
         <Typography variant='h5'>Descripstion</Typography>
-      </Box>
-      <Box sx={{ display: 'flex', mt: 6 }}>
-        <Box>
-          <Typography sx={{ marginBottom: 2 }}>Billing Currency</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.default_currency} />
-        </Box>
-        <Box sx={{ ml: 20 }}>
-          <Typography sx={{ marginBottom: 2 }}>Default Price List</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.default_price_list} />
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex', mt: 6 }}>
-        <Box sx={{ ml: 82 }}>
-          <Typography sx={{ marginBottom: 2 }}>Default Company Bank Account</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.default_bank_account} />
-        </Box>
-      </Box>
-      <Box sx={{ mt: 20, display: 'flex' }}>
-        <Button size='small' variant='filled' label='' onClick={handleClickInternal}>
-          <Typography variant='h6'> Internal Customer</Typography>
-        </Button>
-        <Box>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography>Billing Currency</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.default_currency || ''}
+            fullWidth
+          />
+
+          <Typography>Default Price List</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.default_price_list || ''}
+            fullWidth
+          />
+        </Grid>
+        <Grid item sm={12} md={12} lg={6}>
+          <Typography>Default Company Bank Account</Typography>
+          <TextField
+            sx={{ marginBottom: 5 }}
+            size='small'
+            variant='filled'
+            label=''
+            value={getDataRow.default_bank_account || ''}
+            fullWidth
+          />
+        </Grid>
+      </Grid>
+
+      <Divider sx={{ margin: 0, mb: 5 }} />
+
+      <Grid container sx={{ mb: 5 }}>
+        <Box sx={{ width: '100%', display: 'flex' }}>
+          <Button size='small' variant='filled' label='' onClick={handleClickInternal}>
+            <Typography variant='h6'> Internal Customer</Typography>
+          </Button>
+
           <CardActions className='card-action-dense'>
             <IconButton size='small' onClick={handleClickInternal}>
               {collapseInternal ? (
@@ -113,34 +183,43 @@ const DetailCustomer = ({ getDataRow }) => {
             </IconButton>
           </CardActions>
         </Box>
-      </Box>
-      <Collapse in={collapseInternal}>
-        <Divider sx={{ margin: 0 }} />
-        <CardContent>
-          <Box sx={{ display: 'flex' }}>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox checked={isCompanyCheck} onChange={handleCompanyCheck} />}
-                variant='body2'
-                label='Is Your Company Address'
-              />
-              {isCompanyCheck && (
-                <Box sx={{ mt: 4 }}>
-                  <Typography>Represents Company *</Typography>
-                  <TextField label='' variant='outlined' fullWidth />
-                </Box>
-              )}
-            </FormGroup>
-          </Box>
-          <Box></Box>
-        </CardContent>
-      </Collapse>
+      </Grid>
 
-      <Box sx={{ mt: 10, display: 'flex' }}>
-        <Button size='small' variant='filled' label='' onClick={handleClickMarket}>
-          <Typography variant='h6'> More Information</Typography>
-        </Button>
-        <Box>
+      <Grid container>
+        <Collapse in={collapseInternal} width={'100%'} style={{ width: '100%' }}>
+          <Grid container spacing={2} sx={{ mt: 5 }} style={{ width: '100%' }}>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={isCompanyCheck} onChange={handleCompanyCheck} />}
+                  variant='body2'
+                  label='Is Your Company Address'
+                />
+                {isCompanyCheck && (
+                  <Grid>
+                    <Typography>Represents Company *</Typography>
+                    <TextField
+                      sx={{ marginBottom: 5 }}
+                      label=''
+                      variant='outlined'
+                      fullWidth
+                      size='small'
+                      value={getDataRow.represents_company || ''}
+                    />
+                  </Grid>
+                )}
+              </FormGroup>
+            </Grid>
+          </Grid>
+        </Collapse>
+      </Grid>
+
+      <Grid container sx={{ mb: 5 }}>
+        <Grid sx={{ width: '100%', display: 'flex' }}>
+          <Button size='small' variant='filled' label='' onClick={handleClickMarket}>
+            <Typography variant='h6'> More Infomation</Typography>
+          </Button>
+
           <CardActions className='card-action-dense'>
             <IconButton size='small' onClick={handleClickMarket}>
               {collapseMarket ? (
@@ -150,54 +229,81 @@ const DetailCustomer = ({ getDataRow }) => {
               )}
             </IconButton>
           </CardActions>
-        </Box>
-      </Box>
-      <Collapse in={collapseMarket}>
-        <Divider sx={{ margin: 0 }} />
-        <CardContent>
-          <Box sx={{ display: 'flex' }}>
-            <Box sx={{ width: '38%', display: 'flex', flexDirection: 'column' }}>
-              <Box sx={{ mt: 6 }}>
-                <Typography sx={{ marginBottom: 2 }}>Market Segment</Typography>
-                <TextField size='small' variant='filled' label='' value={getDataRow.market_segment} />
-              </Box>
-              <Box sx={{ mt: 4 }}>
-                <Typography sx={{ marginBottom: 2 }}>industry</Typography>
-                <TextField size='small' variant='filled' label='' value={getDataRow.industry} />
-              </Box>
-              <Box sx={{ mt: 4 }}>
-                <Typography sx={{ marginBottom: 2 }}>Website</Typography>
-                <TextField size='small' variant='filled' label='' value={getDataRow.website} />
-              </Box>
-              <Box sx={{ mt: 4 }}>
-                <Typography sx={{ marginBottom: 2 }}>Print Language</Typography>
-                <TextField size='small' variant='filled' label='' value={getDataRow.language} />
-              </Box>
-            </Box>
-            <Box sx={{ width: '60%', mt: 6 }}>
-              <Typography sx={{ marginBottom: 2 }}>Customer Details</Typography>
+        </Grid>
+      </Grid>
+
+      <Grid container>
+        <Collapse in={collapseMarket} width={'100%'} style={{ width: '100%' }}>
+          <Grid container spacing={2} sx={{ mt: 5 }} style={{ width: '100%' }}>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <Typography>Market Segment</Typography>
               <TextField
+                sx={{ marginBottom: 5 }}
+                size='small'
+                variant='filled'
+                label=''
+                value={getDataRow.market_segment}
+                fullWidth
+              />
+
+              <Typography>industry</Typography>
+              <TextField
+                sx={{ marginBottom: 5 }}
+                size='small'
+                variant='filled'
+                label=''
+                value={getDataRow.industry}
+                fullWidth
+              />
+
+              <Typography>Website</Typography>
+              <TextField
+                sx={{ marginBottom: 5 }}
+                size='small'
+                variant='filled'
+                label=''
+                value={getDataRow.website}
+                fullWidth
+              />
+
+              <Typography>Print Language</Typography>
+              <TextField
+                sx={{ marginBottom: 5 }}
+                size='small'
+                variant='filled'
+                label=''
+                value={getDataRow.language}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <Typography>Customer Details</Typography>
+              <TextField
+                sx={{ marginBottom: 5 }}
                 size='small'
                 variant='filled'
                 label=''
                 multiline
-                rows={14}
+                rows={13}
                 fullWidth
                 value={getDataRow.customer_details}
               />
               <Typography variant='subtitle2'>Additional information regarding the customer.</Typography>
-            </Box>
-          </Box>
-        </CardContent>
-      </Collapse>
-      <Box>
-        <Typography variant='h6' sx={{ m: 2 }}>
-          Add Comment
-        </Typography>
-        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
-        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
-        <Button>add comment</Button>
-      </Box>
+            </Grid>
+          </Grid>
+        </Collapse>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12} style={{ width: '100%' }}>
+          <Typography variant='h6' sx={{ m: 2 }}>
+            Add Comment
+          </Typography>
+          <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+          <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+          <Button>add comment</Button>
+        </Grid>
+      </Grid>
     </Box>
   )
 }

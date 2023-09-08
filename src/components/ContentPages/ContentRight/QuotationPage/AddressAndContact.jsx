@@ -20,9 +20,13 @@ import {
 const AddressAndContact = () => {
   return (
     <Grid>
-      <Box>
-        <Typography>dasdasda</Typography>
-      </Box>
+      <Grid>
+        <Grid sx={{ width: '100%', display: 'flex' }}>
+          <Grid sx={{ width: '33%' }}>dasd</Grid>
+          <Grid sx={{ width: '33%' }}>dasd</Grid>
+          <Grid sx={{ width: '33%' }}>dasdas</Grid>
+        </Grid>
+      </Grid>
     </Grid>
   )
 }
