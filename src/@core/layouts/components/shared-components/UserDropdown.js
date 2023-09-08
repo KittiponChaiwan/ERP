@@ -26,6 +26,7 @@ import LogoutVariant from 'mdi-material-ui/LogoutVariant'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
+import Cookies from 'js-cookie'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -59,6 +60,7 @@ const UserDropdown = () => {
   const handleLogout = () => {
     dispatch(logoutSuccess())
     handleDropdownClose('/pages/login')
+    Cookies.remove('jwt')
   }
 
   const styles = {
