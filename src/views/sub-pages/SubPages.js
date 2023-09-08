@@ -126,7 +126,7 @@ const SubPages = ({ data, menuContent, showContent, dataRow, setDataRow }) => {
                     </Box>
                   </Box>
                   <Card>
-                    <TabContext value={tabValue}>
+                    <TabContext value={tabValue.toString()}>
                       <Tabs
                         value={tabValue}
                         onChange={handleTabChange}
@@ -153,7 +153,7 @@ const SubPages = ({ data, menuContent, showContent, dataRow, setDataRow }) => {
                         ))}
                       </Tabs>
                       {showContent.map((item, index) => (
-                        <TabPanel value={index + 1} key={index}>
+                        <TabPanel value={(index + 1).toString()} key={index + 1}>
                           {item}
                         </TabPanel>
                       ))}

@@ -6,11 +6,9 @@ import axios from 'axios'
 import SubPages from 'src/views/sub-pages/SubPages'
 
 // ** Dummy Data
-import { ItemContentMenu, defaultMaterialRequestType } from 'src/dummy/contentPages/itemPage'
+import { SalesInvoiceContentMenu } from 'src/dummy/contentPages/salesInvoice'
 
 // ** Custom Components
-import DetailItem from 'src/components/SubPages/DetailItem'
-import DashboardItem from 'src/components/SubPages/DashboardItem'
 import InventoryItem from 'src/components/SubPages/InventoryItem'
 import AccountingItem from 'src/components/SubPages/AccountingItem'
 import PurchasingItem from 'src/components/SubPages/PurchasingItem'
@@ -21,27 +19,28 @@ import ManufacturingItem from 'src/components/SubPages/ManufacturingItem'
 
 // ** Layouts
 import SubPageLayout from 'src/@core/layouts/SubPageLayout'
-import DetailSalesInvoice from 'src/components/ContentPages/ContentRight/SalesInvoice/DetailSalesInvoice'
+import DetailSalesInvoice from 'src/components/ContentPages/ContentRight/SalesInvoice/DetailSalesinvoice'
+import Payments from 'src/components/ContentPages/ContentRight/SalesInvoice/PaymentsSalesinvoice'
+import ContactAddressSalesinvoice from 'src/components/ContentPages/ContentRight/SalesInvoice/ContactAddressSalesinvoice'
 
 const SalesInvoice = ({ data }) => {
   const [dataRow, setDataRow] = React.useState({})
 
   const showContent = [
-    <DetailSalesInvoice key='detail' dataRow={dataRow} />,
-    <DashboardItem key='dashboard' />,
-    <InventoryItem key='inventory' dataRow={dataRow} dropDowns={defaultMaterialRequestType} />,
-    <AccountingItem key='accounting' />,
-    <PurchasingItem key='purchasing' />,
-    <SalesItem key='sales' />,
-    <TexItem key='tex' />,
-    <QualityItem key='quality' />,
-    <ManufacturingItem key='manufacturing' />
+    <DetailSalesInvoice key={'detail'} dataRow={dataRow} />,
+    <Payments key={'payments'} dataRow={dataRow} />,
+    <ContactAddressSalesinvoice key={'accounting'} dataRow={dataRow} />,
+    <PurchasingItem key={'purchasing'} />,
+    <SalesItem key={'sales'} />,
+    <TexItem key={'tex'} />,
+    <QualityItem key={'quality'} />,
+    <ManufacturingItem key={'manufacturing'} />
   ]
 
   return (
     <SubPages
       data={data}
-      menuContent={ItemContentMenu}
+      menuContent={SalesInvoiceContentMenu}
       showContent={showContent}
       dataRow={dataRow}
       setDataRow={setDataRow}
