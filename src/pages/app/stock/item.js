@@ -12,7 +12,7 @@ import { ItemContentMenu, defaultMaterialRequestType } from 'src/dummy/contentPa
 import DetailItem from 'src/components/SubPages/DetailItem'
 import DashboardItem from 'src/components/SubPages/DashboardItem'
 import InventoryItem from 'src/components/SubPages/InventoryItem'
-import AccountingItem from 'src/components/SubPages/AccountingItem'
+import AccountingItem from 'src/components/ContentPages/ItemPage/AccountingItem'
 import PurchasingItem from 'src/components/SubPages/PurchasingItem'
 import SalesItem from 'src/components/SubPages/SalesItem'
 import TexItem from 'src/components/SubPages/TexItem'
