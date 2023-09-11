@@ -16,7 +16,6 @@ const ContentLeft = ({ menuColumn, dataRow, handleRowClick }) => {
         </Typography>
         <Box sx={{ display: 'flex' }}>
           <PopupButton />
-          <InsertButton />
         </Box>
       </Box>
       <Card>
