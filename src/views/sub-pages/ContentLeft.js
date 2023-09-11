@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import { DataGrid } from '@mui/x-data-grid'
 
 // ** Components
-import InsertButton from 'src/components/Button/InsertButton/InsertButton'
 import PopupButton from 'src/components/Button/PopupButton/PopupButton'
 
 const ContentLeft = ({ menuColumn, dataRow, handleRowClick }) => {
