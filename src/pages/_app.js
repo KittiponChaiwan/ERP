@@ -1,6 +1,6 @@
 // ** React Imports
-import React, { useEffect, useState } from 'react'
-import { Provider, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { Provider } from 'react-redux'
 import { CacheProvider } from '@emotion/react'
 
 // ** NextJS Imports
