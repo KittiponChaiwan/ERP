@@ -1,4 +1,4 @@
-import { Box, TextField, Typography, Checkbox, Button } from '@mui/material'
+import { Box, TextField, Typography, Checkbox, Button, Grid } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 
 const PotalUserCustomer = () => {
@@ -12,35 +12,13 @@ const PotalUserCustomer = () => {
     {
       id: 2,
       User: 'Lannister'
-    },
-    {
-      id: 3,
-      User: 'Lannister'
-    },
-    { id: 4, User: 'Stark' },
-    {
-      id: 5,
-      User: 'Targaryen'
-    },
-    {
-      id: 6,
-      User: 'Melisandre'
-    },
-    {
-      id: 7,
-      User: 'Clifford'
-    },
-    {
-      id: 8,
-      User: 'Frances'
-    },
-    { id: 9, User: 'Roxie' }
+    }
   ]
 
   return (
-    <Box>
-      <Box>
-        <Box>
+    <Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <Typography>Customer Portal Users</Typography>
           <DataGrid
             rows={rows}
@@ -56,17 +34,20 @@ const PotalUserCustomer = () => {
           <Box>
             <Button>Add row</Button>
           </Box>
-        </Box>
-      </Box>
-      <Box>
-        <Typography variant='h6' sx={{ m: 2 }}>
-          Add Comment
-        </Typography>
-        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
-        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
-        <Button>add comment</Button>
-      </Box>
-    </Box>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2} sx={{ mt: 20 }}>
+        <Grid item xs={12} sm={12} md={12} lg={12} style={{ width: '100%' }}>
+          <Typography variant='h6' sx={{ m: 2 }}>
+            Add Comment
+          </Typography>
+          <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+          <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+          <Button>add comment</Button>
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
 

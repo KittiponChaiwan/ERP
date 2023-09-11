@@ -17,7 +17,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 
-const AccountingCustomer = ({ getDataRow }) => {
+const AccountingCustomer = ({ dataRow }) => {
   const [collapseInformation, setCollapseInformation] = useState()
 
   const columns = [
@@ -45,7 +45,7 @@ const AccountingCustomer = ({ getDataRow }) => {
       <Grid container spacing={2}>
         <Grid item sm={12} md={12} lg={6}>
           <Typography sx={{ marginBottom: 2 }}>Default Payment Terms Template</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.payment_terms} fullWidth />
+          <TextField size='small' variant='filled' label='' value={dataRow.payment_terms} fullWidth />
         </Grid>
       </Grid>
       <Grid container spacing={2} sx={{ mt: 6 }}>
@@ -109,7 +109,7 @@ const AccountingCustomer = ({ getDataRow }) => {
           <Grid container spacing={2} sx={{ mt: 5 }} style={{ width: '100%' }}>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <Typography sx={{ marginBottom: 2 }}>Loyalty Program</Typography>
-              <TextField size='small' variant='filled' label='' value={getDataRow.loyalty_program} fullWidth />
+              <TextField size='small' variant='filled' label='' value={dataRow.loyalty_program} fullWidth />
             </Grid>
           </Grid>
         </Collapse>

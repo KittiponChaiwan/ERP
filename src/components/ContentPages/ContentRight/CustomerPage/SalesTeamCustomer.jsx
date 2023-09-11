@@ -1,7 +1,7 @@
 import { Box, TextField, Typography, Checkbox, Button, Grid } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 
-const SalesTeamCustomer = ({ getDataRow }) => {
+const SalesTeamCustomer = ({ dataRow }) => {
   const columns = [
     { field: 'id', headerName: 'No', width: 70 },
     { field: 'SalesPerson', headerName: 'Sales Person', width: 150 },
@@ -59,11 +59,11 @@ const SalesTeamCustomer = ({ getDataRow }) => {
       <Grid container spacing={2} sx={{ mt: 20 }}>
         <Grid item sm={12} md={12} lg={6}>
           <Typography sx={{ marginBottom: 2 }}>Sales Partner</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.default_sales_partner} fullWidth />
+          <TextField size='small' variant='filled' label='' value={dataRow.default_sales_partner} fullWidth />
         </Grid>
         <Grid item sx={12} md={12} lg={6}>
           <Typography sx={{ marginBottom: 2 }}>Commission Rate</Typography>
-          <TextField size='small' variant='filled' label='' value={getDataRow.default_commission_rate} fullWidth />
+          <TextField size='small' variant='filled' label='' value={dataRow.default_commission_rate} fullWidth />
         </Grid>
       </Grid>
 

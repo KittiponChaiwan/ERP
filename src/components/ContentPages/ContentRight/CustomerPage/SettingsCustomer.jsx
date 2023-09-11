@@ -1,6 +1,6 @@
-import { Box, TextField, Typography, Checkbox, Button } from '@mui/material'
+import { Box, TextField, Typography, Checkbox, Button, Grid } from '@mui/material'
 
-const SettingsCustomer = () => {
+const SettingsCustomer = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const handleCheckboxChange = event => {
@@ -8,44 +8,51 @@ const SettingsCustomer = () => {
   }
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} checked={getDataRow.so_required} onChange={handleCheckboxChange} />
-          <Typography variant='subtitle1' sx={{ m: 4 }}>
-            Allow Sales Invoice Creation Without Sales Order
+    <Grid>
+      <Grid container spacing={2}>
+        <Grid item sm={12} md={6} lg={6}>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} checked={dataRow.so_required} onChange={handleCheckboxChange} />
+            <Typography variant='subtitle1' sx={{ mt: 2 }}>
+              Allow Sales Invoice Creation Without Sales Order
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} checked={dataRow.dn_required} onChange={handleCheckboxChange} />
+            <Typography variant='subtitle1' sx={{ mt: 2 }}>
+              Allow Sales Invoice Creation Without Delivery Note
+            </Typography>
+          </Box>
+        </Grid>
+
+        <Grid item sm={12} md={6} lg={6}>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} checked={dataRow.is_frozen} onChange={handleCheckboxChange} />
+            <Typography variant='subtitle1' sx={{ mt: 2 }}>
+              Is Frozen
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex' }}>
+            <Checkbox {...label} checked={dataRow.disabled} onChange={handleCheckboxChange} />
+            <Typography variant='subtitle1' sx={{ mt: 2 }}>
+              Disabled
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12} style={{ width: '100%' }}>
+          <Typography variant='h6' sx={{ m: 2 }}>
+            Add Comment
           </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', ml: 20 }}>
-          <Checkbox {...label} checked={getDataRow.is_frozen} onChange={handleCheckboxChange} />
-          <Typography variant='subtitle1' sx={{ m: 4 }}>
-            Is Frozen
-          </Typography>
-        </Box>
-      </Box>
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{ display: 'flex' }}>
-          <Checkbox {...label} checked={getDataRow.dn_required} onChange={handleCheckboxChange} />
-          <Typography variant='subtitle1' sx={{ m: 4 }}>
-            Allow Sales Invoice Creation Without Delivery Note
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', ml: 16 }}>
-          <Checkbox {...label} checked={getDataRow.disabled} onChange={handleCheckboxChange} />
-          <Typography variant='subtitle1' sx={{ m: 4 }}>
-            Disabled
-          </Typography>
-        </Box>
-      </Box>
-      <Box>
-        <Typography variant='h6' sx={{ m: 2 }}>
-          Add Comment
-        </Typography>
-        <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
-        <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
-        <Button>add comment</Button>
-      </Box>
-    </Box>
+          <TextField size='small' variant='filled' label='' multiline rows={4} fullWidth />
+          <Typography variant='subtitle2'>Ctrl+Enter to add comment</Typography>
+          <Button>add comment</Button>
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
 

@@ -22,7 +22,7 @@ import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 import IconButton from '@mui/material/IconButton'
 
-const DetailCustomer = ({ getDataRow }) => {
+const DetailCustomer = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const [collapseInternal, setCollapseInternal] = useState(false)
@@ -51,7 +51,7 @@ const DetailCustomer = ({ getDataRow }) => {
             sx={{ marginBottom: 5 }}
             size='small'
             variant='filled'
-            value={getDataRow.customer_name || ''}
+            value={dataRow.customer_name || ''}
             fullWidth
           />
 
@@ -61,7 +61,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.territory || ''}
+            value={dataRow.territory || ''}
             fullWidth
           />
         </Grid>
@@ -73,7 +73,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.customer_type || ''}
+            value={dataRow.customer_type || ''}
             fullWidth
           />
 
@@ -83,7 +83,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.lead_name || ''}
+            value={dataRow.lead_name || ''}
             fullWidth
           />
         </Grid>
@@ -97,7 +97,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.customer_group || ''}
+            value={dataRow.customer_group || ''}
             fullWidth
           />
         </Grid>
@@ -108,7 +108,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.opportunity_name || ''}
+            value={dataRow.opportunity_name || ''}
             fullWidth
           />
 
@@ -118,7 +118,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.account_manager || ''}
+            value={dataRow.account_manager || ''}
             fullWidth
           />
         </Grid>
@@ -138,7 +138,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.default_currency || ''}
+            value={dataRow.default_currency || ''}
             fullWidth
           />
 
@@ -148,7 +148,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.default_price_list || ''}
+            value={dataRow.default_price_list || ''}
             fullWidth
           />
         </Grid>
@@ -159,7 +159,7 @@ const DetailCustomer = ({ getDataRow }) => {
             size='small'
             variant='filled'
             label=''
-            value={getDataRow.default_bank_account || ''}
+            value={dataRow.default_bank_account || ''}
             fullWidth
           />
         </Grid>
@@ -204,7 +204,7 @@ const DetailCustomer = ({ getDataRow }) => {
                       variant='outlined'
                       fullWidth
                       size='small'
-                      value={getDataRow.represents_company || ''}
+                      value={dataRow.represents_company || ''}
                     />
                   </Grid>
                 )}
@@ -242,7 +242,7 @@ const DetailCustomer = ({ getDataRow }) => {
                 size='small'
                 variant='filled'
                 label=''
-                value={getDataRow.market_segment}
+                value={dataRow.market_segment}
                 fullWidth
               />
 
@@ -252,7 +252,7 @@ const DetailCustomer = ({ getDataRow }) => {
                 size='small'
                 variant='filled'
                 label=''
-                value={getDataRow.industry}
+                value={dataRow.industry}
                 fullWidth
               />
 
@@ -262,7 +262,7 @@ const DetailCustomer = ({ getDataRow }) => {
                 size='small'
                 variant='filled'
                 label=''
-                value={getDataRow.website}
+                value={dataRow.website}
                 fullWidth
               />
 
@@ -272,7 +272,7 @@ const DetailCustomer = ({ getDataRow }) => {
                 size='small'
                 variant='filled'
                 label=''
-                value={getDataRow.language}
+                value={dataRow.language}
                 fullWidth
               />
             </Grid>
@@ -286,7 +286,7 @@ const DetailCustomer = ({ getDataRow }) => {
                 multiline
                 rows={13}
                 fullWidth
-                value={getDataRow.customer_details}
+                value={dataRow.customer_details}
               />
               <Typography variant='subtitle2'>Additional information regarding the customer.</Typography>
             </Grid>

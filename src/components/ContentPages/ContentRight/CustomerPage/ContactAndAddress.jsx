@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Box, TextField, Typography, Checkbox, Button, Grid } from '@mui/material'
 import Address_Contact from './Primary_Address_Contact/Address_Contact'
 
-const ContactAndAddress = ({ getDataRow }) => {
+const ContactAndAddress = ({ dataRow }) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   const [age, setAge] = useState('')
@@ -19,7 +19,7 @@ const ContactAndAddress = ({ getDataRow }) => {
       {/* ////////////////////////////////////// แถวที่ 1 ///////////////////////////////////////////// */}
       <Grid container spacing={2}>
         <Grid item sx={{ width: '100%' }}>
-          <Address_Contact getDataRow={getDataRow} />
+          <Address_Contact dataRow={dataRow} />
         </Grid>
 
         <Grid item>

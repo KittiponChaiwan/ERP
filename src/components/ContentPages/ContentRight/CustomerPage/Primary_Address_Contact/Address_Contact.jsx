@@ -22,7 +22,7 @@ import {
 import DorpdownButton from 'src/components/Button/Dropdown_Button/Dropdown_Button'
 import axios from 'axios'
 
-const Address_Contact = ({ getDataRow }) => {
+const Address_Contact = ({ dataRow }) => {
   const [isOpenAddress, setIsOpenAddress] = useState(false)
   const [address_title, setAddressTitle] = useState('')
   const [email_address, setEmailAddress] = useState('')
@@ -90,7 +90,7 @@ const Address_Contact = ({ getDataRow }) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}Address/${getDataRow.customer_primary_address}`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Address/${dataRow.customer_primary_address}`, {
         headers: {
           Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
         }
@@ -101,7 +101,7 @@ const Address_Contact = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [getDataRow])
+  }, [dataRow, dataAddr])
 
   const { Preferred_Billing_Address, Preferred_Shipping_Addressn, Disabled } = state
 
@@ -111,7 +111,7 @@ const Address_Contact = ({ getDataRow }) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}Contact/${getDataRow.customer_primary_contact}`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Contact/${dataRow.customer_primary_contact}`, {
         headers: {
           Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
         }
@@ -122,7 +122,7 @@ const Address_Contact = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [dataRow])
 
   // useEffect(() => {
   //   console.log('ddd', dataContact.customer_name)
@@ -133,153 +133,160 @@ const Address_Contact = ({ getDataRow }) => {
       <CardHeader title='Address and Contacts' />
       <CardContent>
         <Grid container spacing={3}>
-          <Grid item>
+          <Grid sm={12} md={12} lg={12}>
             <Card>
               {/* sx={{ marginBottom: 3.25 }} */}
               <CardContent sx={{ width: '100%' }}>
-                <Typography variant='body2'>{dataAddr.address_title}</Typography>
-                <Typography variant='body2'>{dataAddr.address_line1}</Typography>
-                <Typography variant='body2'>{dataAddr.city}</Typography>
-                <Typography variant='body2'>{dataAddr.state}</Typography>
-                <Typography variant='body2'>{dataAddr.pincode}</Typography>
-                <Typography variant='body2'>Phone:{dataAddr.phone}</Typography>
-                <Typography variant='body2'>Fax: {dataAddr.Fax}</Typography>
-                <Typography variant='body2'>Email: {dataAddr.email_id}</Typography>
+                <Typography variant='body2'>{dataAddr.address_title || ''}</Typography>
+                <Typography variant='body2'>{dataAddr.address_line1 || ''}</Typography>
+                <Typography variant='body2'>{dataAddr.city || ''}</Typography>
+                <Typography variant='body2'>{dataAddr.state || ''}</Typography>
+                <Typography variant='body2'>{dataAddr.pincode || ''}</Typography>
+                <Typography variant='body2'>Phone:{dataAddr.phone || ''}</Typography>
+                <Typography variant='body2'>Fax: {dataAddr.Fax || ''}</Typography>
+                <Typography variant='body2'>Email: {dataAddr.email_id || ''}</Typography>
               </CardContent>
               <CardActions className='card-action-dense'>
                 <Button onClick={handleEditClickAddress}>แก้ไข</Button>
-                <Dialog open={isOpenAddress} onClose={() => setIsOpenAddress(false)}>
-                  <DialogTitle>Edit</DialogTitle>
-                  <Card sx={{ minWidth: 600, width: '100%', height: '100%' }}>
-                    <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
-                      <Grid item sm={12} md={7.7} lg={6}>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Address Title</Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            value={dataAddr.address_title}
-                            onChange={e => setAddressTitle(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ marginBottom: 2 }}>Address Type</Typography>
-                          <Box sx={{ width: 250 }}>
-                            <DorpdownButton />
-                          </Box>
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Address Line 1 </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.address_line1}
-                            onChange={e => setAddress_L1(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Address Line 2 </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.address_line2}
-                            onChange={e => setAddress_L2(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>City/Town </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.city}
-                            onChange={e => setCityTown(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>County </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.county}
-                            onChange={e => setCounty(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>State/Province </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.state}
-                            onChange={e => setStateProvince(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Country </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.country}
-                            onChange={e => setCounty_E(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Postal Code </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.pincode}
-                            onChange={e => setPostalCode(e.target.value)}
-                          />
-                        </Grid>
+                <Dialog
+                  open={isOpenAddress}
+                  onClose={() => setIsOpenAddress(false)}
+                  fullScreen
+                  PaperProps={{
+                    style: {
+                      width: '80%',
+
+                      margin: 0,
+                      maxWidth: 'none',
+                      maxHeight: 'none'
+                    }
+                  }}
+                >
+                  <DialogTitle>Edit Address</DialogTitle>
+                  <Card sx={{ width: '100%', p: 5 }}>
+                    <Grid container spacing={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <Grid item sm={12} md={6} lg={6}>
+                        <Typography sx={{ margin: 1 }}>Address Title</Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          fullWidth
+                          value={dataAddr.address_title || ''}
+                          onChange={e => setAddressTitle(e.target.value)}
+                        />
+
+                        <Typography sx={{ marginBottom: 2 }}>Address Type</Typography>
+                        <DorpdownButton />
+
+                        <Typography sx={{ margin: 1 }}>Address Line 1 </Typography>
+                        <TextField
+                          fullWidth
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.address_line1 || ''}
+                          onChange={e => setAddress_L1(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Address Line 2 </Typography>
+                        <TextField
+                          fullWidth
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.address_line2 || ''}
+                          onChange={e => setAddress_L2(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>City/Town </Typography>
+                        <TextField
+                          fullWidth
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.city || ''}
+                          onChange={e => setCityTown(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>County </Typography>
+                        <TextField
+                          fullWidth
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.county || ''}
+                          onChange={e => setCounty(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>State/Province </Typography>
+                        <TextField
+                          fullWidth
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.state || ''}
+                          onChange={e => setStateProvince(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Country </Typography>
+                        <TextField
+                          fullWidth
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.country || ''}
+                          onChange={e => setCounty_E(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Postal Code </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataAddr.pincode || ''}
+                          onChange={e => setPostalCode(e.target.value)}
+                        />
                       </Grid>
-                      <Grid item>
-                        <Grid>
-                          <Typography sx={{ marginBottom: 2 }}>Email Address</Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.email_id}
-                            onChange={e => setEmailAddress(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Phone </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.phone}
-                            onChange={e => setPhone(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Fax </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.fax}
-                            onChange={e => setFax(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Tax Category </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataAddr.tax_category}
-                            onChange={e => setTaxCategory(e.target.value)}
-                          />
-                        </Grid>
+
+                      <Grid item sm={12} md={6} lg={6}>
+                        <Typography sx={{ marginBottom: 2 }}>Email Address</Typography>
+                        <TextField
+                          size='small'
+                          fullWidth
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.email_id || ''}
+                          onChange={e => setEmailAddress(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Phone </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.phone || ''}
+                          fullWidth
+                          onChange={e => setPhone(e.target.value)}
+                        />
+                        <Typography sx={{ margin: 1 }}>Fax </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataAddr.fax || ''}
+                          onChange={e => setFax(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Tax Category </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          value={dataAddr.tax_category || ''}
+                          onChange={e => setTaxCategory(e.target.value)}
+                        />
                         <FormGroup>
                           <FormControlLabel
                             control={
@@ -319,9 +326,11 @@ const Address_Contact = ({ getDataRow }) => {
             </Card>
             {/* End Address Detail */}
           </Grid>
-          <Grid item>
+          <CardHeader title='Contacts' />
+          <Grid sm={12} md={12} lg={12}>
             <Card>
               {/* sx={{ marginBottom: 3.25 }} */}
+              <Typography sx={{ m: 2 }}>Address</Typography>
               <CardContent sx={{ width: '100%' }}>
                 <Typography variant='body2'>{dataContact.first_name}</Typography>
                 <Typography variant='body2'>{dataContact.email_id}</Typography>
@@ -458,7 +467,7 @@ const Address_Contact = ({ getDataRow }) => {
                   <TextField
                     size='small'
                     variant='filled'
-                    value={getDataRow.customer_primary_contact}
+                    value={dataRow.customer_primary_contact}
                     fullWidth
                     multiline
                   />
@@ -473,7 +482,7 @@ const Address_Contact = ({ getDataRow }) => {
                     size='small'
                     variant='filled'
                     label=''
-                    value={getDataRow.customer_primary_address}
+                    value={dataRow.customer_primary_address}
                     fullWidth
                     multiline
                   />
