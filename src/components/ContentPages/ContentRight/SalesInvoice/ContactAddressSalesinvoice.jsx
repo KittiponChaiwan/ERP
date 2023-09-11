@@ -160,7 +160,7 @@ const ContactAddressSalesinvoice = ({ dataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [dataRow])
 
   useEffect(() => {
     console.log('Supplier', dataRow)

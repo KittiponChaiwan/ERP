@@ -32,7 +32,6 @@ const CardContentLeft = ({ menuColumn, dataRow }) => {
         </Typography>
         <Box sx={{ display: 'flex' }}>
           <PopupButton />
-          <Insertbutton />
         </Box>
       </Box>
       <Box>

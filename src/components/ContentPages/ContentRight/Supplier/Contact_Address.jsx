@@ -110,7 +110,7 @@ const Contact_Address = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [getDataRow])
 
   useEffect(() => {
     axios

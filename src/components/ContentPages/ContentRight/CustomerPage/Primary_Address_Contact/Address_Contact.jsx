@@ -122,7 +122,7 @@ const Address_Contact = ({ getDataRow }) => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [getDataRow])
 
   // useEffect(() => {
   //   console.log('ddd', dataContact.customer_name)
