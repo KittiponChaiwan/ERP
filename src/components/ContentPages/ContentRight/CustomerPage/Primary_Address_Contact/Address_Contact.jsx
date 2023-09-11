@@ -21,6 +21,7 @@ import {
 
 import DorpdownButton from 'src/components/Button/Dropdown_Button/Dropdown_Button'
 import axios from 'axios'
+import { DataGrid } from '@mui/x-data-grid'
 
 const Address_Contact = ({ dataRow }) => {
   const [isOpenAddress, setIsOpenAddress] = useState(false)
@@ -49,6 +50,15 @@ const Address_Contact = ({ dataRow }) => {
   const [designation, setDesignation] = useState('')
   const [gender, setGender] = useState('')
   const [company_name, setCompanyName] = useState('')
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+
+  const [isShowGoogle, setIsShowGoogle] = useState([])
+  const [collapseContact, setCollapseCotact] = useState([])
+
+  const handleShowGoogle = event => {
+    setIsShowGoogle(event.target.checked)
+  }
 
   const handleEditClickContact = () => {
     setIsOpenContact(true)
@@ -87,6 +97,31 @@ const Address_Contact = ({ dataRow }) => {
 
   const [dataAddr, setDataAddr] = useState('')
   const [dataContact, setDataContact] = useState('')
+  const [dataCustomer, setDataCustomer] = useState('')
+
+  const column = [
+    { field: 'doctype', headerName: 'Link Document Typee *', width: 200 },
+    {
+      field: 'name',
+      headerName: 'Link Name *',
+      width: 250,
+      renderCell: params => (
+        <Button sx={{ color: 'black' }} onClick={() => handleEditLinkName(params.row)}>
+          {dataCustomer[0]?.name}
+        </Button>
+      )
+    },
+
+    { field: 'customer_name', headerName: 'Link Title', width: 250 }
+  ]
+
+  const [isOpenEditLinkName, setIsOpenEditLinkName] = useState(false)
+  const [linkName, setLinkName] = useState(null)
+
+  const handleEditLinkName = row => {
+    setLinkName(row)
+    setIsOpenEditLinkName(true)
+  }
 
   useEffect(() => {
     axios
@@ -99,15 +134,11 @@ const Address_Contact = ({ dataRow }) => {
         setDataAddr(res.data.data)
       })
       .catch(err => {
-        console.log(err)
+        console.log('address error', err)
       })
-  }, [dataRow, dataAddr])
+  }, [dataRow])
 
   const { Preferred_Billing_Address, Preferred_Shipping_Addressn, Disabled } = state
-
-  // useEffect(() => {
-  //   console.log('xxa', dataAddr.address_title)
-  // }, [dataAddr])
 
   useEffect(() => {
     axios
@@ -120,13 +151,28 @@ const Address_Contact = ({ dataRow }) => {
         setDataContact(res.data.data)
       })
       .catch(err => {
-        console.log(err)
+        console.log('contact error', err)
       })
   }, [dataRow])
 
-  // useEffect(() => {
-  //   console.log('ddd', dataContact.customer_name)
-  // }, [dataContact])
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}Customer/${dataRow.name}`, {
+        headers: {
+          Authorization: 'token 5891d01ccc2961e:0e446b332dc22aa'
+        }
+      })
+      .then(res => {
+        setDataCustomer(res.data.data)
+      })
+      .catch(err => {
+        console.log('show Error', err)
+      })
+  }, [])
+
+  if (dataCustomer.length === 0) {
+    return 'waiting...'
+  }
 
   return (
     <Grid>
@@ -155,7 +201,7 @@ const Address_Contact = ({ dataRow }) => {
                   PaperProps={{
                     style: {
                       width: '80%',
-
+                      height: '80%',
                       margin: 0,
                       maxWidth: 'none',
                       maxHeight: 'none'
@@ -315,6 +361,17 @@ const Address_Contact = ({ dataRow }) => {
                           />
                         </FormGroup>
                       </Grid>
+                      <Grid>
+                        <Checkbox {...label} />
+                      </Grid>
+                      <Grid sm={12} md={12} lg={12}>
+                        <DataGrid
+                          sx={{ width: 'full', mt: 6, height: 'auto' }}
+                          rows={dataCustomer}
+                          columns={column}
+                          getRowId={row => row.name}
+                        />
+                      </Grid>
                     </Grid>
                   </Card>
                   <DialogActions>
@@ -330,7 +387,6 @@ const Address_Contact = ({ dataRow }) => {
           <Grid sm={12} md={12} lg={12}>
             <Card>
               {/* sx={{ marginBottom: 3.25 }} */}
-              <Typography sx={{ m: 2 }}>Address</Typography>
               <CardContent sx={{ width: '100%' }}>
                 <Typography variant='body2'>{dataContact.first_name}</Typography>
                 <Typography variant='body2'>{dataContact.email_id}</Typography>
@@ -340,110 +396,124 @@ const Address_Contact = ({ dataRow }) => {
               </CardContent>
               <CardActions className='card-action-dense'>
                 <Button onClick={handleEditClickContact}>แก้ไข</Button>
-                <Dialog open={isOpenContact} onClose={() => setIsOpenContact(false)}>
-                  <DialogTitle>Edit</DialogTitle>
-                  <Card sx={{ minWidth: 600, width: '100%', height: '100%' }}>
-                    <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
-                      <Grid item sm={12} md={7.7} lg={6}>
-                        <Grid>
-                          <Typography sx={{ marginBottom: 2 }}>First Name</Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.first_name}
-                            onChange={e => setFirstName(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Middle Name </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.middle_name}
-                            onChange={e => setMiddleName(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Last Name </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.last_name}
-                            onChange={e => setLastName(e.target.value)}
-                          />
-                        </Grid>
+                <Dialog
+                  open={isOpenContact}
+                  onClose={() => setIsOpenContact(false)}
+                  PaperProps={{
+                    style: {
+                      width: '80%',
 
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>User Id </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.user}
-                            onChange={e => setUserId(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Address</Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.address}
-                            onChange={e => setAddress(e.target.value)}
-                          />
-                        </Grid>
+                      margin: 0,
+                      maxWidth: 'none',
+                      maxHeight: 'none'
+                    }
+                  }}
+                >
+                  <DialogTitle>Edit</DialogTitle>
+                  <Card sx={{ width: '100%', p: 5 }}>
+                    <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <Grid item sm={12} md={6} lg={6}>
+                        <Typography sx={{ marginBottom: 2 }}>First Name</Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          fullWidth
+                          type='text'
+                          value={dataContact.first_name}
+                          onChange={e => setFirstName(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Middle Name </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataContact.middle_name}
+                          onChange={e => setMiddleName(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Last Name </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataContact.last_name}
+                          onChange={e => setLastName(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>User Id </Typography>
+                        <TextField
+                          size='small'
+                          fullWidth
+                          variant='filled'
+                          type='text'
+                          value={dataContact.user}
+                          onChange={e => setUserId(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Address</Typography>
+                        <TextField
+                          size='small'
+                          fullWidth
+                          variant='filled'
+                          type='text'
+                          value={dataContact.address}
+                          onChange={e => setAddress(e.target.value)}
+                        />
+
+                        <Box sx={{ display: 'flex' }}>
+                          <Checkbox />
+                          <Typography sx={{ mt: 2 }}>Sync with Google Contacts</Typography>
+                        </Box>
                       </Grid>
-                      <Grid item>
-                        <Grid>
-                          <Typography sx={{ marginBottom: 2 }}>{dataContact.status}</Typography>
-                          <Box sx={{ width: 250 }}>
-                            <DorpdownButton />
-                          </Box>
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Salutation </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.salutation}
-                            onChange={e => setSalutation(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Designation </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.designation}
-                            onChange={e => setDesignation(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Gender </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.gender}
-                            onChange={e => setGender(e.target.value)}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography sx={{ margin: 1 }}>Company Name </Typography>
-                          <TextField
-                            size='small'
-                            variant='filled'
-                            type='text'
-                            value={dataContact.company_name}
-                            onChange={e => setCompanyName(e.target.value)}
-                          />
-                        </Grid>
+                      <Grid item sm={12} md={6} lg={6}>
+                        <Typography sx={{ margin: 1 }}>Status </Typography>
+
+                        <Box sx={{ width: '100%' }}>
+                          <DorpdownButton />
+                        </Box>
+
+                        <Typography sx={{ margin: 1 }}>Salutation </Typography>
+                        <TextField
+                          size='small'
+                          fullWidth
+                          variant='filled'
+                          type='text'
+                          value={dataContact.salutation}
+                          onChange={e => setSalutation(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Designation </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataContact.designation}
+                          onChange={e => setDesignation(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Gender </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataContact.gender}
+                          onChange={e => setGender(e.target.value)}
+                        />
+
+                        <Typography sx={{ margin: 1 }}>Company Name </Typography>
+                        <TextField
+                          size='small'
+                          variant='filled'
+                          type='text'
+                          fullWidth
+                          value={dataContact.company_name}
+                          onChange={e => setCompanyName(e.target.value)}
+                        />
                       </Grid>
                     </Grid>
                   </Card>
