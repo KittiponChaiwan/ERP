@@ -1,10 +1,25 @@
-import React, { useEffect } from 'react'
+// ** React Imports
+import React, { useEffect, useState } from 'react'
 import { Provider, useSelector } from 'react-redux'
-import { useRouter, Router as NextRouter } from 'next/router'
-import { wrapper } from 'src/redux/store'
-import Head from 'next/head'
-import NProgress from 'nprogress'
 import { CacheProvider } from '@emotion/react'
+
+// ** NextJS Imports
+import { useRouter, Router as NextRouter } from 'next/router'
+import Head from 'next/head'
+
+// ** Axios
+import axios from 'axios'
+
+// ** Cookies
+import Cookies from 'js-cookie'
+
+// ** redux wrapper
+import { wrapper } from 'src/redux/store'
+
+// ** NProgress
+import NProgress from 'nprogress'
+
+// ** Theme Config Import
 import themeConfig from 'src/configs/themeConfig'
 import UserLayout from 'src/layouts/UserLayout'
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
@@ -27,19 +42,6 @@ if (themeConfig.routingLoader) {
 }
 
 const InnerApp = ({ Component, pageProps, emotionCache }) => {
-  const isLoggedIn = useSelector(state => state.user.isLoggedIn)
-  const router = useRouter()
-
-  console.log('isLoggedIn', isLoggedIn)
-
-  useEffect(() => {
-    if (!isLoggedIn && router.pathname !== '/pages/login') {
-      router.push('/pages/login')
-    } else if (isLoggedIn && router.pathname === '/pages/login') {
-      router.push('/')
-    }
-  }, [isLoggedIn])
-
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
   return (
@@ -56,9 +58,32 @@ const InnerApp = ({ Component, pageProps, emotionCache }) => {
   )
 }
 
-const App = ({ Component, ...rest }) => {
+const App = ({ Component, initialIsLoggedIn, ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest)
   const { emotionCache = clientSideEmotionCache, pageProps } = props
+
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = Cookies.get('jwt')
+      try {
+        const res = await axios.post('/api/logger', { token: token })
+        if (res.status !== 200 && router.pathname !== '/pages/login') {
+          router.push('/pages/login')
+        } else if (res.status === 200 && router.pathname === '/pages/login') {
+          router.push('/')
+        }
+      } catch (error) {
+        console.error('ErrorApp:', error)
+        if (router.pathname !== '/pages/login') {
+          router.push('/pages/login')
+        }
+      }
+    }
+
+    checkAuth()
+  }, [router])
 
   return (
     <Provider store={store}>

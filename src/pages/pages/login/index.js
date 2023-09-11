@@ -46,6 +46,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 import { Login } from 'mdi-material-ui'
+import Cookies from 'js-cookie'
 
 // ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -91,6 +92,7 @@ const LoginPage = () => {
   }
 
   const handleLogin = async () => {
+    console.log('usr: ', values.username, 'pwd: ', values.password)
     try {
       const response = await axios.post(
         '/api/login',
@@ -107,6 +109,7 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         dispatch(loginSuccess(response.data.data))
+        Cookies.set('jwt', response.data.data.token, { expires: 1, path: '' })
         router.push('/')
       } else {
         console.error('Login failed')
