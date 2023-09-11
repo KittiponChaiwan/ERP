@@ -4,6 +4,10 @@ import { useState, Fragment } from 'react'
 // ** Next Import
 import { useRouter } from 'next/router'
 
+//  ** Redux Imports
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutSuccess } from 'src/redux/userSlice'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Menu from '@mui/material/Menu'
@@ -22,12 +26,6 @@ import LogoutVariant from 'mdi-material-ui/LogoutVariant'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
-
-// ** redux
-import { useDispatch } from 'react-redux'
-import { logoutUser } from 'src/@core/redux/authSlice'
-
-// ** Cookies Import
 import Cookies from 'js-cookie'
 
 // ** Styled Components
@@ -42,6 +40,7 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
 const UserDropdown = () => {
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
+  const user = useSelector(state => state.user)
 
   // ** Hooks
   const router = useRouter()
@@ -59,9 +58,9 @@ const UserDropdown = () => {
   }
 
   const handleLogout = () => {
-    dispatch(logoutUser)
-    Cookies.remove('jwtToken')
-    router.push('/pages/login')
+    dispatch(logoutSuccess())
+    handleDropdownClose('/pages/login')
+    Cookies.remove('jwt')
   }
 
   const styles = {
@@ -87,12 +86,7 @@ const UserDropdown = () => {
         badgeContent={<BadgeContentSpan />}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
-        <Avatar
-          alt='John Doe'
-          onClick={handleDropdownOpen}
-          sx={{ width: 40, height: 40 }}
-          src='/images/avatars/1.png'
-        />
+        <Avatar alt='John Doe' onClick={handleDropdownOpen} sx={{ width: 40, height: 40 }} src={user.userImage} />
       </Badge>
       <Menu
         anchorEl={anchorEl}
@@ -109,12 +103,18 @@ const UserDropdown = () => {
               badgeContent={<BadgeContentSpan />}
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             >
-              <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
+              <Avatar alt='John Doe' src={user.userImage} sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
+              {/* 
+              // ? Name
+               */}
+              <Typography sx={{ fontWeight: 600 }}>{user.userName}</Typography>
+              {/* 
+              // ? Role 
+               */}
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
-                Admin
+                {user.userRole}
               </Typography>
             </Box>
           </Box>
@@ -158,7 +158,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={handleLogout}>
+        <MenuItem sx={{ py: 2 }} onClick={() => handleLogout()}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
         </MenuItem>

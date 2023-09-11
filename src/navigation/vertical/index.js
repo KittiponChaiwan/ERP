@@ -18,40 +18,104 @@ const navigation = () => {
       icon: HomeOutline,
       path: '/'
     },
-
-    // {
-    //   title: 'Account Settings',
-    //   icon: AccountCogOutline,
-    //   path: '/account-settings'
-    // },
     {
       sectionTitle: 'Pages'
     },
     {
       title: 'HOME',
       icon: Cog,
-      path: '/webbrowser',
-      openInNewTab: true
+      path: '/app'
     },
-
-    // {
-    //   title: 'Login',
-    //   icon: Login,
-    //   path: '/pages/login',
-    //   openInNewTab: true
-    // },
-    // {
-    //   title: 'Register',
-    //   icon: AccountPlusOutline,
-    //   path: '/pages/register',
-    //   openInNewTab: true
-    // },
-    // {
-    //   title: 'Error',
-    //   icon: AlertCircleOutline,
-    //   path: '/pages/error',
-    //   openInNewTab: true
-    // },
+    {
+      title: 'Accounting',
+      icon: Cog,
+      path: '/app/accounting'
+    },
+    {
+      title: 'Buying',
+      icon: Cog,
+      path: '/app/buying'
+    },
+    {
+      title: 'Selling',
+      icon: Cog,
+      path: '/app/selling'
+    },
+    {
+      title: 'Stock',
+      icon: Cog,
+      path: '/app/stock'
+    },
+    {
+      title: 'HR',
+      icon: Cog,
+      path: '/app/hr'
+    },
+    {
+      title: 'Manufacturing',
+      icon: Cog,
+      path: '/app/manufacturing'
+    },
+    {
+      title: 'Quality',
+      icon: Cog,
+      path: '/app/quality'
+    },
+    {
+      title: 'CRM',
+      icon: Cog,
+      path: '/app/crm'
+    },
+    {
+      title: 'Projects',
+      icon: Cog,
+      path: '/app/projects'
+    },
+    {
+      title: 'Support',
+      icon: Cog,
+      path: '/app/support'
+    },
+    {
+      title: 'Users',
+      icon: Cog,
+      path: '/app/users'
+    },
+    {
+      title: 'Website',
+      icon: Cog,
+      path: '/app/website'
+    },
+    {
+      title: 'Payroll',
+      icon: Cog,
+      path: '/app/payroll'
+    },
+    {
+      title: 'Build',
+      icon: Cog,
+      path: '/app/build'
+    },
+    {
+      title: 'Tools',
+      icon: Cog,
+      path: '/app/tools'
+    },
+    {
+      title: 'ERPNext Settings',
+      icon: Cog,
+      path: '/app/erpnext-settings'
+    },
+    {
+      title: 'Integrations',
+      icon: Cog,
+      path: '/app/integrations'
+    },
+    {
+      title: 'ERPNext Integrations',
+      icon: Cog,
+      path: '/app/erpnext-integrations'
+    },
     {
       sectionTitle: 'User Interface'
     },

@@ -8,11 +8,14 @@ function Btn(props) {
     <Box sx={{ width: 'auto' }}>
       <Button
         sx={{
+          border: '1px solid black',
+          fontWeight: 'bold',
+          maxWidth: numminwid,
           minWidth: numminwid,
           textAlign: 'left',
           justifyContent: 'flex-start',
           bgcolor: `${bgcolorbutton}`,
-          color: 'grey.50',
+          color: 'secondary.G',
           '&:hover': {
             bgcolor: 'primary.dark',
             color: 'common.white'

@@ -1,87 +1,52 @@
 // ** React Imports
-import { useEffect } from 'react'
-
-// ** Next Imports
-import Head from 'next/head'
-import { Router, useRouter } from 'next/router'
-
-// ** Redux Imports
-import { wrapper } from '../@core/redux/store'
-
-// ** Cookies Import
-import Cookies from 'js-cookie'
-
-// ** Loader Import
-import NProgress from 'nprogress'
-
-// ** Emotion Imports
+import React, { useEffect, useState } from 'react'
+import { Provider, useSelector } from 'react-redux'
 import { CacheProvider } from '@emotion/react'
 
-// ** Config Imports
-import themeConfig from 'src/configs/themeConfig'
+// ** NextJS Imports
+import { useRouter, Router as NextRouter } from 'next/router'
+import Head from 'next/head'
 
-// ** Component Imports
+// ** Axios
+import axios from 'axios'
+
+// ** Cookies
+import Cookies from 'js-cookie'
+
+// ** redux wrapper
+import { wrapper } from 'src/redux/store'
+
+// ** NProgress
+import NProgress from 'nprogress'
+
+// ** Theme Config Import
+import themeConfig from 'src/configs/themeConfig'
 import UserLayout from 'src/layouts/UserLayout'
 import ThemeComponent from 'src/@core/theme/ThemeComponent'
-
-// ** Contexts
 import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsContext'
-
-// ** Utils Imports
 import { createEmotionCache } from 'src/@core/utils/create-emotion-cache'
-
-// ** React Perfect Scrollbar Style
-import 'react-perfect-scrollbar/dist/css/styles.css'
-
-// ** Global css styles
 import '../../styles/globals.css'
-
-// ** Check Login
-import { checkCookieToken } from 'src/@core/utils/checkCookieToken'
 
 const clientSideEmotionCache = createEmotionCache()
 
-// ** Pace Loader
 if (themeConfig.routingLoader) {
-  Router.events.on('routeChangeStart', () => {
+  NextRouter.events.on('routeChangeStart', () => {
     NProgress.start()
   })
-  Router.events.on('routeChangeError', () => {
+  NextRouter.events.on('routeChangeError', () => {
     NProgress.done()
   })
-  Router.events.on('routeChangeComplete', () => {
+  NextRouter.events.on('routeChangeComplete', () => {
     NProgress.done()
   })
 }
 
-// ** Configure JSS & ClassName
-const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) => {
-  // ** Router
-  const Router = useRouter()
-
-  // Variables
+const InnerApp = ({ Component, pageProps, emotionCache }) => {
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
-  const UserStatus = checkCookieToken(Cookies.get('jwtToken'))
-
-  useEffect(() => {
-    if (!UserStatus) {
-      // เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบ หรือเส้นทางที่คุณต้องการ
-      Router.push('/pages/login')
-    }
-  }, [])
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <title>{`${themeConfig.templateName} - Material Design React Admin Template`}</title>
-        <meta
-          name='description'
-          content={`${themeConfig.templateName} – Material Design React Admin Dashboard Template – is the most developer friendly & highly customizable Admin Dashboard Template based on MUI v5.`}
-        />
-        <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
-      </Head>
-
+      <Head>{/* ... */}</Head>
       <SettingsProvider>
         <SettingsConsumer>
           {({ settings }) => {
@@ -93,4 +58,38 @@ const App = ({ Component, emotionCache = clientSideEmotionCache, pageProps }) =>
   )
 }
 
-export default wrapper.withRedux(App)
+const App = ({ Component, initialIsLoggedIn, ...rest }) => {
+  const { store, props } = wrapper.useWrappedStore(rest)
+  const { emotionCache = clientSideEmotionCache, pageProps } = props
+
+  const router = useRouter()
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = Cookies.get('jwt')
+      try {
+        const res = await axios.post('/api/logger', { token: token })
+        if (res.status !== 200 && router.pathname !== '/pages/login') {
+          router.push('/pages/login')
+        } else if (res.status === 200 && router.pathname === '/pages/login') {
+          router.push('/')
+        }
+      } catch (error) {
+        console.error('ErrorApp:', error)
+        if (router.pathname !== '/pages/login') {
+          router.push('/pages/login')
+        }
+      }
+    }
+
+    checkAuth()
+  }, [router])
+
+  return (
+    <Provider store={store}>
+      <InnerApp Component={Component} pageProps={pageProps} emotionCache={emotionCache} />
+    </Provider>
+  )
+}
+
+export default App

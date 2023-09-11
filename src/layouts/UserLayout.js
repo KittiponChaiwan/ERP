@@ -10,7 +10,6 @@ import VerticalLayout from 'src/@core/layouts/VerticalLayout'
 import VerticalNavItems from 'src/navigation/vertical'
 
 // ** Component Import
-import UpgradeToProButton from './components/UpgradeToProButton'
 import VerticalAppBarContent from './components/vertical/AppBarContent'
 
 // ** Hook Import
@@ -36,7 +35,6 @@ const UserLayout = ({ children }) => {
       settings={settings}
       saveSettings={saveSettings}
       verticalNavItems={VerticalNavItems()} // Navigation Items
-      // afterVerticalNavMenuContent={UpgradeToProImg}
       verticalAppBarContent={(
         props // AppBar Content
       ) => (
@@ -49,7 +47,6 @@ const UserLayout = ({ children }) => {
       )}
     >
       {children}
-      {/* <UpgradeToProButton /> */}
     </VerticalLayout>
   )
 }
