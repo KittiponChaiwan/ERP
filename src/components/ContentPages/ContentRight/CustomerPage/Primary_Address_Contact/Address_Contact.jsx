@@ -10,18 +10,22 @@ import CardActions from '@mui/material/CardActions'
 import {
   Box,
   Checkbox,
+  Collapse,
   Dialog,
   DialogActions,
   DialogTitle,
+  Divider,
   FormControlLabel,
   FormGroup,
   Grid,
+  IconButton,
   TextField
 } from '@mui/material'
 
 import DorpdownButton from 'src/components/Button/Dropdown_Button/Dropdown_Button'
 import axios from 'axios'
 import { DataGrid } from '@mui/x-data-grid'
+import { ChevronDown, ChevronUp } from 'mdi-material-ui'
 
 const Address_Contact = ({ dataRow }) => {
   const [isOpenAddress, setIsOpenAddress] = useState(false)
@@ -55,6 +59,10 @@ const Address_Contact = ({ dataRow }) => {
 
   const [isShowGoogle, setIsShowGoogle] = useState([])
   const [collapseContact, setCollapseCotact] = useState([])
+
+  const handleCallapeContact = () => {
+    setCollapseCotact(!collapseContact)
+  }
 
   const handleShowGoogle = event => {
     setIsShowGoogle(event.target.checked)
@@ -464,8 +472,54 @@ const Address_Contact = ({ dataRow }) => {
                         />
 
                         <Box sx={{ display: 'flex' }}>
-                          <Checkbox />
-                          <Typography sx={{ mt: 2 }}>Sync with Google Contacts</Typography>
+                          <FormGroup>
+                            <FormControlLabel
+                              control={<Checkbox checked={isShowGoogle} onChange={handleShowGoogle} />}
+                              variant='body2'
+                              label='Sync with Google Contacts'
+                              sx={{ ml: 0.2 }}
+                            />
+                            {isShowGoogle && (
+                              <Grid>
+                                <Grid>
+                                  <Box sx={{ mt: 10, display: 'flex', width: '100%' }}>
+                                    <Button size='small' variant='filled' label='' onClick={handleCallapeContact}>
+                                      <Typography variant='h6'>Website Specifications</Typography>
+                                    </Button>
+                                    <Box>
+                                      <CardActions className='card-action-dense'>
+                                        <IconButton size='small' onClick={handleCallapeContact}>
+                                          {collapseContact ? (
+                                            <ChevronUp sx={{ fontSize: '1.875rem' }} />
+                                          ) : (
+                                            <ChevronDown sx={{ fontSize: '1.875rem' }} />
+                                          )}
+                                        </IconButton>
+                                      </CardActions>
+                                    </Box>
+                                  </Box>
+                                  <Grid sx={{ bgcolor: 'red' }}>
+                                    <Collapse in={collapseContact}>
+                                      <Divider sx={{ margin: 0 }} />
+                                      <CardContent>
+                                        <Box>
+                                          <Typography sx={{ margin: 1 }}>City/Town </Typography>
+                                          <TextField
+                                            fullWidth
+                                            size='small'
+                                            variant='filled'
+                                            type='text'
+                                            value={dataAddr.city || ''}
+                                            onChange={e => setCityTown(e.target.value)}
+                                          />
+                                        </Box>
+                                      </CardContent>
+                                    </Collapse>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            )}
+                          </FormGroup>
                         </Box>
                       </Grid>
                       <Grid item sm={12} md={6} lg={6}>
